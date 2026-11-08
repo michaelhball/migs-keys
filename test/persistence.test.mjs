@@ -1,0 +1,97 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { markdown } from '../public/markdown.js';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+async function launch(directory) {
+  const process = spawn(globalThis.process.execPath, ['server.mjs'], { cwd: root, env: { ...globalThis.process.env, PORT: '0', MIGS_DATA_DIR: directory }, stdio: ['ignore', 'pipe', 'pipe'] });
+  const url = await new Promise((resolve, reject) => {
+    let output = '';
+    const timeout = setTimeout(() => { process.kill(); reject(Error(`Server did not start: ${output}`)); }, 10000);
+    process.stdout.on('data', chunk => { output += chunk; const match = output.match(/http:\/\/127\.0\.0\.1:\d+/); if (match) { clearTimeout(timeout); resolve(match[0]); } });
+    process.stderr.on('data', chunk => output += chunk);
+    process.once('exit', code => { clearTimeout(timeout); if (code) reject(Error(output)); });
+  });
+  return { url, stop: () => new Promise(resolve => { if (process.exitCode !== null) return resolve(); process.once('exit', resolve); process.kill('SIGTERM'); }) };
+}
+
+test('course, journal, drafts, checkpoints and settings survive a server restart', async t => {
+  const directory = await mkdtemp(path.join(tmpdir(), 'migs-keys-test-'));
+  let server;
+  t.after(async () => { await server?.stop(); await rm(directory, { recursive: true, force: true }); });
+  server = await launch(directory);
+  const request = async (endpoint, method = 'GET', data) => {
+    const response = await fetch(server.url + endpoint, { method, headers: method === 'GET' ? {} : { 'Content-Type': 'application/json', 'X-Migs-Local': '1' }, ...(data ? { body: JSON.stringify(data) } : {}) });
+    return { status: response.status, data: await response.json() };
+  };
+
+  const manifest = await request('/api/course');
+  assert.equal(manifest.data.lessons.length, 24);
+  const first = await request('/api/lessons/1');
+  assert.equal(first.status, 200);
+  assert.match(first.data.markdown, /Second session/);
+  assert.equal((await request('/api/lessons/2')).data.markdown, null);
+  assert.equal((await fetch(server.url + '/')).status, 200);
+  for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
+  const html = markdown(first.data.markdown);
+  assert.match(html, /<h3>Your goal<\/h3>/);
+  assert.equal((html.match(/<ol>/g) || []).length, 1);
+  assert.equal((html.match(/<li>/g) || []).length, 6);
+  assert.equal((html.match(/<table>/g) || []).length, 2);
+
+  const draft = { minutes: 17, feeling: 'mixed', worked: 'Finding C is easier.', sticky: 'The join needs practice.', next: 'Read a few notes.' };
+  assert.equal((await request('/api/drafts/1', 'PUT', draft)).status, 200);
+  await Promise.all([
+    request('/api/checkpoints/1', 'PUT', { checked: [0, 1] }),
+    request('/api/completion/1', 'PUT', { completed: true }),
+    request('/api/settings', 'PUT', { tempo: 72, timer: { elapsed: 42, startedAt: null } })
+  ]);
+  const session = { ...draft, lessonId: 1, id: 'test-session-0001' };
+  assert.equal((await request('/api/sessions', 'POST', session)).status, 201);
+  await request('/api/sessions', 'POST', session);
+  let saved = (await request('/api/state')).data;
+  assert.equal(saved.sessions.length, 1, 'retry must not duplicate a journal entry');
+  assert.equal(saved.drafts['1'], undefined);
+  assert.deepEqual(saved.completed, [1]);
+  assert.deepEqual(saved.checkpoints['1'], [0, 1]);
+  assert.equal(saved.settings.tempo, 72);
+  assert.equal(saved.settings.timer.elapsed, 42);
+  await request('/api/drafts/1', 'PUT', { ...draft, worked: 'A new draft to resume.' });
+  const exported = await request('/api/export');
+  assert.equal(exported.data.lessons.length, 1);
+  assert.equal(exported.data.progress.sessions[0].sticky, draft.sticky);
+  assert.equal(JSON.parse(await readFile(path.join(directory, 'progress.json'), 'utf8')).sessions.length, 1);
+  assert.equal(JSON.parse(await readFile(path.join(directory, 'progress.previous.json'), 'utf8')).sessions.length, 1);
+
+  await server.stop();
+  server = await launch(directory);
+  saved = (await request('/api/state')).data;
+  assert.equal(saved.sessions.length, 1);
+  assert.equal(saved.drafts['1'].worked, 'A new draft to resume.');
+  assert.deepEqual(saved.checkpoints['1'], [0, 1]);
+  assert.equal(saved.settings.tempo, 72);
+  assert.equal(saved.settings.timer.elapsed, 42);
+
+  assert.equal((await request('/api/active', 'PUT', { lessonId: 2 })).status, 404, 'planned lessons cannot become the active assignment');
+  assert.equal((await request('/api/sessions', 'POST', { ...session, id: 'invalid-entry-123', minutes: -1 })).status, 400);
+  assert.equal((await request('/api/checkpoints/1', 'PUT', { checked: [100] })).status, 400);
+  const forbidden = await fetch(server.url + '/api/completion/1', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ completed: false }) });
+  assert.equal(forbidden.status, 403);
+  const foreignOrigin = await fetch(server.url + '/api/completion/1', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Migs-Local': '1', Origin: 'https://example.com' }, body: JSON.stringify({ completed: false }) });
+  assert.equal(foreignOrigin.status, 403);
+  assert.equal((await fetch(server.url + '/data/progress.json')).status, 404);
+  assert.equal((await request('/api/state')).data.sessions.length, 1, 'invalid requests preserve saved history');
+});
+
+test('lesson rendering keeps links useful and escapes unsafe markup', () => {
+  const rendered = markdown('<script>alert(1)</script>\n\n[Unsafe](javascript:alert(1))\n\n[Teacher](https://example.com/lesson)');
+  assert.doesNotMatch(rendered, /<script>|href="javascript:/);
+  assert.match(rendered, /&lt;script&gt;/);
+  assert.match(rendered, /rel="noopener noreferrer"/);
+  assert.match(rendered, /href="https:\/\/example.com\/lesson"/);
+});

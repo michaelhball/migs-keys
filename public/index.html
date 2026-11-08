@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2eb">
+  <title>Migs Keys · Your piano practice</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to lesson</a>
+  <aside class="sidebar">
+    <a class="brand" href="#today" aria-label="Migs Keys home"><span class="brand-icon" aria-hidden="true">Ⅲ</span><span>Migs Keys<small>PIANO COURSE</small></span></a>
+    <nav aria-label="Main navigation">
+      <a href="#today" data-nav="today"><span aria-hidden="true">◒</span> Today’s practice</a>
+      <a href="#course" data-nav="course"><span aria-hidden="true">≋</span> Your course</a>
+      <a href="#journal" data-nav="journal"><span aria-hidden="true">▤</span> Practice journal</a>
+      <a href="#resources" data-nav="resources"><span aria-hidden="true">↗</span> Resources</a>
+    </nav>
+    <div class="sidebar-note"><div class="local-status"><span></span> Saved on this computer</div></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span id="breadcrumb">Your piano practice</span><div><span id="practice-total">No sessions logged</span><a class="export-link" href="/api/export" download>Export backup ↗</a></div></header>
+    <main id="main" tabindex="-1"><div class="loading">Loading course…</div></main>
+    <footer>Migs Keys <span>Piano lessons and practice journal</span></footer>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="journal-dialog" aria-labelledby="dialog-title"></dialog>
+</body>
+</html>

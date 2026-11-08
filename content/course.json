@@ -1,0 +1,311 @@
+{
+  "title": "Piano course",
+  "description": "Beginner piano lessons covering reading, technique, rhythm, chords, and improvisation.",
+  "modules": [
+    {
+      "id": 1,
+      "title": "Keyboard and reading",
+      "subtitle": "Keyboard, reading & your first piece",
+      "from": 1,
+      "to": 6
+    },
+    {
+      "id": 2,
+      "title": "Scales, chords, and phrasing",
+      "subtitle": "Scales, chords, phrasing & playing by ear",
+      "from": 7,
+      "to": 12
+    },
+    {
+      "id": 3,
+      "title": "Blues and jazz",
+      "subtitle": "Blues, swing & your first jazz chords",
+      "from": 13,
+      "to": 19
+    },
+    {
+      "id": 4,
+      "title": "Repertoire and synthesizers",
+      "subtitle": "Classical pieces, pop accompaniment, and synthesizers",
+      "from": 20,
+      "to": 24
+    }
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Keyboard notes and a steady beat",
+      "focus": "Keyboard landmarks and a steady pulse",
+      "description": "Find C, D, and E, play a short melody, and learn to practise the joins.",
+      "duration": 20,
+      "status": "ready",
+      "file": "01-first-notes.md",
+      "checkpoints": [
+        "I can find several Cs and locate D and E beside them.",
+        "I can play the melody slowly with a steady beat.",
+        "I can play the overlapping groups and repeat the full melody in a later session."
+      ],
+      "tags": [
+        "Keyboard",
+        "Rhythm",
+        "Improvisation"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Reading C, D, and E",
+      "focus": "Reading a few treble-clef notes",
+      "description": "Connect C, D, and E on the keyboard to their positions on a staff.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 3,
+      "title": "Note lengths and rests",
+      "focus": "Note lengths and rests",
+      "description": "Read basic durations and rests in a four-measure melody.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 4,
+      "title": "Left hand and bass clef",
+      "focus": "Left-hand movement and bass-clef landmarks",
+      "description": "Read and play a short left-hand melody.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 5,
+      "title": "Playing with both hands",
+      "focus": "Coordinating the hands",
+      "description": "Combine a melody with occasional left-hand notes.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 6,
+      "title": "An eight-measure piece",
+      "focus": "Finishing a first piece",
+      "description": "Build an eight-measure piece using overlapping sections.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 7,
+      "title": "C major scale and intervals",
+      "focus": "Scales and intervals",
+      "description": "Play C major and hear the distance between notes.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 8,
+      "title": "Major and minor chords",
+      "focus": "Major and minor chords",
+      "description": "Play C, F, G, and A minor chords.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 9,
+      "title": "Pop chord progressions",
+      "focus": "Chords with a bass note",
+      "description": "Play a simple accompaniment with a bass note and a chord.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 10,
+      "title": "Chord inversions",
+      "focus": "Moving smoothly between chords",
+      "description": "Find nearby chord positions and hear smooth voice leading.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 11,
+      "title": "Classical phrasing",
+      "focus": "Phrasing and musical expression",
+      "description": "Practise melody balance, dynamics, and phrasing in a short classical-style piece.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 12,
+      "title": "Playing by ear and transposing",
+      "focus": "Learning by ear and moving a tune",
+      "description": "Find a familiar phrase and move it to a different starting note.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 13,
+      "title": "Dominant seventh chords",
+      "focus": "The sound of a dominant seventh",
+      "description": "Use C7, F7, and G7 in short musical phrases.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 14,
+      "title": "The 12-bar blues",
+      "focus": "Following a blues form",
+      "description": "Keep your place through a slow 12-bar blues accompaniment.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 15,
+      "title": "Swing rhythm",
+      "focus": "Swing, imitation, and leaving space",
+      "description": "Imitate short rhythms and answer them with your own phrases.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 16,
+      "title": "Blues improvisation",
+      "focus": "First blues improvisation",
+      "description": "Make a chorus with a beginning, repetition, and an ending.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 17,
+      "title": "Jazz seventh chords",
+      "focus": "Major seventh, minor seventh, and dominant seventh chords",
+      "description": "Compare major seventh, minor seventh, and dominant seventh sounds.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 18,
+      "title": "The ii–V–I progression",
+      "focus": "Connecting jazz chords",
+      "description": "Connect D minor 7, G7, and C major 7 using simple voicings.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 19,
+      "title": "Reading lead sheets",
+      "focus": "Reading a lead sheet",
+      "description": "Read a short melody with chord symbols and add an accompaniment.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 20,
+      "title": "Reading a new classical piece",
+      "focus": "A new classical reading project",
+      "description": "Read a beginner piece that introduces a new key or accompaniment pattern.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 21,
+      "title": "Pop accompaniment",
+      "focus": "Pop accompaniment patterns",
+      "description": "Play broken-chord accompaniment with a steady beat.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 22,
+      "title": "Playing with a backing track",
+      "focus": "Rhythm and playing with a backing track",
+      "description": "Keep a simple groove and introduce controlled offbeat notes.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 23,
+      "title": "Synthesizer basics",
+      "focus": "Exploring synthesizers",
+      "description": "Play a familiar melody while changing basic synthesizer settings.",
+      "duration": 20,
+      "status": "planned"
+    },
+    {
+      "id": 24,
+      "title": "Repertoire review",
+      "focus": "Building your repertoire",
+      "description": "Record a piece, an accompaniment, and an improvised passage.",
+      "duration": 20,
+      "status": "planned"
+    }
+  ],
+  "resources": [
+    {
+      "name": "Bill Hilton",
+      "role": "Keyboard skills & reading",
+      "description": "Selected visual explanations and free beginner worksheets.",
+      "url": "https://billspianopages.com/beginners",
+      "type": "Free lessons"
+    },
+    {
+      "name": "Graham Fitch",
+      "role": "How to practise",
+      "description": "Attentive slow practice, overlapping sections, and gradually developing tempo.",
+      "url": "https://practisingthepiano.com/the-three-ss-part-two/",
+      "type": "Free article"
+    },
+    {
+      "name": "Nancy & Randall Faber",
+      "role": "Repertoire & foundations",
+      "description": "Adult Piano Adventures combines pieces, technique, and theory. An optional source of additional music.",
+      "url": "https://pianoadventures.com/piano-books/adult-piano-adventures/level-1/",
+      "type": "Optional book"
+    },
+    {
+      "name": "Penelope Roskell",
+      "role": "Comfortable movement",
+      "description": "A reference for posture, coordinated movement, touch, and hand coordination.",
+      "url": "https://www.roskellacademy.com/for-pianists/foundations-in-piano-technique/",
+      "type": "Optional course"
+    },
+    {
+      "name": "Musictheory.net",
+      "role": "Reading & rhythm",
+      "description": "Short explanations of notation, note lengths, intervals, and chords.",
+      "url": "https://www.musictheory.net/lessons/",
+      "type": "Free lessons"
+    },
+    {
+      "name": "Jonny May",
+      "role": "Blues foundations",
+      "description": "A reference for progressing from blues form and chords to phrasing and improvisation.",
+      "url": "https://pianowithjonny.com/learning-tracks/blues-piano-1/",
+      "type": "Optional course"
+    },
+    {
+      "name": "Peter Martin & Adam Maness",
+      "role": "Jazz practice",
+      "description": "Jazz chord connections and guided practice as keyboard skills develop.",
+      "url": "https://openstudio.helpscoutdocs.com/article/52-which-piano-course-is-right-for-me",
+      "type": "Course guide"
+    },
+    {
+      "name": "Jeremy Siskind",
+      "role": "Jazz musicianship",
+      "description": "Later support for lead sheets, swing, accompaniment, and improvisation.",
+      "url": "https://jeremysiskind.com/product/jazz-piano-fundamentals-book-1/",
+      "type": "Optional book"
+    },
+    {
+      "name": "Ableton",
+      "role": "Synthesizer basics",
+      "description": "Hands-on sound-design exercises in the browser.",
+      "url": "https://learningsynths.ableton.com/",
+      "type": "Free interactive lessons"
+    },
+    {
+      "name": "Bill Hilton",
+      "role": "Harmony & improvisation",
+      "description": "How To Really Play The Piano supports later chord and accompaniment work and assumes some basic reading.",
+      "url": "https://billspianopages.com/how-to-really",
+      "type": "Optional book"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "migs-keys",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local piano course and practice journal",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check server.mjs && node --check public/app.js && node --check public/markdown.js"
+  },
+  "engines": { "node": ">=20" }
+}
