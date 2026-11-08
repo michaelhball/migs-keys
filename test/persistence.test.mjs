@@ -38,11 +38,11 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.match((await request('/api/lessons/2')).data.markdown, /ledger line/);
   assert.equal((await request('/api/lessons/7')).data.markdown, null);
   assert.equal((await fetch(server.url + '/')).status, 200);
-  for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/playback.js', '/music.js', '/performance.js', '/sound.js', '/recording.js', '/piano-view.js', '/midi.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
+  for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/playback.js', '/music.js', '/lesson-guide.js', '/music-symbols.js', '/performance.js', '/sound.js', '/recording.js', '/piano-view.js', '/midi.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
   assert.equal((await request('/api/state')).data.settings.melodyTempo, 60);
   assert.equal((await request('/api/state')).data.settings.songView, 'notes');
   const library = await request('/api/songs');
-  assert.deepEqual(library.data.songs.map(song => song.id), ['dont-stop-believin', 'fur-elise']);
+  assert.deepEqual(library.data.songs.map(song => song.id), ['dont-stop-believin', 'fur-elise', 'amazing-grace', 'lord-of-the-dance']);
   for (const song of library.data.songs) {
     const detail = await request(`/api/songs/${song.id}`);
     assert.equal(detail.status, 200);
@@ -84,7 +84,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   await request('/api/drafts/1', 'PUT', { ...draft, worked: 'A new draft to resume.' });
   const exported = await request('/api/export');
   assert.equal(exported.data.lessons.length, 6);
-  assert.equal(exported.data.songs.length, 2);
+  assert.equal(exported.data.songs.length, 4);
   assert.match(exported.data.songs[1].scores[0].svg, /<svg/);
   assert.match(exported.data.songs[1].noteNames, /D♯5/);
   assert.equal(exported.data.progress.sessions[0].sticky, draft.sticky);

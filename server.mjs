@@ -1,3 +1,4 @@
+import { ankiRoute } from './anki.mjs';
 import { recordingRoute } from './recordings.mjs';
 import http from 'node:http';
 import { readFile, writeFile, mkdir, rename, copyFile } from 'node:fs/promises';
@@ -81,6 +82,7 @@ const server = http.createServer(async (req, res) => {
       if (req.headers.origin && ![`http://127.0.0.1:${port}`, `http://localhost:${port}`].includes(req.headers.origin)) fail(403, 'This request must come from the local app.');
     }
     if (await recordingRoute({req,res,url,dataDirectory:DATA,state,update,fail,reply})) return;
+    if (await ankiRoute({req,res,url,state,reply,fail})) return;
     if (req.method === 'GET' && url.pathname === '/api/course') return reply(200, await course());
     if (req.method === 'GET' && url.pathname === '/api/songs') return reply(200, await songs());
     if (req.method === 'GET' && /^\/api\/songs\/[a-z0-9-]+$/.test(url.pathname)) {
@@ -159,6 +161,8 @@ const server = http.createServer(async (req, res) => {
     }
     const staticFiles = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/styles.css': ['styles.css', 'text/css'], '/markdown.js': ['markdown.js', 'text/javascript'], '/playback.js': ['playback.js', 'text/javascript'], '/favicon.svg': ['favicon.svg', 'image/svg+xml'] };
     staticFiles['/music.js'] = ['music.js', 'text/javascript'];
+    staticFiles['/music-symbols.js'] = ['music-symbols.js', 'text/javascript'];
+    staticFiles['/lesson-guide.js'] = ['lesson-guide.js', 'text/javascript'];
     staticFiles['/recording.js'] = ['recording.js', 'text/javascript'];
     staticFiles['/piano-view.js'] = ['piano-view.js', 'text/javascript'];
     staticFiles['/midi.js'] = ['midi.js', 'text/javascript'];

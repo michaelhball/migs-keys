@@ -1,3 +1,4 @@
+import { lessonGuide } from './lesson-guide.js';
 import { PracticeRecorder } from './recording.js';
 import { pianoNavigation, pianoPosition } from './piano-view.js';
 import { SoundEngine } from './sound.js';
@@ -66,9 +67,9 @@ function intro(kicker, title, description, action = '') { return `<div class="pa
 function lessonName(id) { return course.lessons.find(x => x.id === id)?.title || `Lesson ${id}`; }
 function date(value) { return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(value)); }
 
-function keyboard() {
+function keyboard(octave = 4) {
   const white = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-  return `<div class="keyboard" role="group" aria-label="Playable octave starting at middle C">${white.map((note, i) => `<button class="white-key ${i < 3 ? 'focus-key' : ''}" data-note="${[60, 62, 64, 65, 67, 69, 71][i]}" aria-label="Play ${note}4"><span>${note}</span></button>`).join('')}${[[61, 1, 'C sharp'], [63, 2, 'D sharp'], [66, 4, 'F sharp'], [68, 5, 'G sharp'], [70, 6, 'A sharp']].map(([midi, pos, name]) => `<button class="black-key black-${pos}" data-note="${midi}" aria-label="Play ${name}4"></button>`).join('')}</div>`;
+  return `<div class="keyboard" role="group" aria-label="Playable octave starting at C${octave}">${white.map((note, i) => `<button class="white-key ${i < 3 ? 'focus-key' : ''}" data-note="${[60, 62, 64, 65, 67, 69, 71][i] + (octave - 4) * 12}" aria-label="Play ${note}${octave}"><span>${note}</span></button>`).join('')}${[[61, 1, 'C sharp'], [63, 2, 'D sharp'], [66, 4, 'F sharp'], [68, 5, 'G sharp'], [70, 6, 'A sharp']].map(([midi, pos, name]) => `<button class="black-key black-${pos}" data-note="${midi + (octave - 4) * 12}" aria-label="Play ${name}${octave}"></button>`).join('')}</div>`;
 }
 function toolsCard() {
   return `<section class="card tools-card"><h2>Timer and metronome</h2>
@@ -92,11 +93,11 @@ function lessonNavigation(item) {
 }
 function lessonPlayer(item) {
   const view = item.defaultView || 'notes';
-  return `<section class="card melody-card">${item.id === 2 ? staffGuide() : ''}<div class="song-view-controls" role="group" aria-label="Music display">${[['notes','Piano view'],['notation','Sheet music']].map(([v,label]) => `<button class="button small outline ${view === v ? 'selected' : ''}" data-action="lesson-view" data-view="${v}" aria-pressed="${view === v}">${label}</button>`).join('')}</div><div id="lesson-player">${musicPlayer(item.exercise, melodyTempo, view, state.settings.soundPreset)}</div></section>`;
+  return `<section class="card melody-card" id="lesson-player-start">${item.id === 2 ? staffGuide() : lessonGuide(item.id)}<div class="song-view-controls" role="group" aria-label="Music display">${[['notes','Piano view'],['notation','Sheet music']].map(([v,label]) => `<button class="button small outline ${view === v ? 'selected' : ''}" data-action="lesson-view" data-view="${v}" aria-pressed="${view === v}">${label}</button>`).join('')}</div><div id="lesson-player">${musicPlayer(item.exercise, melodyTempo, view, state.settings.soundPreset)}</div></section>`;
 }
 function staffGuide() {
-  const exercise = { title: 'Middle C, D, and E on the treble staff', events: [{beats:1,right:[{midi:60,finger:1}]},{beats:1,right:[{midi:62,finger:2}]},{beats:2,right:[{midi:64,finger:3}]}] };
-  return `<section class="staff-guide"><h2>Reading the treble staff</h2><p>Five lines show pitch. Count lines from the bottom. The clef at the left identifies this as the treble staff.</p>${notation(exercise)}<div class="staff-landmarks"><p><strong>C4 · middle C</strong><br>On the short extra line below the staff.</p><p><strong>D4</strong><br>In the space just below the bottom line.</p><p><strong>E4</strong><br>On the bottom line.</p></div><p class="fine">The numbers above the notes are right-hand fingers: thumb 1, index 2, middle 3. In the exercise below, read the note's vertical position.</p></section>`;
+  const exercise = { title: 'Middle C, D, and E on the treble staff', events: [{beats:1,right:[{midi:60,finger:1}]},{beats:1,right:[{midi:62,finger:2}]},{beats:1,right:[{midi:64,finger:3}]},{beats:1,right:[{midi:60,finger:1}]}] };
+  return `<section class="staff-guide"><h2>Reading the treble staff</h2><p>A staff has five lines and four spaces between them. Count from the bottom. The treble clef is also called the G clef: its curl marks G4 on the second line. Read pitch from the oval notehead, not the stem.</p>${notation(exercise)}<div class="staff-landmarks"><p><strong>C4 · middle C</strong><br>On the short extra line below the staff.</p><p><strong>D4</strong><br>In the space just below the bottom line.</p><p><strong>E4</strong><br>On the bottom line.</p></div><p class="fine">The numbers above the notes are right-hand fingers: thumb 1, index 2, middle 3. In the exercise below, read the note's vertical position.</p></section>`;
 }
 async function showLesson(id, today) {
   const version = routeVersion;
@@ -110,16 +111,16 @@ async function showLesson(id, today) {
   const isActive = state.activeLesson === item.id;
   currentExercise = item.exercise;
   main.innerHTML = `${intro(today ? new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date()).toUpperCase() : `LESSON ${item.id}`, item.title, item.description)}
-    <section class="lesson-hero"><div class="hero-copy"><div class="hero-tags">${badge(`Lesson ${item.id} / ${course.lessons.length}`)}${badge('Foundations')}${badge('20 minutes')}</div><div class="hero-actions"><a class="button light" href="#lesson-steps" data-action="begin">Begin practice <span>↓</span></a><button class="text-button" data-action="log" data-id="${item.id}">Log a session ↗</button></div></div><div class="hero-visual"><span class="eyebrow">C, D, AND E</span>${keyboard()}<span class="keyboard-caption">Tap a key to hear a reference tone</span></div></section>
+    <section class="lesson-hero"><div class="hero-copy"><div class="hero-tags">${badge(`Lesson ${item.id} / ${course.lessons.length}`)}${badge(item.id <= 6 ? 'Foundations' : 'Melody and accompaniment')}${badge(`${item.duration || 20} minutes`)}</div><div class="hero-actions"><a class="button light" href="#lesson-player-start" data-action="begin">Begin practice <span>↓</span></a><button class="text-button" data-action="log" data-id="${item.id}">Log a session ↗</button></div></div><div class="hero-visual"><span class="eyebrow">${item.id === 4 ? 'LEFT HAND · C3, D3, E3' : item.id >= 6 ? 'REFERENCE KEYS · C4 TO C5' : 'RIGHT HAND · C4, D4, E4'}</span>${keyboard(item.id === 4 ? 3 : 4)}<span class="keyboard-caption">Tap a key to hear a reference tone</span></div></section>
     <div class="lesson-layout"><div class="lesson-column">${lessonPlayer(item)}
     <article class="card lesson-body" id="lesson-steps">${markdown(item.markdown)}</article>
     </div>
-    <aside class="lesson-aside">${toolsCard()}${checkpoints(item)}${lessonNavigation(item)}<section class="card checkin-card"><h2>Record your session</h2><p>Record what improved, where you hesitated, and what you want to practise next.</p><button class="button outline full" data-action="log" data-id="${item.id}">Write a practice note</button>${!isActive ? `<button class="text-button dark" data-action="set-active" data-id="${item.id}">Make this my current lesson</button>` : ''}</section></aside></div>`;
+    <aside class="lesson-aside">${toolsCard()}${checkpoints(item)}${flashcardLessonCard(item)}${lessonNavigation(item)}<section class="card checkin-card"><h2>Record your session</h2><p>Record what improved, where you hesitated, and what you want to practise next.</p><button class="button outline full" data-action="log" data-id="${item.id}">Write a practice note</button>${!isActive ? `<button class="text-button dark" data-action="set-active" data-id="${item.id}">Make this my current lesson</button>` : ''}</section></aside></div>`;
   updateTimer(); installPianoNavigation();
 }
 function showCourse() {
   currentLesson = null;
-  main.innerHTML = `${intro('LESSON PLAN', 'Piano course', 'Lessons are added and adjusted based on your progress. Reading, rhythm, and ear training continue throughout.')}<div class="course-summary"><span><strong>${state.completed.length}</strong> lessons completed</span><span><strong>${course.lessons.filter(x => x.file).length}</strong> lesson available</span><span>Reading and improvisation throughout</span></div><div class="modules">${course.modules.map(mod => `<section class="course-module"><div class="module-heading"><span class="module-number">0${mod.id}</span><div><h2>${esc(mod.title)}</h2><p>${esc(mod.subtitle)}</p></div><span class="range">${String(mod.from).padStart(2, '0')}—${mod.to}</span></div><div class="lesson-list">${course.lessons.filter(x => x.id >= mod.from && x.id <= mod.to).map(x => `<a class="lesson-row ${x.id === state.activeLesson ? 'current' : ''}" href="#lesson/${x.id}"><span class="lesson-number">${state.completed.includes(x.id) ? '✓' : String(x.id).padStart(2, '0')}</span><div><strong>${esc(x.title)}</strong><small>${esc(x.focus)}</small></div>${badge(state.completed.includes(x.id) ? 'Completed' : x.id === state.activeLesson ? 'Current lesson' : x.file ? 'Ready' : 'Planned', x.file ? 'green' : 'subtle')}<span class="row-arrow">↗</span></a>`).join('')}</div></section>`).join('')}</div>`;
+  main.innerHTML = `${intro('LESSON PLAN', 'Piano course', 'Lessons are added and adjusted based on your progress. Reading, rhythm, and ear training continue throughout.')}<div class="course-summary"><span><strong>${state.completed.length}</strong> lessons completed</span><span><strong>${course.lessons.filter(x => x.file).length}</strong> lessons available</span><span>Reading and improvisation throughout</span></div><div class="modules">${course.modules.map(mod => `<section class="course-module"><div class="module-heading"><span class="module-number">0${mod.id}</span><div><h2>${esc(mod.title)}</h2><p>${esc(mod.subtitle)}</p></div><span class="range">${String(mod.from).padStart(2, '0')}—${mod.to}</span></div><div class="lesson-list">${course.lessons.filter(x => x.id >= mod.from && x.id <= mod.to).map(x => `<a class="lesson-row ${x.id === state.activeLesson ? 'current' : ''}" href="#lesson/${x.id}"><span class="lesson-number">${state.completed.includes(x.id) ? '✓' : String(x.id).padStart(2, '0')}</span><div><strong>${esc(x.title)}</strong><small>${esc(x.focus)}</small></div>${badge(state.completed.includes(x.id) ? 'Completed' : x.id === state.activeLesson ? 'Current lesson' : x.file ? 'Ready' : 'Planned', x.file ? 'green' : 'subtle')}<span class="row-arrow">↗</span></a>`).join('')}</div></section>`).join('')}</div>`;
 }
 function checkinText(session) {
   return `Piano check-in · Lesson ${session.lessonId}: ${lessonName(session.lessonId)}\nDate: ${date(session.createdAt)} · ${session.minutes} minutes\nPractice felt: ${session.feeling}\nWhat went well: ${session.worked || 'Not noted'}\nWhat needs attention: ${session.sticky || 'Not noted'}\nWhat I want to explore next: ${session.next || 'Continue the course'}\nCheckpoints marked: ${(state.checkpoints[session.lessonId] || []).length}\nPlease use this to adjust my next piano assignment.`;
@@ -127,6 +128,17 @@ function checkinText(session) {
 function showJournal() {
   currentLesson = null;
   main.innerHTML = `${intro('PRACTICE RECORD', 'Practice journal', 'Record your practice time, progress, and questions for the next lesson.', '<button class="button primary" data-action="log">+ Log a session</button>')}<div class="journal-stats"><div><strong>${state.sessions.length}</strong><span>practice sessions</span></div><div><strong>${totalMinutes()}</strong><span>minutes practised</span></div><div><strong>${state.completed.length}</strong><span>lessons completed</span></div></div>${state.sessions.length ? `<div class="journal-entries">${state.sessions.map(s => `<article class="card journal-entry"><div class="entry-heading"><div><span class="eyebrow">${esc(date(s.createdAt))} · ${s.minutes} MINUTES</span><h2>${esc(lessonName(s.lessonId))}</h2></div>${badge({ good: 'Good', mixed: 'Mixed', challenging: 'Difficult' }[s.feeling], 'subtle')}</div>${[['What went well', s.worked], ['What needs attention', s.sticky], ['Next time', s.next]].filter(([, v]) => v).map(([label, value]) => `<div class="journal-thought"><h3>${label}</h3><p>${esc(value)}</p></div>`).join('')}<button class="text-button dark" data-action="copy-checkin" data-id="${esc(s.id)}">Copy check-in for our conversation ↗</button></article>`).join('')}</div>` : `<section class="card empty-state"><h2>No sessions logged</h2><p>After practising, record what improved and what needs more work.</p><button class="button primary" data-action="log">Log your first session</button></section>`}`;
+}
+function flashcardLessonCard(item) {
+  if(item.id>24)return '';
+  return `<section class="card"><h2>Theory flashcards</h2><p>Review the facts introduced through Lesson ${item.id} in Anki.</p><a class="button outline full" href="/anki/lessons-01-${String(item.id).padStart(2,'0')}.apkg" download>Download / update deck</a><p class="fine">Import into the same Anki profile. Existing reviews are kept.</p><a class="text-link" href="#flashcards">Instructions and examples →</a></section>`;
+}
+async function showFlashcards() {
+  currentLesson=null;
+  const version=routeVersion,data=await api('anki');if(version!==routeVersion)return;
+  // Card HTML is authored in the repository, not submitted by a visitor.
+  const localMedia=html=>html.replaceAll('src="migs-','src="/anki/media/migs-');
+  main.innerHTML=`${intro('ANKI','Theory flashcards','Review the facts from your lessons. Learn the idea at the keyboard first, then use cards to recall it.')}<section class="card flashcard-intro"><h2>Through Lesson ${data.current.lesson}</h2><p class="fine">${data.preparedCards} cards are prepared for the course and later theory. This download includes only what you have reached.</p><p>${data.current.cards} cards covering ${data.current.facts} facts. Some facts have a separate recall card: name a written note, then picture its position from its name.</p><a class="button primary" href="/anki/current.apkg" download>Download / update Anki deck</a><ol><li>Open the downloaded .apkg file in Anki, or choose File → Import.</li><li>Study <strong>Migs Keys → Music theory</strong>. In Anki’s deck options, set <strong>New cards/day</strong> to about <strong>5</strong> and enable all three <strong>Bury siblings</strong> options: new, review and interday learning. This separates the two directions across days. Do the reviews Anki schedules.</li><li>After a new lesson, download again and import into the same profile. This adds the next material while keeping your existing reviews.</li></ol><p>For a “picture or draw” card, decide where the note belongs before revealing the answer. A rough sketch on paper works too. Use Again when you missed the answer; use Good when you recalled it correctly.</p><p class="fine">Importing is a manual step; the site does not write into Anki automatically. The package includes all its images and works offline. If Anki offers learning-progress import, leave it off. Keep this note type’s fields unchanged so future updates continue to match.</p><p><a href="https://docs.ankiweb.net/manual/importing/packaged-decks" target="_blank" rel="noopener">Anki import instructions ↗</a></p></section><section class="card"><h2>Examples from your deck</h2><div class="flashcard-examples">${data.samples.map(n=>`<div class="flashcard-example"><div>${localMedia(n.front)}</div><details><summary>Show answer</summary><div>${localMedia(n.back)}</div>${n.extra?`<p class="fine">${localMedia(n.extra)}</p>`:''}</details>${n.reverse?`<details><summary>Reverse card</summary><p>${localMedia(n.reverse)}</p><details><summary>Show answer</summary><div>${localMedia(n.reverseAnswer)}</div></details></details>`:''}</div>`).join('')}</div></section><section class="card"><h2>Optional song theory</h2><p>These go beyond the current beginner lesson. Import one when you want to study the markings and rhythms in that song.</p><div class="flashcard-packs">${data.optional.map(item=>`<div><h3>${esc(item.title)}</h3><p>${item.cards} cards</p><a class="button outline" href="/anki/${esc(item.file)}" download>Download ${esc(item.title)}</a></div>`).join('')}</div></section><section class="card"><h2>Prepared for later</h2><p>The library covers staff reading, rhythm, scales, keys, intervals, chords, inversions, harmony, cadences, blues, jazz, lead sheets and synthesizer basics. Advanced topics include non-chord tones and Neapolitan chords.</p><p>Future cards are assigned to planned lessons and will be reviewed against each lesson before release. The normal download stops at material already introduced.</p><details><summary>Download the full library for inspection</summary><p>This includes future topics and would add a large number of new cards. Use the current-lesson download above for normal study.</p><a class="button outline" href="/anki/complete-library.apkg" download>Download all ${data.preparedCards} prepared cards</a></details></section>`;
 }
 function showResources() {
   currentLesson = null;
@@ -138,7 +150,8 @@ async function showSongs(id) {
   if (!id) {
     const library = await api('songs');
     if (version !== routeVersion) return;
-    main.innerHTML = `${intro('SONG LIBRARY', 'Songs', 'Songs you want to learn, with note names, sheet music, and practice instructions.')}<p class="muted song-request-note">To add a song, tell me its title and artist in our conversation.</p><div class="song-list">${library.songs.map(song => `<a class="card song-card" href="#song/${esc(song.id)}"><div>${badge(song.status, 'subtle')}<h2>${esc(song.title)}</h2><p>${esc(song.artist)}</p><p class="muted">${esc(song.summary)}</p></div><span class="text-link">Open song →</span></a>`).join('')}</div>`;
+    const categories = [...new Set(library.songs.map(song => song.category || 'Other'))];
+    main.innerHTML = `${intro('SONG LIBRARY', 'Songs', 'Sheet music, piano visualisers, and practice instructions.')}<p class="muted song-request-note">To add a song, tell me its title and artist in our conversation.</p>${categories.map(category => `<section class="song-category"><h2>${esc(category)}</h2><div class="song-list">${library.songs.filter(song => (song.category || 'Other') === category).map(song => `<a class="card song-card" href="#song/${esc(song.id)}"><div>${badge(song.status, 'subtle')}<h3>${esc(song.title)}</h3><p>${esc(song.artist)}</p><p class="muted">${esc(song.summary)}</p></div><span class="text-link">Open song →</span></a>`).join('')}</div></section>`).join('')}`;
     return;
   }
   const song = await api(`songs/${encodeURIComponent(id)}`);
@@ -166,14 +179,15 @@ function stopSounds() {
 async function route() {
   routeVersion++; stopSounds(); currentSong = null; currentExercise = null; currentStep=0;
   const hash = location.hash.slice(1) || 'today';
-  const section = hash.startsWith('song/') ? 'songs' : ['course', 'journal', 'songs', 'resources'].includes(hash) ? hash : 'today';
+  const section = hash.startsWith('song/') ? 'songs' : ['course', 'journal', 'songs', 'resources', 'flashcards'].includes(hash) ? hash : 'today';
   document.querySelectorAll('[data-nav]').forEach(a => { a.classList.toggle('active', a.dataset.nav === section); if (a.dataset.nav === section) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-  $('#breadcrumb').textContent = { today: 'Your piano practice', course: 'Your course', journal: 'Practice journal', songs: 'Songs', resources: 'Resources' }[section];
+  $('#breadcrumb').textContent = { today: 'Your piano practice', course: 'Your course', journal: 'Practice journal', songs: 'Songs', resources: 'Resources', flashcards: 'Flashcards' }[section];
   try {
     if (section === 'course') showCourse();
     else if (section === 'journal') showJournal();
     else if (section === 'songs') await showSongs(hash.startsWith('song/') ? hash.slice(5) : null);
     else if (section === 'resources') showResources();
+    else if (section === 'flashcards') await showFlashcards();
     else await showLesson(/^lesson\/\d+$/.test(hash) ? Number(hash.split('/')[1]) : state.activeLesson, !hash.startsWith('lesson/'));
     window.scrollTo({ top: 0, behavior: 'instant' });
   } catch (error) { main.innerHTML = `<section class="card empty-state"><h1>Couldn’t open this page.</h1><p>${esc(error.message)}</p><a class="button primary" href="#today">Return to today’s practice</a></section>`; }
@@ -325,7 +339,7 @@ document.addEventListener('click', async event => {
   const button = event.target.closest('[data-action]'); if (!button) return;
   const action = button.dataset.action;
   try {
-    if (action === 'begin') { event.preventDefault(); $('#lesson-steps').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (action === 'begin') { event.preventDefault(); $('#lesson-player-start').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     else if (action === 'log') openLog(button.dataset.id);
     else if (action === 'close-dialog') await closeDialog();
     else if (action === 'copy-checkin') await copyCheckin(button.dataset.id);

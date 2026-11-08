@@ -10,7 +10,7 @@ Practise C D E F G and back once, without a fixed tempo. Let the fingers rest ne
 
 ## Read the shape first
 
-Choose Sheet music. Find repeated notes, steps to neighbouring staff positions, and skips. In the first bar, E to G skips over F. In bar 5, C to E to G makes a broken C-major chord: its notes are played separately.
+Choose Sheet music. A **step** moves to the next line or space, such as E to F. A **skip** passes over a staff position, such as E to G. Find repeated notes, steps and skips. In the first bar, E to G skips over F. A **chord** is a group of notes considered together; C, E and G form a C-major chord. In bar 5 they sound one after another, so this is a **broken chord**. You only need those three note names here; building other chords comes later.
 
 All notes in this study are quarter notes, one per beat. The left hand has three quarter rests after each C. Count four beats in every bar.
 
@@ -34,3 +34,5 @@ Play bars 1–4 at one comfortable volume, then bars 5–8 a little quieter. Alt
 Try starting at bar 3 or bar 5, rather than always at the beginning. Then play the whole study and note one specific next target: a reading mix-up, a pause, or a note that is too loud.
 
 This completes the first block of six lessons. The next block will cover scales, chords, and accompaniment. Your song studies remain available in Songs while we adjust the next block from your journal.
+
+For reference, [Musictheory.net: introduction to chords](https://www.musictheory.net/lessons/40) explains the C-major shape. Focus on its C–E–G example; the other chord qualities are for later lessons.

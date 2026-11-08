@@ -27,3 +27,5 @@ The left-hand part uses octaves. If you cannot reach them comfortably, play just
 Use the named sections to navigate the song. The shorter **Practice bars** selections overlap by one bar, so you can rehearse joins. You can also choose a bar in Piano view, move one position at a time, and start Listen from that position.
 
 This song is a longer-term project alongside the beginner lessons. It introduces black keys, hand movement and independent rhythms before those have all been covered in the course. The first right-hand bar is a reasonable starting point; you do not need to learn the whole arrangement now.
+
+The [Flashcards page](#flashcards) has an optional Journey pack covering this accompaniment’s ties, counting and key signature. [Musictheory.net: dots and ties](https://www.musictheory.net/lessons/14) explains the held bass notes.

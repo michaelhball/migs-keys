@@ -27,3 +27,5 @@ Play four Cs, one per beat. Then play two Cs, each lasting two beats. Both fill 
 Play the two-bar exercise while counting aloud, including the final rest. If the silence becomes shorter when you repeat, practise the last C, the two silent beats, and the first C of the next repetition as one group.
 
 Log what needed attention, then continue to Lesson 4 if you want to. The next lesson uses the left hand separately.
+
+For a visual reference, use [Musictheory.net: note durations](https://www.musictheory.net/lessons/11) and [rests](https://www.musictheory.net/lessons/13). Focus on quarter and half notes and the half rest; the shorter values come later.

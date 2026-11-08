@@ -1,3 +1,4 @@
+import { musicGlyphs } from './music-symbols.js';
 import { soundControl } from './sound.js';
 import { escapeHtml as esc } from './markdown.js';
 
@@ -39,12 +40,14 @@ export function notation(exercise) {
   const bars = measures(exercise), hands = handsFor(exercise), height = hands.length === 2 ? 300 : 175;
   let html = '';
   for (let row = 0; row < bars.length; row += 2) {
-    let drawing = '';
+    let drawing = hands.length === 2 ? '<path d="M15 65 C3 65 15 140 3 150 C15 160 3 235 15 235 M20 65 V235" class="staff-line"/>' : '';
     hands.forEach((hand, handIndex) => {
       const bottom = 105 + handIndex * 130, top = bottom - 40;
       drawing += `<text x="12" y="${top - 18}" font-size="12">${hand === 'right' ? 'Right hand' : 'Left hand'}</text>`;
       for (let y = top; y <= bottom; y += 10) drawing += `<path d="M20 ${y}H775" class="staff-line"/>`;
-      drawing += `<text x="27" y="${bottom + (hand === 'right' ? 2 : -3)}" class="music-symbol" font-size="${hand === 'right' ? 62 : 46}">${hand === 'right' ? '𝄞' : '𝄢'}</text><text x="87" y="${top + 17}" font-size="24" font-family="serif">4</text><text x="87" y="${bottom - 2}" font-size="24" font-family="serif">4</text>`;
+      const anchor = hand === 'left' ? top + 10 : bottom - 10;
+      drawing += `<g class="${hand === 'left' ? 'bass' : 'treble'}-clef" data-anchor-y="${anchor}" transform="translate(27 ${anchor})"><path d="${musicGlyphs[hand === 'left' ? 'bass' : 'treble']}" transform="scale(.04 -.04)" fill="currentColor"/></g>`;
+      drawing += `<text x="87" y="${top + 17}" font-size="24" font-family="serif">4</text><text x="87" y="${bottom - 2}" font-size="24" font-family="serif">4</text>`;
       for (let b = 0; b < 2 && bars[row + b]; b++) {
         const accidentals = new Map();
         drawing += `<text x="${130 + b * 320}" y="${bottom + 35}" font-size="11">Bar ${row + b + 1}</text>`;
@@ -52,7 +55,7 @@ export function notation(exercise) {
           const x = 150 + b * 320 + beat * 74, beats = eventBeats(event), notes = handNotes(event, hand);
           drawing += `<g class="score-event" data-sequence="${index}"><circle class="score-playhead" cx="${x}" cy="${top - 35}" r="4"/>`;
           if (!notes.length) {
-            if (beats === 1) drawing += `<text x="${x - 9}" y="${top + 36}" class="music-symbol" font-size="36">𝄽</text>`;
+            if (beats === 1) drawing += `<g class="quarter-rest" transform="translate(${x - 5} ${top + 20})"><path d="${musicGlyphs.quarterRest}" transform="scale(.04 -.04)" fill="currentColor"/></g>`;
             else drawing += `<rect x="${x - 8}" y="${top + (beats === 4 ? 10 : 15)}" width="16" height="5" class="note-ink"/>`;
           }
           notes.forEach(n => {
@@ -63,13 +66,17 @@ export function notation(exercise) {
             for (let ly = bottom + 10; ly <= y; ly += 10) drawing += `<path d="M${x - 12} ${ly}h24" class="staff-line"/>`;
             for (let ly = top - 10; ly >= y; ly -= 10) drawing += `<path d="M${x - 12} ${ly}h24" class="staff-line"/>`;
             drawing += `<ellipse cx="${x}" cy="${y}" rx="${beats === 4 ? 9 : 7}" ry="5" transform="rotate(-20 ${x} ${y})" class="${beats >= 2 ? 'open-note' : 'note-ink'}"/>`;
-            if (beats !== 4) {
-              const down = y < bottom - 20, stemX = x + (down ? -6 : 6), stemEnd = y + (down ? 30 : -30);
-              drawing += `<path d="M${stemX} ${y}V${stemEnd}" class="note-stem"/>`;
-              if (beats === .5) drawing += `<path d="M${stemX} ${stemEnd}q14 ${down ? -8 : 8} 4 ${down ? -19 : 19}" class="note-stem"/>`;
-            }
+            if ([1.5, 3].includes(beats)) drawing += `<circle class="augmentation-dot" cx="${x + 14}" cy="${(bottom - y) % 10 === 0 ? y - 5 : y}" r="2"/>`;
             if (n.finger) drawing += `<text x="${x + (notes.length > 1 ? (notes.indexOf(n) * 14 - 7) : 0)}" y="${top - 18}" text-anchor="middle" font-size="12">${n.finger}</text>`;
           });
+          if (notes.length && beats !== 4) {
+            const ys = notes.map(n => noteY(n.midi, bottom, hand));
+            const high = Math.min(...ys), low = Math.max(...ys);
+            const down = (high + low) / 2 <= bottom - 20;
+            const stemX = x + (down ? -6 : 6), stemStart = down ? high : low, stemEnd = down ? low + 30 : high - 30;
+            drawing += `<path d="M${stemX} ${stemStart}V${stemEnd}" class="note-stem"/>`;
+            if (beats === .5) drawing += `<path d="M${stemX} ${stemEnd}q14 ${down ? -8 : 8} 4 ${down ? -19 : 19}" class="note-stem"/>`;
+          }
           drawing += '</g>';
         }
         drawing += `<path d="M${450 + b * 320} ${top}V${bottom}" class="staff-line"/>`;

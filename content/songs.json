@@ -29,7 +29,8 @@
       "downloadFiles": [
         "dont-stop-believin.pdf",
         "dont-stop-believin.midi"
-      ]
+      ],
+      "category": "Pop / rock"
     },
     {
       "id": "fur-elise",
@@ -52,7 +53,58 @@
         "fur-elise.pdf",
         "fur-elise.midi"
       ],
-      "scoreMapFile": "fur-elise-score-map.json"
+      "scoreMapFile": "fur-elise-score-map.json",
+      "category": "Classical"
+    },
+    {
+      "id": "amazing-grace",
+      "title": "Amazing Grace",
+      "artist": "Traditional · NEW BRITAIN",
+      "category": "Hymns",
+      "status": "Complete beginner arrangement",
+      "summary": "A complete 16-bar tune in C, with a one-beat pickup and a simple left-hand bass part.",
+      "materialTitle": "Melody and bass · score and practice player",
+      "materialDescription": "Beginner arrangement of NEW BRITAIN. One complete verse of the tune, in 3/4.",
+      "notesFile": "amazing-grace-notes.md",
+      "practiceFile": "amazing-grace-practice.md",
+      "exerciseFile": "amazing-grace-performance.json",
+      "scoreMapFile": "amazing-grace-score-map.json",
+      "notationFiles": [
+        "amazing-grace-page-1.svg"
+      ],
+      "notationAlt": "Amazing Grace in C major, melody and single-note bass.",
+      "scoreViewBoxes": [
+        "0.0000 -0.0000 132.7795 187.7882"
+      ],
+      "downloadFiles": [
+        "amazing-grace.pdf",
+        "amazing-grace.midi"
+      ]
+    },
+    {
+      "id": "lord-of-the-dance",
+      "title": "Lord of the Dance · Simple Gifts",
+      "artist": "Joseph Brackett · traditional tune",
+      "category": "Hymns",
+      "status": "Complete beginner arrangement",
+      "summary": "The complete 16-bar Simple Gifts tune behind Lord of the Dance, arranged in C with a simple bass part.",
+      "materialTitle": "Melody and bass · score and practice player",
+      "materialDescription": "Original beginner arrangement of the traditional Simple Gifts tune used for Lord of the Dance. Includes both sections of the tune; no lyrics.",
+      "notesFile": "lord-of-the-dance-notes.md",
+      "practiceFile": "lord-of-the-dance-practice.md",
+      "exerciseFile": "lord-of-the-dance-performance.json",
+      "scoreMapFile": "lord-of-the-dance-score-map.json",
+      "notationFiles": [
+        "lord-of-the-dance-page-1.svg"
+      ],
+      "notationAlt": "Lord of the Dance · Simple Gifts in C major, melody and single-note bass.",
+      "scoreViewBoxes": [
+        "0.0000 -0.0000 132.7795 187.7882"
+      ],
+      "downloadFiles": [
+        "lord-of-the-dance.pdf",
+        "lord-of-the-dance.midi"
+      ]
     }
   ]
 }

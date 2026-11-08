@@ -1,0 +1,268 @@
+{
+  "version": 1,
+  "releasedThrough": 6,
+  "lessons": [
+    {
+      "lesson": 1,
+      "file": "lessons-01-01.apkg",
+      "facts": 9,
+      "cards": 15
+    },
+    {
+      "lesson": 2,
+      "file": "lessons-01-02.apkg",
+      "facts": 24,
+      "cards": 37
+    },
+    {
+      "lesson": 3,
+      "file": "lessons-01-03.apkg",
+      "facts": 28,
+      "cards": 44
+    },
+    {
+      "lesson": 4,
+      "file": "lessons-01-04.apkg",
+      "facts": 34,
+      "cards": 54
+    },
+    {
+      "lesson": 5,
+      "file": "lessons-01-05.apkg",
+      "facts": 38,
+      "cards": 59
+    },
+    {
+      "lesson": 6,
+      "file": "lessons-01-06.apkg",
+      "facts": 44,
+      "cards": 70
+    },
+    {
+      "lesson": 7,
+      "file": "lessons-01-07.apkg",
+      "facts": 67,
+      "cards": 103
+    },
+    {
+      "lesson": 8,
+      "file": "lessons-01-08.apkg",
+      "facts": 88,
+      "cards": 141
+    },
+    {
+      "lesson": 9,
+      "file": "lessons-01-09.apkg",
+      "facts": 107,
+      "cards": 167
+    },
+    {
+      "lesson": 10,
+      "file": "lessons-01-10.apkg",
+      "facts": 117,
+      "cards": 181
+    },
+    {
+      "lesson": 11,
+      "file": "lessons-01-11.apkg",
+      "facts": 143,
+      "cards": 226
+    },
+    {
+      "lesson": 12,
+      "file": "lessons-01-12.apkg",
+      "facts": 164,
+      "cards": 247
+    },
+    {
+      "lesson": 13,
+      "file": "lessons-01-13.apkg",
+      "facts": 170,
+      "cards": 258
+    },
+    {
+      "lesson": 14,
+      "file": "lessons-01-14.apkg",
+      "facts": 173,
+      "cards": 261
+    },
+    {
+      "lesson": 15,
+      "file": "lessons-01-15.apkg",
+      "facts": 189,
+      "cards": 285
+    },
+    {
+      "lesson": 16,
+      "file": "lessons-01-16.apkg",
+      "facts": 194,
+      "cards": 290
+    },
+    {
+      "lesson": 17,
+      "file": "lessons-01-17.apkg",
+      "facts": 221,
+      "cards": 339
+    },
+    {
+      "lesson": 18,
+      "file": "lessons-01-18.apkg",
+      "facts": 225,
+      "cards": 343
+    },
+    {
+      "lesson": 19,
+      "file": "lessons-01-19.apkg",
+      "facts": 232,
+      "cards": 352
+    },
+    {
+      "lesson": 20,
+      "file": "lessons-01-20.apkg",
+      "facts": 322,
+      "cards": 509
+    },
+    {
+      "lesson": 21,
+      "file": "lessons-01-21.apkg",
+      "facts": 324,
+      "cards": 511
+    },
+    {
+      "lesson": 22,
+      "file": "lessons-01-22.apkg",
+      "facts": 329,
+      "cards": 516
+    },
+    {
+      "lesson": 23,
+      "file": "lessons-01-23.apkg",
+      "facts": 343,
+      "cards": 530
+    },
+    {
+      "lesson": 24,
+      "file": "lessons-01-24.apkg",
+      "facts": 345,
+      "cards": 532
+    }
+  ],
+  "optional": [
+    {
+      "id": "fur-elise",
+      "title": "Für Elise theory",
+      "file": "fur-elise-theory.apkg",
+      "facts": 17,
+      "cards": 28
+    },
+    {
+      "id": "journey",
+      "title": "Journey theory",
+      "file": "journey-theory.apkg",
+      "facts": 6,
+      "cards": 8
+    }
+  ],
+  "library": [
+    {
+      "id": "advanced",
+      "title": "Advanced tonal theory",
+      "file": "advanced-theory.apkg",
+      "facts": 26,
+      "cards": 36
+    },
+    {
+      "id": "complete",
+      "title": "Complete prepared library",
+      "file": "complete-library.apkg",
+      "facts": 374,
+      "cards": 571
+    }
+  ],
+  "media": [
+    "migs-alto-clef.png",
+    "migs-bass-a2.png",
+    "migs-bass-a3.png",
+    "migs-bass-b2.png",
+    "migs-bass-b3.png",
+    "migs-bass-c3.png",
+    "migs-bass-c4.png",
+    "migs-bass-clef.png",
+    "migs-bass-d3.png",
+    "migs-bass-e2.png",
+    "migs-bass-e3.png",
+    "migs-bass-f2.png",
+    "migs-bass-f3.png",
+    "migs-bass-g2.png",
+    "migs-bass-g3.png",
+    "migs-broken-c.png",
+    "migs-chord-c-augmented.png",
+    "migs-chord-c-diminished.png",
+    "migs-chord-c-major.png",
+    "migs-chord-c-minor.png",
+    "migs-chord-c7.png",
+    "migs-chord-cdim7.png",
+    "migs-chord-cm7.png",
+    "migs-chord-cm7flat5.png",
+    "migs-chord-cmaj7.png",
+    "migs-dotted-quarter.png",
+    "migs-double-flat.png",
+    "migs-double-sharp.png",
+    "migs-eighth-note.png",
+    "migs-eighth-rest.png",
+    "migs-half-note.png",
+    "migs-half-rest.png",
+    "migs-keysig-a.png",
+    "migs-keysig-aes.png",
+    "migs-keysig-b.png",
+    "migs-keysig-bes.png",
+    "migs-keysig-c.png",
+    "migs-keysig-ces.png",
+    "migs-keysig-cis.png",
+    "migs-keysig-d.png",
+    "migs-keysig-des.png",
+    "migs-keysig-e.png",
+    "migs-keysig-ees.png",
+    "migs-keysig-f.png",
+    "migs-keysig-fis.png",
+    "migs-keysig-g.png",
+    "migs-keysig-ges.png",
+    "migs-quarter-note.png",
+    "migs-quarter-rest.png",
+    "migs-sharp-note.png",
+    "migs-sixteenth-note.png",
+    "migs-sixteenth-rest.png",
+    "migs-skip.png",
+    "migs-slur.png",
+    "migs-staff.png",
+    "migs-step.png",
+    "migs-tenor-clef.png",
+    "migs-tie.png",
+    "migs-time-128.png",
+    "migs-time-22.png",
+    "migs-time-24.png",
+    "migs-time-34.png",
+    "migs-time-38.png",
+    "migs-time-44.png",
+    "migs-time-68.png",
+    "migs-time-98.png",
+    "migs-treble-a4.png",
+    "migs-treble-a5.png",
+    "migs-treble-b4.png",
+    "migs-treble-c4.png",
+    "migs-treble-c5.png",
+    "migs-treble-clef.png",
+    "migs-treble-d4.png",
+    "migs-treble-d5.png",
+    "migs-treble-e4.png",
+    "migs-treble-e5.png",
+    "migs-treble-f4.png",
+    "migs-treble-f5.png",
+    "migs-treble-g4.png",
+    "migs-treble-g5.png",
+    "migs-whole-note.png",
+    "migs-whole-rest.png"
+  ],
+  "preparedFacts": 374,
+  "preparedCards": 571
+}

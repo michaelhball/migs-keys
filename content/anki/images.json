@@ -1,0 +1,422 @@
+{
+  "staff": {
+    "music": "s1",
+    "clef": "none",
+    "meter": null
+  },
+  "treble-clef": {
+    "music": "s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-c4": {
+    "music": "c'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-d4": {
+    "music": "d'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-e4": {
+    "music": "e'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "quarter-note": {
+    "music": "e'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "time-44": {
+    "music": "s1",
+    "clef": "treble",
+    "meter": "4/4"
+  },
+  "half-note": {
+    "music": "e'2",
+    "clef": "treble",
+    "meter": null
+  },
+  "half-rest": {
+    "music": "r2",
+    "clef": "treble",
+    "meter": null
+  },
+  "bass-clef": {
+    "music": "s1",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-c3": {
+    "music": "c4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-d3": {
+    "music": "d4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-e3": {
+    "music": "e4",
+    "clef": "bass",
+    "meter": null
+  },
+  "quarter-rest": {
+    "music": "r4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-f4": {
+    "music": "f'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-g4": {
+    "music": "g'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "step": {
+    "music": "c'4 d'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "skip": {
+    "music": "c'4 e'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "broken-c": {
+    "music": "c'4 e'4 g'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "time-38": {
+    "music": "s4.",
+    "clef": "treble",
+    "meter": "3/8"
+  },
+  "eighth-note": {
+    "music": "e'8",
+    "clef": "treble",
+    "meter": null
+  },
+  "sixteenth-note": {
+    "music": "e'16",
+    "clef": "treble",
+    "meter": null
+  },
+  "eighth-rest": {
+    "music": "r8",
+    "clef": "treble",
+    "meter": null
+  },
+  "dotted-quarter": {
+    "music": "e'4.",
+    "clef": "treble",
+    "meter": null
+  },
+  "sharp-note": {
+    "music": "dis''4",
+    "clef": "treble",
+    "meter": null
+  },
+  "tie": {
+    "music": "e'4~ e'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "slur": {
+    "music": "e'4( g'4)",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-a4": {
+    "music": "a'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-b4": {
+    "music": "b'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-c5": {
+    "music": "c''4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-d5": {
+    "music": "d''4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-e5": {
+    "music": "e''4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-f5": {
+    "music": "f''4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-g5": {
+    "music": "g''4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-a5": {
+    "music": "a''4",
+    "clef": "treble",
+    "meter": null
+  },
+  "bass-e2": {
+    "music": "e,4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-f2": {
+    "music": "f,4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-g2": {
+    "music": "g,4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-a2": {
+    "music": "a,4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-b2": {
+    "music": "b,4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-f3": {
+    "music": "f4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-g3": {
+    "music": "g4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-a3": {
+    "music": "a4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-b3": {
+    "music": "b4",
+    "clef": "bass",
+    "meter": null
+  },
+  "bass-c4": {
+    "music": "c'4",
+    "clef": "bass",
+    "meter": null
+  },
+  "alto-clef": {
+    "music": "s1",
+    "clef": "alto",
+    "meter": null
+  },
+  "tenor-clef": {
+    "music": "s1",
+    "clef": "tenor",
+    "meter": null
+  },
+  "whole-note": {
+    "music": "e'1",
+    "clef": "treble",
+    "meter": null
+  },
+  "whole-rest": {
+    "music": "r1",
+    "clef": "treble",
+    "meter": null
+  },
+  "sixteenth-rest": {
+    "music": "r16",
+    "clef": "treble",
+    "meter": null
+  },
+  "time-24": {
+    "music": "s1*2/4",
+    "clef": "treble",
+    "meter": "2/4"
+  },
+  "time-34": {
+    "music": "s1*3/4",
+    "clef": "treble",
+    "meter": "3/4"
+  },
+  "time-22": {
+    "music": "s1*2/2",
+    "clef": "treble",
+    "meter": "2/2"
+  },
+  "time-68": {
+    "music": "s1*6/8",
+    "clef": "treble",
+    "meter": "6/8"
+  },
+  "time-98": {
+    "music": "s1*9/8",
+    "clef": "treble",
+    "meter": "9/8"
+  },
+  "time-128": {
+    "music": "s1*12/8",
+    "clef": "treble",
+    "meter": "12/8"
+  },
+  "flat": {
+    "music": "bes'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "natural": {
+    "music": "fis'4 f'!4",
+    "clef": "treble",
+    "meter": null
+  },
+  "double-sharp": {
+    "music": "fisis'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "double-flat": {
+    "music": "beses'4",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-c-major": {
+    "music": "<c' e' g'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-c-minor": {
+    "music": "<c' ees' g'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-c-diminished": {
+    "music": "<c' ees' ges'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-c-augmented": {
+    "music": "<c' e' gis'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-c7": {
+    "music": "<c' e' g' bes'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-cmaj7": {
+    "music": "<c' e' g' b'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-cm7": {
+    "music": "<c' ees' g' bes'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-cm7flat5": {
+    "music": "<c' ees' ges' bes'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "chord-cdim7": {
+    "music": "<c' ees' ges' beses'>1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-c": {
+    "music": "\\key c \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-g": {
+    "music": "\\key g \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-d": {
+    "music": "\\key d \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-a": {
+    "music": "\\key a \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-e": {
+    "music": "\\key e \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-b": {
+    "music": "\\key b \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-fis": {
+    "music": "\\key fis \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-cis": {
+    "music": "\\key cis \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-f": {
+    "music": "\\key f \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-bes": {
+    "music": "\\key bes \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-ees": {
+    "music": "\\key ees \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-aes": {
+    "music": "\\key aes \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-des": {
+    "music": "\\key des \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-ges": {
+    "music": "\\key ges \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "keysig-ces": {
+    "music": "\\key ces \\major s1",
+    "clef": "treble",
+    "meter": null
+  }
+}

@@ -42,3 +42,9 @@ Use the passage selector to explore the complete piece. Later passages overlap b
 The complete three-page score is from the [Mutopia Project's public-domain edition](https://github.com/MutopiaProject/MutopiaProject/blob/master/ftp/BeethovenLv/WoO59/fur_Elise_WoO59/fur_Elise_WoO59.ly), based on Breitkopf & Härtel (1888), typeset by Stelios Samelis. The app's playback follows that edition, with repeats unfolded. Piano-view fingerings are practice suggestions added for this course.
 
 For another explanation of counting, see [musictheory.net: simple and compound meter](https://www.musictheory.net/lessons/15).
+
+## Markings and theory review
+
+**Poco moto** means “with a little motion”: a gently moving character, not an exact BPM. **pp** means *pianissimo*, very soft. A dot after a note adds half its original value; a dotted quarter therefore lasts three eighth notes. The little flags or beams identify eighth notes (one) and sixteenth notes (two).
+
+Use [Musictheory.net: note durations](https://www.musictheory.net/lessons/11), [dots and ties](https://www.musictheory.net/lessons/14), and [simple and compound meter](https://www.musictheory.net/lessons/15) for diagrams. The [Flashcards page](#flashcards) has an optional Für Elise theory pack when you want to review these ideas.

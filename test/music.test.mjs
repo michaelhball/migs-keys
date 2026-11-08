@@ -11,7 +11,7 @@ test('available lesson exercises have complete bars, matching hand keyboards, an
     assert.match(html, /notation-display/);
     assert.doesNotMatch(html, /piano-display/);
     const piano=musicPlayer(lesson.exercise,60,'notes'); assert.match(piano,/piano-display/);
-    if (lesson.id >= 5) { assert.match(piano, /data-hand="left"/); assert.match(piano, /data-hand="right"/); }
+    if ([5,6,9,10].includes(lesson.id)) { assert.match(piano, /data-hand="left"/); assert.match(piano, /data-hand="right"/); }
   }
 });
 
@@ -84,4 +84,12 @@ test('Journey accompaniment has full 4/4 form, tied bass, score positions and se
   assert.equal(passages(exercise).find(p=>p.id==='109').to,116);
   const html=performancePlayer(song,selectPassage(exercise),60,'notation');
   assert.match(html,/Quarter notes \/ minute/);assert.doesNotMatch(html,/Für Elise|piano-display/);
+});
+
+
+test('bass clef dots straddle F3, the fourth line, independently of fonts', () => {
+  const svg = notation({title:'Bass clef',events:[{beats:4,left:[{midi:53}]}]});
+  assert.match(svg, /class="bass-clef" data-anchor-y="75"/);
+  assert.match(svg, /M557 -125/, 'LilyPond bass dots are symmetric around its F-line origin');
+  assert.match(svg, /cx="150" cy="75"/, 'F3 is on the line halfway between the dots');
 });

@@ -6,7 +6,7 @@ Play a right-hand melody while the left hand adds one bass note at the start of 
 
 Put right-hand fingers 1, 2, and 3 on C4, D4, and E4. Put the left little finger (5) on C3, the C one octave below middle C.
 
-The top staff is the right hand and the bottom staff is the left hand. Notes lined up vertically start together. A quarter rest on the lower staff means the left hand stays silent for that beat while the right hand continues.
+The two staves joined by a brace are called the **grand staff**. In this exercise, the top (treble) staff is the right hand and the bottom (bass) staff is the left hand. Notes lined up vertically start together. The new symbol is a **quarter rest**, the zigzag-shaped mark shown above the player. In 4/4 it lasts one beat of silence. A quarter rest on the lower staff means the left hand stays silent for that beat while the right hand continues.
 
 In this exercise the left C lasts **one beat**. Release it on beat 2. We will add longer held bass notes later.
 
@@ -28,3 +28,5 @@ Try making the left C quieter than the right-hand melody. Listen to whether the 
 ## Check and continue
 
 Play both bars twice at a comfortable tempo. Check that the left hand starts only on beat 1 and releases on beat 2. Record which transition needs more work. Lesson 6 applies this same coordination to a longer piece.
+
+[Musictheory.net’s rests lesson](https://www.musictheory.net/lessons/13) shows this new symbol alongside the half rest from Lesson 3.

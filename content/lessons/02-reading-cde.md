@@ -4,7 +4,7 @@ Read C, D, and E on the treble staff and connect each written note to its key. Y
 
 ## Three positions to recognise
 
-A staff has five horizontal lines. Count them from the bottom. The treble clef at the left tells you how pitches map onto those lines and spaces.
+A staff has five horizontal lines and four spaces between them. Count both from the bottom. The treble clef is also called the G clef: its curl marks G4 on the second line from the bottom. We will use that G later. Read a note’s pitch from the oval notehead, not the tip of its stem.
 
 - **Middle C (C4)** sits on a short extra line below the staff. That short line is called a ledger line.
 - **D4** sits in the space just below the bottom staff line, between middle C and E.

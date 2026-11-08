@@ -77,7 +77,7 @@ for page,file in enumerate(files,1):
    if path is None or not transform:continue
    shape=path.get('d','')
    # Emmentaler noteheads at the 18/20-point staff sizes used by our scores.
-   if not shape.startswith(('M0 -46','M0 -45','M0 -42','M0 -34','M0 -40','M74 -105')):continue
+   if not shape.startswith(('M0 -46','M0 -45','M0 -42','M0 -34','M0 -40','M74 -105','M343 -25')):continue
    x,y=map(float,transform.groups())
    staff=min(tops,key=lambda top:abs(y-(top+2)))
    # Marker is always above the staff and above high ledger notes.
