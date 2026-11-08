@@ -41,6 +41,8 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/playback.js', '/music.js', '/lesson-guide.js', '/music-symbols.js', '/performance.js', '/sound.js', '/recording.js', '/piano-view.js', '/midi.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
   assert.equal((await request('/api/state')).data.settings.melodyTempo, 60);
   assert.equal((await request('/api/state')).data.settings.songView, 'notes');
+  assert.equal((await request('/api/settings', 'PUT', {lessonFingering:{lessonId:7,show:'yes'}})).status,400);
+  await request('/api/settings', 'PUT', {lessonFingering:{lessonId:7,show:true}});
   const library = await request('/api/songs');
   assert.deepEqual(library.data.songs.map(song => song.id), ['dont-stop-believin', 'fur-elise', 'amazing-grace', 'lord-of-the-dance']);
   for (const song of library.data.songs) {
@@ -116,6 +118,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal(saved.settings.melodyTempo, 105);
   assert.equal(saved.settings.timer.elapsed, 42);
   assert.equal(saved.settings.songView, 'notation');
+  assert.equal(saved.settings.lessonFingerings['7'], true);
   assert.equal(saved.settings.soundPreset,'electric');
 
   assert.equal(saved.activeLesson, 2, 'completing the active lesson advances to the next available lesson');

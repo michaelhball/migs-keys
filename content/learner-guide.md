@@ -22,6 +22,6 @@ Browser audio and MIDI capture are implemented, with local recording files and d
 
 Sound presets: acoustic piano samples, electric piano, organ and synth pad. Keep the controls near playback. GitHub commits and pushes directly to main are explicitly authorised. Keep data/ and private recordings out of commits. Give clear progress updates for features that are actually usable.
 
-After every completed fix, run the relevant checks, commit it, and push to `main` before continuing with unrelated work. Do not accumulate fixes locally until the whole task is finished. Say a fix is pushed only after verifying the push succeeded. The learner explicitly requested this on 2026-11-09.
+After every completed modification—content, feature, preference, tooling, or fix—run the relevant checks, commit it, and push to `main` before continuing with unrelated work. Do not accumulate changes locally until the whole task is finished. Say a change is pushed only after verifying the push succeeded. The learner explicitly requested this on 2026-11-09.
 
 Accuracy review is required for lesson text, rendered notation, playback, fingerings, and both directions of Anki cards. A bass-clef font baseline bug incorrectly placed its dots; use anchored vector symbols and regression checks. Preview actual browser output, including rests, before claiming a lesson is ready. From Lesson 7, hide score fingering by default and offer an explicit toggle; retain piano-view fingering. Keep the gradual course progression and check retention again in a later session.

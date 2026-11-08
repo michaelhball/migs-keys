@@ -58,3 +58,6 @@ main>.text-link+.page-intro{margin-top:18px}
 .flashcard-example summary { cursor: pointer; color: var(--green, #2e4a3f); }
 
 .hand-position-diagram{display:block;width:100%;max-width:580px;margin:18px auto;fill:var(--ink)}.staff-guide h3{font-size:18px;margin-top:24px}.rest-guide{display:flex;gap:20px;align-items:center}.rest-guide img{width:140px;max-width:35%;height:auto}.rest-guide p{font-size:13px;line-height:1.7}
+
+[hidden]{display:none!important}
+.song-category{margin:32px 0}.song-card h3{font-size:24px;line-height:1.2;margin:14px 0}

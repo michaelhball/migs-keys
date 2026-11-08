@@ -93,3 +93,11 @@ test('bass clef dots straddle F3, the fourth line, independently of fonts', () =
   assert.match(svg, /M557 -125/, 'LilyPond bass dots are symmetric around its F-line origin');
   assert.match(svg, /cx="150" cy="75"/, 'F3 is on the line halfway between the dots');
 });
+
+
+test('score fingering can be hidden without removing piano-view guidance', () => {
+  const exercise={title:'Reading', events:[{beats:4,right:[{midi:60,finger:1}]}]};
+  assert.match(notation(exercise,true), /class="score-fingering"/);
+  assert.doesNotMatch(notation(exercise,false), /class="score-fingering"/);
+  assert.match(musicPlayer(exercise,60,'notes','piano',false), /key-finger/);
+});

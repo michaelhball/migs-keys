@@ -91,9 +91,10 @@ function lessonNavigation(item) {
   const next = course.lessons.find(x => x.id > item.id && x.file);
   return `<section class="card lesson-navigation"><h2>Lessons</h2>${previous ? `<a class="button outline full" href="#lesson/${previous.id}">← Lesson ${previous.id}</a>` : ''}${next ? `<a class="button primary full" href="#lesson/${next.id}">Next: Lesson ${next.id} →</a><p class="fine">You can continue in the same session.</p>` : '<p class="fine">You have reached the end of the available lessons. Review a piece or try a song while the next block is prepared.</p>'}</section>`;
 }
+function lessonFingering(id) { return state.settings.lessonFingerings?.[id] ?? id <= 6; }
 function lessonPlayer(item) {
   const view = item.defaultView || 'notes';
-  return `<section class="card melody-card" id="lesson-player-start">${item.id === 2 ? staffGuide() : lessonGuide(item.id)}<div class="song-view-controls" role="group" aria-label="Music display">${[['notes','Piano view'],['notation','Sheet music']].map(([v,label]) => `<button class="button small outline ${view === v ? 'selected' : ''}" data-action="lesson-view" data-view="${v}" aria-pressed="${view === v}">${label}</button>`).join('')}</div><div id="lesson-player">${musicPlayer(item.exercise, melodyTempo, view, state.settings.soundPreset)}</div></section>`;
+  return `<section class="card melody-card" id="lesson-player-start">${item.id === 2 ? staffGuide() : lessonGuide(item.id)}<div class="song-view-controls" role="group" aria-label="Music display">${[['notes','Piano view'],['notation','Sheet music']].map(([v,label]) => `<button class="button small outline ${view === v ? 'selected' : ''}" data-action="lesson-view" data-view="${v}" aria-pressed="${view === v}">${label}</button>`).join('')}<button class="button small outline" data-action="lesson-fingering" aria-pressed="${lessonFingering(item.id)}" ${view === 'notation' ? '' : 'hidden'}>${lessonFingering(item.id) ? 'Hide' : 'Show'} fingering</button></div><div id="lesson-player">${musicPlayer(item.exercise, melodyTempo, view, state.settings.soundPreset, lessonFingering(item.id))}</div></section>`;
 }
 function staffGuide() {
   const exercise = { title: 'Middle C, D, and E on the treble staff', events: [{beats:1,right:[{midi:60,finger:1}]},{beats:1,right:[{midi:62,finger:2}]},{beats:1,right:[{midi:64,finger:3}]},{beats:1,right:[{midi:60,finger:1}]}] };
@@ -347,8 +348,17 @@ document.addEventListener('click', async event => {
     else if (action === 'piano-step') { stopSounds(); currentStep=Math.max(0,Math.min(currentExercise.events.length-1,currentStep+Number(button.dataset.delta))); previewPiano(); }
     else if (action === 'lesson-view') {
       stopSounds();
-      $('#lesson-player').innerHTML = musicPlayer(currentExercise, melodyTempo, button.dataset.view, state.settings.soundPreset); installPianoNavigation();
+      $('#lesson-player').innerHTML = musicPlayer(currentExercise, melodyTempo, button.dataset.view, state.settings.soundPreset, lessonFingering(currentLesson.id)); installPianoNavigation();
+      $('[data-action="lesson-fingering"]').hidden = button.dataset.view !== 'notation';
       document.querySelectorAll('[data-action="lesson-view"]').forEach(x => { x.setAttribute('aria-pressed', String(x === button)); x.classList.toggle('selected', x === button); });
+    }
+    else if (action === 'lesson-fingering') {
+      stopSounds();
+      const id = currentLesson.id, show = !lessonFingering(id);
+      const result = await api('settings', 'PUT', { lessonFingering: { lessonId: id, show } });
+      state.settings.lessonFingerings = result.settings.lessonFingerings;
+      button.setAttribute('aria-pressed', String(show)); button.textContent = `${show ? 'Hide' : 'Show'} fingering`;
+      $('#lesson-player').innerHTML = musicPlayer(currentExercise, melodyTempo, 'notation', state.settings.soundPreset, show);
     }
     else if (action === 'song-view') {
       stopSounds();

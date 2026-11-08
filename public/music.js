@@ -36,7 +36,7 @@ function noteY(midi, bottom, hand) {
   const step = Number(name.slice(-1)) * 7 + 'CDEFGAB'.indexOf(name[0]);
   return bottom - (step - (hand === 'right' ? 30 : 18)) * 5;
 }
-export function notation(exercise) {
+export function notation(exercise, showFingering = true) {
   const bars = measures(exercise), hands = handsFor(exercise), height = hands.length === 2 ? 300 : 175;
   let html = '';
   for (let row = 0; row < bars.length; row += 2) {
@@ -67,7 +67,7 @@ export function notation(exercise) {
             for (let ly = top - 10; ly >= y; ly -= 10) drawing += `<path d="M${x - 12} ${ly}h24" class="staff-line"/>`;
             drawing += `<ellipse cx="${x}" cy="${y}" rx="${beats === 4 ? 9 : 7}" ry="5" transform="rotate(-20 ${x} ${y})" class="${beats >= 2 ? 'open-note' : 'note-ink'}"/>`;
             if ([1.5, 3].includes(beats)) drawing += `<circle class="augmentation-dot" cx="${x + 14}" cy="${(bottom - y) % 10 === 0 ? y - 5 : y}" r="2"/>`;
-            if (n.finger) drawing += `<text x="${x + (notes.length > 1 ? (notes.indexOf(n) * 14 - 7) : 0)}" y="${top - 18}" text-anchor="middle" font-size="12">${n.finger}</text>`;
+            if (showFingering && n.finger) drawing += `<text x="${x + (notes.length > 1 ? (notes.indexOf(n) * 14 - 7) : 0)}" y="${top - 18}" text-anchor="middle" font-size="12" class="score-fingering">${n.finger}</text>`;
           });
           if (notes.length && beats !== 4) {
             const ys = notes.map(n => noteY(n.midi, bottom, hand));
@@ -87,6 +87,6 @@ export function notation(exercise) {
   return html;
 }
 
-export function musicPlayer(exercise, tempo, view = 'notes', preset = 'piano') {
-  return `<div class="section-top"><h2>${esc(exercise.title)}</h2><div class="melody-controls">${soundControl(preset)}<label for="melody-tempo">Tempo</label><input id="melody-tempo" type="number" min="30" max="180" step="1" value="${tempo}" aria-label="Playback tempo in beats per minute"><span>BPM</span><button class="button outline small" data-action="melody">▷ Listen</button></div></div><p class="fine">${esc(exercise.description || 'Four beats per bar. Finger numbers appear on the keys during playback.')}</p>${view === 'notation' ? notation(exercise) : ''}${view === 'notes' ? `<div class="player-keyboards">${handsFor(exercise).map(hand => keyboardView(exercise, hand)).join('')}</div><p class="fine">Finger 1 = thumb · 2 = index · 3 = middle · 4 = ring · 5 = little finger</p>` : ''}`;
+export function musicPlayer(exercise, tempo, view = 'notes', preset = 'piano', showFingering = true) {
+  return `<div class="section-top"><h2>${esc(exercise.title)}</h2><div class="melody-controls">${soundControl(preset)}<label for="melody-tempo">Tempo</label><input id="melody-tempo" type="number" min="30" max="180" step="1" value="${tempo}" aria-label="Playback tempo in beats per minute"><span>BPM</span><button class="button outline small" data-action="melody">▷ Listen</button></div></div><p class="fine">${esc(exercise.description || 'Four beats per bar. Finger numbers appear on the keys during playback.')}</p>${view === 'notation' ? notation(exercise, showFingering) : ''}${view === 'notes' ? `<div class="player-keyboards">${handsFor(exercise).map(hand => keyboardView(exercise, hand)).join('')}</div><p class="fine">Finger 1 = thumb · 2 = index · 3 = middle · 4 = ring · 5 = little finger</p>` : ''}`;
 }
