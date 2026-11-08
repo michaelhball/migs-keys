@@ -59,3 +59,29 @@ test('every Für Elise playback note has an in-page score position',async()=>{
   const exercise=JSON.parse(await readFile(new URL('../content/songs/fur-elise-performance.json',import.meta.url),'utf8'));
   for(const event of exercise.events)for(const hand of ['right','left'])for(const note of event[hand]){const point=score[note.scoreKey];assert.ok(point);assert.ok(point.page>=1&&point.page<=3);assert.ok(point.x>0&&point.x<119.5016);assert.ok(point.y>0&&point.y<169.0094);}
 });
+
+test('Journey accompaniment has full 4/4 form, tied bass, score positions and selectable sections',async()=>{
+  const {passages,selectPassage,performancePlayer}=await import('../public/performance.js');
+  const exercise=JSON.parse(await readFile(new URL('../content/songs/dont-stop-believin-performance.json',import.meta.url),'utf8'));
+  const score=JSON.parse(await readFile(new URL('../content/songs/dont-stop-believin-score-map.json',import.meta.url),'utf8'));
+  const song=JSON.parse(await readFile(new URL('../content/songs.json',import.meta.url),'utf8')).songs[0];song.exercise=exercise;
+  assert.equal(exercise.events.reduce((sum,e)=>sum+e.beats,0),116*4);
+  assert.deepEqual(exercise.meter,[4,4]);
+  const bars=new Map();const fingers=new Map();
+  for(const e of exercise.events){
+    bars.set(e.bar,(bars.get(e.bar)||0)+e.beats);
+    for(const hand of ['right','left']){
+      assert.equal(new Set(e[hand].map(n=>n.finger)).size,e[hand].length);
+      for(const n of e[hand]){assert.ok(score[n.scoreKey]);assert.ok(n.finger>=1&&n.finger<=5);if(fingers.has(n.id))assert.equal(n.finger,fingers.get(n.id));fingers.set(n.id,n.finger);}
+    }
+  }
+  assert.equal(bars.size,116);for(const beats of bars.values())assert.equal(beats,4);
+  const before=exercise.events.find(e=>e.bar===1&&e.beat===3.5).left[0];
+  const after=exercise.events.find(e=>e.bar===2&&e.beat===0).left[0];
+  assert.equal(before.midi,47);assert.equal(before.id,after.id);assert.equal(after.attack,false);assert.notEqual(before.scoreKey,after.scoreKey,'marker advances across a tied bar line');
+  assert.equal(selectPassage(exercise,'opening').events.at(-1).bar,8);
+  assert.equal(selectPassage(exercise,'41').events[0].bar,41);
+  assert.equal(passages(exercise).find(p=>p.id==='109').to,116);
+  const html=performancePlayer(song,selectPassage(exercise),60,'notation');
+  assert.match(html,/Quarter notes \/ minute/);assert.doesNotMatch(html,/Für Elise|piano-display/);
+});

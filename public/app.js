@@ -25,7 +25,7 @@ const melodyPlayer = new MelodyPlayer({
       const notes = ['right','left'].filter(hand=>playingHand==='both'||hand===playingHand).flatMap(hand=>handNotes(event,hand));
       for (const [id,voice] of heldVoices) if (!notes.some(n=>n.id===id)) { voice(); heldVoices.delete(id); }
       for (const note of notes) if (!heldVoices.has(note.id)) heldVoices.set(note.id, sustainedTone(note.midi));
-      if ($('#playback-position')) $('#playback-position').textContent = `${event.bar===0?'Pickup':`Playthrough bar ${event.bar}`} · count ${Number((event.beat+1).toFixed(2))}`;
+      if ($('#playback-position')) $('#playback-position').textContent = pianoPosition(currentExercise,index).split(' · position ')[0];
     } else silenceTones();
     document.querySelectorAll('.piano-key.sounding').forEach(key => { key.classList.remove('sounding'); key.querySelector('.key-finger').textContent = ''; });
     for (const hand of ['right', 'left']) for (const note of handNotes(event, hand)) {

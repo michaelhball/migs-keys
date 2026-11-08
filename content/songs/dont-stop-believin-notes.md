@@ -1,3 +1,1 @@
-## Right hand
-
-Alternate E4 + B4 together with B3. Suggested fingers: 2 + 5 for the chord, then 1 for B3. Each event lasts an eighth note. Count 1 & 2 & 3 & 4 &.
+The Piano view displays the tutorial-based accompaniment with one keyboard for each hand. Use Previous/Next, the position slider or the bar selector to inspect the notes and suggested fingers without playback. Full practice instructions are in dont-stop-believin-practice.md.

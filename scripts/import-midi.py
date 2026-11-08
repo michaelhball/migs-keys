@@ -3,8 +3,19 @@ Usage: python3 scripts/import-midi.py INPUT.midi OUTPUT.json
 The supplied MIDI must have named up/down tracks and unfolded repeats.
 """
 from pathlib import Path
-import json, sys
-b = Path(sys.argv[1]).read_bytes()
+import argparse, json
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('input', type=Path)
+parser.add_argument('output', type=Path)
+parser.add_argument('--meter', default='3/8')
+parser.add_argument('--pickup', type=float, default=1, help='Pickup length in denominator-note units')
+parser.add_argument('--title', default='Für Elise — original 3/8')
+parser.add_argument('--description', default='Tempo counts eighth notes: 1 & 2 & 3 &. Repeats are played in full. Playback follows the written note lengths without pedal or expressive timing.')
+args = parser.parse_args()
+numerator, denominator = map(int, args.meter.split('/'))
+if numerator < 1 or denominator not in (2,4,8,16) or not 0 <= args.pickup < numerator:
+    parser.error('Use a positive meter and a pickup shorter than one bar.')
+b = args.input.read_bytes()
 assert b[:4] == b'MThd'
 tpq = int.from_bytes(b[12:14], 'big')
 assert tpq < 32768
@@ -46,25 +57,16 @@ while pos < len(b):
     assert not active
     total = max(total, tick)
 
-unit = tpq / 2 # one eighth note per player beat
-pickup = int(unit)
-bar_ticks = int(3 * unit)
+unit = tpq * 4 / denominator
+pickup = round(args.pickup * unit)
+bar_ticks = round(numerator * unit)
 boundaries = {0, total, *range(pickup,total,bar_ticks)}
 for note in notes: boundaries.update((note['start'],note['end']))
 times = sorted(boundaries)
-# Suggested fingering only for the familiar opening; later passages are unannotated.
-rh = sorted((n for n in notes if n['hand']=='right'), key=lambda n:n['start'])
-for note,finger in zip(rh,[5,4,5,4,5,2,4,3,1,1,2,4,5,1,3,5,5]): note['finger']=finger
-for note in notes:
-    if note['hand']=='left' and note['start'] < 9*bar_ticks:
-        if note['midi'] in (45,40): note['finger']=5
-        elif note['midi']==52: note['finger']=2
-        elif note['midi'] in (57,56): note['finger']=1
-
 events = []
 for t,end in zip(times,times[1:]):
     bar = 0 if t<pickup else 1+(t-pickup)//bar_ticks
-    beat = (t / unit + 2) if bar==0 else ((t-pickup)%bar_ticks)/unit
+    beat = (t / unit + numerator - args.pickup) if bar==0 else ((t-pickup)%bar_ticks)/unit
     event = dict(beats=(end-t)/unit,bar=bar,beat=beat,right=[],left=[])
     for n in notes:
         if n['start']<=t<n['end']:
@@ -73,6 +75,6 @@ for t,end in zip(times,times[1:]):
             value['length'] = (n['end']-n['start'])/unit
             event[n['hand']].append(value)
     events.append(event)
-result=dict(title='Für Elise — original 3/8',description='Tempo counts eighth notes: 1 & 2 & 3 &. Repeats are played in full. Playback follows the written note lengths without pedal or expressive timing.',timeline=True,meter=[3,8],pickupBeats=1,events=events)
-Path(sys.argv[2]).write_text(json.dumps(result,separators=(',',':'))+'\n')
-print(f'{len(notes)} notes, {len(events)} events, {total/unit} eighth-note units, {events[-1]["bar"]} playthrough bars after pickup')
+result=dict(title=args.title,description=args.description,timeline=True,meter=[numerator,denominator],pickupBeats=args.pickup,events=events)
+args.output.write_text(json.dumps(result,separators=(',',':'))+'\n')
+print(f'{len(notes)} notes, {len(events)} events, {total/unit} 1/{denominator}-note units, {events[-1]["bar"]} bars after pickup')

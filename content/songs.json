@@ -4,116 +4,32 @@
       "id": "dont-stop-believin",
       "title": "Don't Stop Believin'",
       "artist": "Journey",
-      "status": "Opening excerpt + full tutorial",
-      "summary": "The actual opening right-hand accompaniment, plus the full Pianote lesson you requested.",
-      "materialTitle": "Opening right hand — one-bar excerpt",
-      "materialDescription": "A short excerpt of the song's opening accompaniment in E major. Alternate E4 + B4 together with B3. The linked video teaches the walking bass and the rest of the song.",
+      "status": "Full piano accompaniment",
+      "summary": "116 bars of tutorial-based piano accompaniment, including the walking bass, verses, Strangers section and chorus.",
+      "materialTitle": "Piano accompaniment and practice player",
+      "materialDescription": "Start with the eight-bar intro. Choose a section, practise each hand, or step through the keys without audio. Repeated riffs use consistent voicings for practice.",
       "notesFile": "dont-stop-believin-notes.md",
       "practiceFile": "dont-stop-believin-practice.md",
-      "notationFiles": [],
-      "exercise": {
-        "title": "Opening right hand — one-bar excerpt",
-        "description": "Count 1 & 2 & 3 & 4 &. Each event lasts half a beat. Start around 40 BPM.",
-        "events": [
-          {
-            "beats": 0.5,
-            "right": [
-              {
-                "midi": 64,
-                "finger": 2
-              },
-              {
-                "midi": 71,
-                "finger": 5
-              }
-            ],
-            "left": []
-          },
-          {
-            "beats": 0.5,
-            "right": [
-              {
-                "midi": 59,
-                "finger": 1
-              }
-            ],
-            "left": []
-          },
-          {
-            "beats": 0.5,
-            "right": [
-              {
-                "midi": 64,
-                "finger": 2
-              },
-              {
-                "midi": 71,
-                "finger": 5
-              }
-            ],
-            "left": []
-          },
-          {
-            "beats": 0.5,
-            "right": [
-              {
-                "midi": 59,
-                "finger": 1
-              }
-            ],
-            "left": []
-          },
-          {
-            "beats": 0.5,
-            "right": [
-              {
-                "midi": 64,
-                "finger": 2
-              },
-              {
-                "midi": 71,
-                "finger": 5
-              }
-            ],
-            "left": []
-          },
-          {
-            "beats": 0.5,
-            "right": [
-              {
-                "midi": 59,
-                "finger": 1
-              }
-            ],
-            "left": []
-          },
-          {
-            "beats": 0.5,
-            "right": [
-              {
-                "midi": 64,
-                "finger": 2
-              },
-              {
-                "midi": 71,
-                "finger": 5
-              }
-            ],
-            "left": []
-          },
-          {
-            "beats": 0.5,
-            "right": [
-              {
-                "midi": 59,
-                "finger": 1
-              }
-            ],
-            "left": []
-          }
-        ]
-      },
-      "tutorialUrl": "https://www.youtube.com/watch?v=amRtNe2uVwE"
+      "notationFiles": [
+        "dont-stop-believin-page-1.svg",
+        "dont-stop-believin-page-2.svg",
+        "dont-stop-believin-page-3.svg",
+        "dont-stop-believin-page-4.svg"
+      ],
+      "tutorialUrl": "https://www.youtube.com/watch?v=amRtNe2uVwE",
+      "exerciseFile": "dont-stop-believin-performance.json",
+      "scoreMapFile": "dont-stop-believin-score-map.json",
+      "notationAlt": "Tutorial-based piano accompaniment in E major, both hands.",
+      "scoreViewBoxes": [
+        "0.0000 -0.0000 132.7795 187.7882",
+        "0.0000 -0.0000 132.7795 187.7882",
+        "0.0000 -0.0000 132.7795 187.7882",
+        "0.0000 -0.0000 132.7795 187.7882"
+      ],
+      "downloadFiles": [
+        "dont-stop-believin.pdf",
+        "dont-stop-believin.midi"
+      ]
     },
     {
       "id": "fur-elise",
