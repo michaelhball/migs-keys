@@ -64,11 +64,8 @@ npm test
 
 Integration tests use an isolated temporary data directory, exercise real HTTP endpoints, restart the server, and verify saved data survives. They do not alter the learner's progress.
 
-## Rebuilding the Beethoven assets
+## Rebuilding music and inspecting source video
 
-The original public-domain LilyPond source is in `content/songs/source/fur-elise.ly`.
-LilyPond 2.26 creates the SVG pages and PDF. For MIDI, use an otherwise identical
-copy with `\unfoldRepeats` before `\new PianoStaff`.
-Run `python3 scripts/import-midi.py INPUT.midi content/songs/fur-elise-performance.json`,
-then `python3 scripts/suggest-fingerings.py`. Generated assets are committed, so
-LilyPond and Python are not needed to run the app.
+Run `python3 scripts/build-fur-elise.py` from the repository root with LilyPond 2.26 installed. It rebuilds the score, unfolded MIDI, player events, suggested fingerings, and the map from playback notes to engraved noteheads. The green dots are drawn above the staff; the printed SVG remains unchanged beneath them. Generated assets are committed, so LilyPond and Python are not needed to run the app.
+
+`scripts/extract-video-frames.py` extracts sparse, timestamped frames using FFmpeg's input seeking. Start with `--every 60`, then use `--times 30,90,330` for chosen details. Store source videos and extracted frames under ignored `data/video-review/`. The extraction script and inspection decisions belong in Git; personal video files do not. No video-analysis API is called.

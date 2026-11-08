@@ -15,7 +15,7 @@ In the player above, choose **Sheet music**. Find the bottom line first. Then id
 ## Practise · about 15–20 minutes
 
 1. **Locate the keys.** Put right-hand fingers 1, 2, and 3 on middle C, D, and E. On keyboards without octave labels, use the C nearest the physical centre as a starting guide; ask me if its octave is unclear.
-2. **Read without playing.** Say the first four note names from the staff. Use the Note names view to check, then return to the staff.
+2. **Read without playing.** Say the first four note names from the staff. Use Piano view and its Next button to check the highlighted keys, then return to the staff.
 3. **Play four notes slowly.** Begin with E, using finger 3. Look at the next written note before playing it. If you need to stop, stop; choose a slower pulse on the next attempt.
 4. **Read the second bar.** Identify each note by its position. Play the four notes, then try the two bars together.
 5. **Practise the join.** Work on notes 3–6: C, D, C, C. Count “3, 4, 1, 2”. Then start one note earlier and finish one note later before returning to the whole phrase.

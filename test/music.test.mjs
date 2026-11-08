@@ -52,3 +52,10 @@ test('complete Für Elise uses 3/8, repeated passages, consistent fingering, and
   const score=performancePlayer(song,opening,90,'notation');assert.equal((score.match(/class="full-score-page"/g)||[]).length,3);assert.doesNotMatch(score,/piano-display|notation-display/);
   const piano=performancePlayer(song,opening,90,'notes');assert.equal((piano.match(/class="piano-display"/g)||[]).length,2);assert.doesNotMatch(piano,/full-score-page|timeline-events/);
 });
+
+
+test('every Für Elise playback note has an in-page score position',async()=>{
+  const score=JSON.parse(await readFile(new URL('../content/songs/fur-elise-score-map.json',import.meta.url),'utf8'));
+  const exercise=JSON.parse(await readFile(new URL('../content/songs/fur-elise-performance.json',import.meta.url),'utf8'));
+  for(const event of exercise.events)for(const hand of ['right','left'])for(const note of event[hand]){const point=score[note.scoreKey];assert.ok(point);assert.ok(point.page>=1&&point.page<=3);assert.ok(point.x>0&&point.x<119.5016);assert.ok(point.y>0&&point.y<169.0094);}
+});

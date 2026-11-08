@@ -6,7 +6,7 @@ Keep counting while a note continues and while there is silence. Use the same ri
 
 In this 4/4 exercise, a **quarter note** (filled head and stem) lasts one beat. A **half note** (open head and stem) lasts two beats. A **half rest** is a small rectangle sitting on the middle staff line; it means two beats of silence.
 
-The first bar is C for one beat, D for one beat, then E for two beats. The second bar is D for one beat, C for one beat, then two silent beats. The numbered groups in Note names show which counts belong to each event.
+The first bar is C for one beat, D for one beat, then E for two beats. The second bar is D for one beat, C for one beat, then two silent beats. Use Piano view to step through the events; the position label shows the count where each begins.
 
 ## Practise · about 15 minutes
 

@@ -34,7 +34,7 @@ const melodyPlayer = new MelodyPlayer({
       const key = document.querySelector(`[data-hand="${hand}"] [data-note="${note.midi}"]`);
       if (key) { key.classList.add('sounding'); key.querySelector('.key-finger').textContent = note.finger || ''; }
     }
-    updatePianoPosition();
+    updatePianoPosition(); syncScore(event);
     document.querySelectorAll('#lesson-player [data-sequence], #song-score [data-sequence]').forEach(x => x.classList.toggle('sounding', Number(x.dataset.sequence) === index));
   },
   onStop(finished) {
@@ -44,6 +44,7 @@ const melodyPlayer = new MelodyPlayer({
     document.querySelectorAll('.key-finger').forEach(x => x.textContent = '');
     if ($('[data-action="melody"]')) $('[data-action="melody"]').textContent = '▷ Listen';
     previewPiano();
+    document.querySelectorAll('.score-overlay').forEach(svg=>svg.replaceChildren());
     if (finished && repeatPassage && currentExercise?.timeline) { melodyPlayer.start(currentExercise.events,melodyTempo); if ($('[data-action="melody"]')) $('[data-action="melody"]').textContent='■ Stop'; }
   }
 });
@@ -182,6 +183,27 @@ async function audioReady() { await sound.ready(state.settings.soundPreset || 'p
 function tone(midi, duration=.7, quiet=false) { return sound.start(midi,{duration,quiet}); }
 function sustainedTone(midi) { return sound.start(midi); }
 function silenceTones() { heldVoices.clear(); sound.stopAll(); }
+function syncScore(event) {
+  const overlays=[...document.querySelectorAll('.score-overlay')];
+  if (!overlays.length || !currentSong?.scoreMap) return;
+  overlays.forEach(svg=>svg.replaceChildren());
+  for (const hand of ['right','left']) {
+    if (playingHand!=='both' && playingHand!==hand) continue;
+    const points=handNotes(event,hand).map(note=>currentSong.scoreMap[note.scoreKey]).filter(Boolean);
+    // A chord shares one marker above its highest printed note.
+    const unique=new Map();for(const point of points){const key=`${point.page}:${point.x}`;if(!unique.has(key)||unique.get(key).y>point.y)unique.set(key,point);}
+    for(const point of unique.values()) {
+      const overlay=document.querySelector(`[data-score-page="${point.page}"] .score-overlay`);if(!overlay)continue;
+      const marker=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      marker.setAttribute('cx',point.x);marker.setAttribute('cy',point.y);marker.setAttribute('r','.65');marker.setAttribute('class','score-marker');overlay.append(marker);
+    }
+  }
+  const marker=document.querySelector('.score-marker');
+  if (marker && $('#follow-score')?.checked) {
+    const rect=marker.getBoundingClientRect();
+    if (rect.top<90 || rect.bottom>window.innerHeight-30) window.scrollBy({top:rect.top-150,behavior:'smooth'});
+  }
+}
 function installPianoNavigation() {
   const keyboards=document.querySelector('.player-keyboards');
   if (!keyboards || !currentExercise) return;

@@ -135,7 +135,8 @@
       "downloadFiles": [
         "fur-elise.pdf",
         "fur-elise.midi"
-      ]
+      ],
+      "scoreMapFile": "fur-elise-score-map.json"
     }
   ]
 }

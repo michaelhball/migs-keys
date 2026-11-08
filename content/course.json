@@ -134,7 +134,7 @@
             "left": []
           }
         ],
-        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+        "description": "Four beats per bar. Numbers above the notes are finger numbers."
       },
       "defaultView": "notes"
     },
@@ -229,7 +229,7 @@
             "left": []
           }
         ],
-        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+        "description": "Four beats per bar. Numbers above the notes are finger numbers."
       },
       "defaultView": "notation",
       "file": "02-reading-cde.md",
@@ -305,7 +305,7 @@
             "left": []
           }
         ],
-        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+        "description": "Four beats per bar. Numbers above the notes are finger numbers."
       },
       "defaultView": "notation",
       "file": "03-lengths-rests.md",
@@ -406,7 +406,7 @@
             ]
           }
         ],
-        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+        "description": "Four beats per bar. Numbers above the notes are finger numbers."
       },
       "defaultView": "notation",
       "file": "04-left-hand.md",
@@ -517,7 +517,7 @@
             "left": []
           }
         ],
-        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+        "description": "Four beats per bar. Numbers above the notes are finger numbers."
       },
       "defaultView": "notation",
       "file": "05-both-hands.md",
@@ -898,7 +898,7 @@
             "left": []
           }
         ],
-        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+        "description": "Four beats per bar. Numbers above the notes are finger numbers."
       },
       "defaultView": "notation",
       "file": "06-first-piece.md",

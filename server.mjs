@@ -16,7 +16,7 @@ async function course() { return jsonFile(path.join(ROOT, 'content', 'course.jso
 async function songs() { return jsonFile(path.join(ROOT, 'content', 'songs.json')); }
 async function songContent(item) {
   const folder = path.join(ROOT, 'content', 'songs');
-  return { ...item, ...(item.exerciseFile ? { exercise: await jsonFile(path.join(folder, item.exerciseFile)) } : {}), noteNames: await readFile(path.join(folder, item.notesFile), 'utf8'), practice: await readFile(path.join(folder, item.practiceFile), 'utf8') };
+  return { ...item, ...(item.exerciseFile ? { exercise: await jsonFile(path.join(folder, item.exerciseFile)) } : {}), ...(item.scoreMapFile ? { scoreMap: await jsonFile(path.join(folder,item.scoreMapFile)) } : {}), noteNames: await readFile(path.join(folder, item.notesFile), 'utf8'), practice: await readFile(path.join(folder, item.practiceFile), 'utf8') };
 }
 async function state() {
   try { const saved = await jsonFile(STATE); return { ...emptyState(), ...saved, settings: { ...emptyState().settings, ...saved.settings } }; }
