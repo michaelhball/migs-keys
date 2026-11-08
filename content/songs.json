@@ -80,7 +80,8 @@
         "amazing-grace.pdf",
         "amazing-grace.midi"
       ],
-      "defaultPassage": "full"
+      "defaultPassage": "full",
+      "lyricsFile": "amazing-grace-lyrics.json"
     },
     {
       "id": "lord-of-the-dance",
@@ -90,7 +91,7 @@
       "status": "Complete beginner arrangement",
       "summary": "The complete 16-bar Simple Gifts tune behind Lord of the Dance, arranged in C with a simple bass part.",
       "materialTitle": "Melody and bass · score and practice player",
-      "materialDescription": "Original beginner arrangement of the traditional Simple Gifts tune used for Lord of the Dance. Includes both sections of the tune; no lyrics.",
+      "materialDescription": "Original beginner arrangement of the traditional Simple Gifts tune used for Lord of the Dance. Includes both sections of the tune, with the original Simple Gifts words.",
       "notesFile": "lord-of-the-dance-notes.md",
       "practiceFile": "lord-of-the-dance-practice.md",
       "exerciseFile": "lord-of-the-dance-performance.json",
@@ -106,7 +107,8 @@
         "lord-of-the-dance.pdf",
         "lord-of-the-dance.midi"
       ],
-      "defaultPassage": "full"
+      "defaultPassage": "full",
+      "lyricsFile": "lord-of-the-dance-lyrics.json"
     }
   ]
 }

@@ -5,7 +5,7 @@ import { SoundEngine } from './sound.js';
 import { markdown, escapeHtml as esc } from './markdown.js';
 import { MelodyPlayer } from './playback.js';
 import { musicPlayer, handNotes, notation } from './music.js';
-import { performancePlayer, selectPassage } from './performance.js';
+import { performancePlayer, selectPassage, lyricIndexAt } from './performance.js';
 
 const $ = selector => document.querySelector(selector);
 let course, state, currentLesson, currentSong, currentExercise, recorder, routeVersion = 0;
@@ -164,8 +164,8 @@ async function showSongs(id) {
 function renderSongView() {
   const view = state.settings.songView || 'notes';
   document.querySelectorAll('[data-action="song-view"]').forEach(button => { const selected = button.dataset.view === view; button.setAttribute('aria-pressed', String(selected)); button.classList.toggle('selected', selected); });
-  $('#song-score').innerHTML = (currentSong.exercise.timeline ? performancePlayer(currentSong,currentExercise,melodyTempo,view,songPassage,state.settings.soundPreset) : musicPlayer(currentExercise, melodyTempo, view, state.settings.soundPreset));
-  installPianoNavigation();
+  $('#song-score').innerHTML = (currentSong.exercise.timeline ? performancePlayer(currentSong,currentExercise,melodyTempo,view,songPassage,state.settings.soundPreset,state.settings.lyricVerses?.[currentSong.id] || 0) : musicPlayer(currentExercise, melodyTempo, view, state.settings.soundPreset));
+  installPianoNavigation(); updatePianoPosition();
   if ($('#song-hands')) $('#song-hands').value = playingHand;
   if ($('#song-loop')) $('#song-loop').checked = repeatPassage;
 }
@@ -228,6 +228,8 @@ function installPianoNavigation() {
 function updatePianoPosition() {
   if (!currentExercise) return;
   const event=currentExercise.events[currentStep]; if (!event) return;
+  const lyricIndex = lyricIndexAt(currentSong?.lyrics,event,currentExercise.meter?.[0] || 4);
+  document.querySelectorAll('[data-lyric-line]').forEach(line => line.classList.toggle('current-lyric',Number(line.dataset.lyricLine) === lyricIndex));
   if ($('#piano-position')) $('#piano-position').value=currentStep;
   if ($('#piano-step-label')) $('#piano-step-label').textContent=pianoPosition(currentExercise,currentStep);
   if ($('#piano-bar')) $('#piano-bar').value=event.bar;
@@ -399,6 +401,11 @@ document.addEventListener('change', async event => {
     finally { select.disabled=false; }
   }
 
+  if (event.target.id === 'lyric-verse') {
+    stopSounds(); const version=routeVersion; const select=event.target; select.disabled=true;
+    try { const result=await api('settings','PUT',{lyricVerse:{songId:currentSong.id,verse:Number(select.value)}}); state.settings.lyricVerses=result.settings.lyricVerses; if (version===routeVersion) renderSongView(); }
+    catch(error) { select.disabled=false; toast(error.message,true); }
+  }
   if (event.target.id === 'song-passage') { stopSounds(); songPassage=event.target.value; currentStep=0; currentExercise=selectPassage(currentSong.exercise,songPassage); renderSongView(); }
   if (event.target.id === 'song-hands') { playingHand=event.target.value; stopSounds(); previewPiano(); }
   if (event.target.id === 'song-loop') repeatPassage=event.target.checked;

@@ -61,3 +61,5 @@ main>.text-link+.page-intro{margin-top:18px}
 
 [hidden]{display:none!important}
 .song-category{margin:32px 0}.song-card h3{font-size:24px;line-height:1.2;margin:14px 0}
+
+.lyrics-panel{margin:20px 0;padding:18px;background:#f7f8f4;border:1px solid var(--line);border-radius:8px}.lyrics-panel h3{margin:0}.lyric-lines{margin:10px 0}.lyric-lines p{margin:0;padding:3px 10px;border-left:3px solid transparent}.lyric-lines .current-lyric{border-color:#4b8a39;background:#e5eddc;font-weight:600}.lyrics-panel .fine{margin-top:8px}

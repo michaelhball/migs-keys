@@ -1,0 +1,53 @@
+{
+  "title": "Simple Gifts",
+  "credit": "Joseph Brackett · original words, 1848",
+  "source": "https://www.americanmusicpreservation.com/JosephBrackettSimpleGifts.htm",
+  "notice": "These are the traditional Simple Gifts words, matching this tune. Sydney Carter’s Lord of the Dance has different words and some melodic differences.",
+  "authorisedLyricsUrl": "https://stainer.co.uk/lord-of-the-dance/",
+  "cues": [
+    {
+      "bar": 0,
+      "beat": 3
+    },
+    {
+      "bar": 2,
+      "beat": 3
+    },
+    {
+      "bar": 4,
+      "beat": 3
+    },
+    {
+      "bar": 6,
+      "beat": 3
+    },
+    {
+      "bar": 9,
+      "beat": 0
+    },
+    {
+      "bar": 10,
+      "beat": 3.5
+    },
+    {
+      "bar": 12,
+      "beat": 3
+    },
+    {
+      "bar": 14,
+      "beat": 3
+    }
+  ],
+  "verses": [
+    [
+      "’Tis the gift to be simple, ’tis the gift to be free,",
+      "’Tis the gift to come down where we ought to be,",
+      "And when we find ourselves in the place just right,",
+      "’Twill be in the valley of love and delight.",
+      "When true simplicity is gained,",
+      "To bow and to bend we shan’t be ashamed,",
+      "To turn, turn will be our delight,",
+      "Till by turning, turning we come round right."
+    ]
+  ]
+}

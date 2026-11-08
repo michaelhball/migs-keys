@@ -131,3 +131,15 @@ test('dotted rhythms and chords render their durations without duplicate stems',
   assert.equal((svg.match(/class="note-stem"/g)||[]).length,4, 'three stems plus one eighth-note flag');
   assert.doesNotMatch(svg,/𝄞|𝄢|𝄽/, 'font-dependent clefs and rests must not return');
 });
+
+
+test('hymn lyric phrases follow absolute score positions when stepping or changing passages', async () => {
+  const {lyricIndexAt,lyricsPanel}=await import('../public/performance.js');
+  const lyrics=JSON.parse(await readFile(new URL('../content/songs/amazing-grace-lyrics.json',import.meta.url),'utf8'));
+  assert.equal(lyricIndexAt(lyrics,{bar:0,beat:2},3),0);
+  assert.equal(lyricIndexAt(lyrics,{bar:4,beat:1.5},3),0);
+  assert.equal(lyricIndexAt(lyrics,{bar:4,beat:2},3),1);
+  assert.equal(lyricIndexAt(lyrics,{bar:12,beat:2},3),3);
+  assert.match(lyricsPanel(lyrics,5),/earth shall soon/);
+  assert.equal(lyricsPanel(null),'');
+});

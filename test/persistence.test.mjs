@@ -51,6 +51,8 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal((await request('/api/state')).data.settings.songView, 'notes');
   assert.equal((await request('/api/settings', 'PUT', {lessonFingering:{lessonId:7,show:'yes'}})).status,400);
   await request('/api/settings', 'PUT', {lessonFingering:{lessonId:7,show:true}});
+  await request('/api/settings','PUT',{lyricVerse:{songId:'amazing-grace',verse:2}});
+  assert.equal((await request('/api/settings','PUT',{lyricVerse:{songId:'amazing-grace',verse:6}})).status,400);
   const library = await request('/api/songs');
   assert.deepEqual(library.data.songs.map(song => song.id), ['dont-stop-believin', 'fur-elise', 'amazing-grace', 'lord-of-the-dance']);
   for (const song of library.data.songs) {
@@ -128,6 +130,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal(saved.settings.timer.elapsed, 42);
   assert.equal(saved.settings.songView, 'notation');
   assert.equal(saved.settings.lessonFingerings['7'], true);
+  assert.equal(saved.settings.lyricVerses['amazing-grace'],2);
   assert.equal(saved.settings.soundPreset,'electric');
 
   assert.equal(saved.activeLesson, 2, 'completing the active lesson advances to the next available lesson');

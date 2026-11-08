@@ -17,7 +17,7 @@ async function course() { return jsonFile(path.join(ROOT, 'content', 'course.jso
 async function songs() { return jsonFile(path.join(ROOT, 'content', 'songs.json')); }
 async function songContent(item) {
   const folder = path.join(ROOT, 'content', 'songs');
-  return { ...item, ...(item.exerciseFile ? { exercise: await jsonFile(path.join(folder, item.exerciseFile)) } : {}), ...(item.scoreMapFile ? { scoreMap: await jsonFile(path.join(folder,item.scoreMapFile)) } : {}), noteNames: await readFile(path.join(folder, item.notesFile), 'utf8'), practice: await readFile(path.join(folder, item.practiceFile), 'utf8') };
+  return { ...item, ...(item.lyricsFile ? { lyrics: await jsonFile(path.join(folder,item.lyricsFile)) } : {}), ...(item.exerciseFile ? { exercise: await jsonFile(path.join(folder, item.exerciseFile)) } : {}), ...(item.scoreMapFile ? { scoreMap: await jsonFile(path.join(folder,item.scoreMapFile)) } : {}), noteNames: await readFile(path.join(folder, item.notesFile), 'utf8'), practice: await readFile(path.join(folder, item.practiceFile), 'utf8') };
 }
 async function state() {
   try { const saved = await jsonFile(STATE); return { ...emptyState(), ...saved, settings: { ...emptyState().settings, ...saved.settings } }; }
@@ -119,10 +119,15 @@ const server = http.createServer(async (req, res) => {
       if (data.tempo !== undefined && (!Number.isInteger(data.tempo) || data.tempo < 30 || data.tempo > 180)) fail(400, 'Tempo must be between 30 and 180.');
       if (data.melodyTempo !== undefined && (!Number.isInteger(data.melodyTempo) || data.melodyTempo < 30 || data.melodyTempo > 180)) fail(400, 'Melody tempo must be between 30 and 180.');
       if (data.soundPreset !== undefined && !['piano','electric','organ','pad'].includes(data.soundPreset)) fail(400, 'Choose a sound preset.');
+      if (data.lyricVerse !== undefined) {
+        const song = (await songs()).songs.find(s => s.id === data.lyricVerse?.songId);
+        const lyrics = song?.lyricsFile ? await jsonFile(path.join(ROOT, 'content/songs', song.lyricsFile)) : null;
+        if (!lyrics || !Number.isInteger(data.lyricVerse.verse) || data.lyricVerse.verse < 0 || data.lyricVerse.verse >= lyrics.verses.length) fail(400, 'Choose an available lyric verse.');
+      }
       if (data.lessonFingering !== undefined && (!Number.isInteger(data.lessonFingering?.lessonId) || data.lessonFingering.lessonId < 1 || data.lessonFingering.lessonId > 24 || typeof data.lessonFingering.show !== 'boolean')) fail(400, 'Choose a lesson and whether to show score fingering.');
       if (data.songView !== undefined && !['notes', 'notation'].includes(data.songView)) fail(400, 'Choose note names or sheet music.');
       if (data.timer !== undefined && (!data.timer || !Number.isFinite(data.timer.elapsed) || data.timer.elapsed < 0 || !(data.timer.startedAt === null || (Number.isFinite(data.timer.startedAt) && data.timer.startedAt > 0 && data.timer.startedAt <= Date.now() + 10000)))) fail(400, 'Invalid practice timer.');
-      return reply(200, await update(s => { s.settings ??= emptyState().settings; if (data.lessonFingering !== undefined) { s.settings.lessonFingerings ??= {}; s.settings.lessonFingerings[data.lessonFingering.lessonId] = data.lessonFingering.show; } if (data.tempo !== undefined) s.settings.tempo = data.tempo; if (data.melodyTempo !== undefined) s.settings.melodyTempo = data.melodyTempo; if (data.soundPreset !== undefined) s.settings.soundPreset = data.soundPreset; if (data.songView !== undefined) s.settings.songView = data.songView; if (data.timer !== undefined) s.settings.timer = { elapsed: data.timer.elapsed, startedAt: data.timer.startedAt }; }));
+      return reply(200, await update(s => { s.settings ??= emptyState().settings; if (data.lyricVerse !== undefined) { s.settings.lyricVerses ??= {}; s.settings.lyricVerses[data.lyricVerse.songId] = data.lyricVerse.verse; } if (data.lessonFingering !== undefined) { s.settings.lessonFingerings ??= {}; s.settings.lessonFingerings[data.lessonFingering.lessonId] = data.lessonFingering.show; } if (data.tempo !== undefined) s.settings.tempo = data.tempo; if (data.melodyTempo !== undefined) s.settings.melodyTempo = data.melodyTempo; if (data.soundPreset !== undefined) s.settings.soundPreset = data.soundPreset; if (data.songView !== undefined) s.settings.songView = data.songView; if (data.timer !== undefined) s.settings.timer = { elapsed: data.timer.elapsed, startedAt: data.timer.startedAt }; }));
     }
     if (req.method === 'PUT' && /^\/api\/checkpoints\/\d+$/.test(url.pathname)) {
       const item = await lesson(url.pathname.split('/').pop(), true); const data = await body(req);

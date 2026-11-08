@@ -1,6 +1,6 @@
 ## What this version contains
 
-This is a complete beginner arrangement of **Simple Gifts**, the traditional tune used for **Lord of the Dance**. It contains both eight-bar sections. Familiar sung versions can differ in repeated notes and rhythm; this uses the traditional tune, without lyrics.
+This is a complete beginner arrangement of **Simple Gifts**, the traditional tune used for **Lord of the Dance**. It contains both eight-bar sections. Familiar sung versions can differ in repeated notes and rhythm; this uses the traditional tune with its original Simple Gifts words. The lyric highlight follows the current phrase as you play or step through the music. Sydney Carter’s modern lyrics and adaptation are separate: [read the authorised Lord of the Dance lyrics at the publisher](https://stainer.co.uk/lord-of-the-dance/).
 
 Choose **Organ** beside playback, then select **Right hand** and **Opening**. Start around **45–60 quarter notes per minute**. Amazing Grace is the easier of these two arrangements if the eighth notes feel too quick.
 
