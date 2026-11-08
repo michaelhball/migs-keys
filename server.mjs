@@ -1,3 +1,4 @@
+import { recordingRoute } from './recordings.mjs';
 import http from 'node:http';
 import { readFile, writeFile, mkdir, rename, copyFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -7,13 +8,18 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const DATA = process.env.MIGS_DATA_DIR || path.join(ROOT, 'data');
 const PORT = Number(process.env.PORT ?? 4317);
 const STATE = path.join(DATA, 'progress.json');
-const emptyState = () => ({ version: 1, activeLesson: 1, completed: [], checkpoints: {}, drafts: {}, sessions: [], settings: { tempo: 60, melodyTempo: 60, timer: { elapsed: 0, startedAt: null } } });
+const emptyState = () => ({ version: 1, activeLesson: 1, completed: [], checkpoints: {}, drafts: {}, sessions: [], recordings: [], settings: { tempo: 60, melodyTempo: 60, songView: 'notes', soundPreset: 'piano', timer: { elapsed: 0, startedAt: null } } });
 let writing = Promise.resolve();
 
 async function jsonFile(file) { return JSON.parse(await readFile(file, 'utf8')); }
 async function course() { return jsonFile(path.join(ROOT, 'content', 'course.json')); }
+async function songs() { return jsonFile(path.join(ROOT, 'content', 'songs.json')); }
+async function songContent(item) {
+  const folder = path.join(ROOT, 'content', 'songs');
+  return { ...item, ...(item.exerciseFile ? { exercise: await jsonFile(path.join(folder, item.exerciseFile)) } : {}), noteNames: await readFile(path.join(folder, item.notesFile), 'utf8'), practice: await readFile(path.join(folder, item.practiceFile), 'utf8') };
+}
 async function state() {
-  try { const saved = await jsonFile(STATE); return { ...saved, settings: { ...emptyState().settings, ...saved.settings } }; }
+  try { const saved = await jsonFile(STATE); return { ...emptyState(), ...saved, settings: { ...emptyState().settings, ...saved.settings } }; }
   catch (error) { if (error.code === 'ENOENT') return emptyState(); throw error; }
 }
 async function update(change) {
@@ -65,7 +71,7 @@ const server = http.createServer(async (req, res) => {
   };
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
-  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
   try {
     const port = server.address().port;
     if (![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host)) fail(403, 'Use the local address printed by the server.');
@@ -74,7 +80,21 @@ const server = http.createServer(async (req, res) => {
       if (req.headers['x-migs-local'] !== '1') fail(403, 'This request must come from the local app.');
       if (req.headers.origin && ![`http://127.0.0.1:${port}`, `http://localhost:${port}`].includes(req.headers.origin)) fail(403, 'This request must come from the local app.');
     }
+    if (await recordingRoute({req,res,url,dataDirectory:DATA,state,update,fail,reply})) return;
     if (req.method === 'GET' && url.pathname === '/api/course') return reply(200, await course());
+    if (req.method === 'GET' && url.pathname === '/api/songs') return reply(200, await songs());
+    if (req.method === 'GET' && /^\/api\/songs\/[a-z0-9-]+$/.test(url.pathname)) {
+      const item = (await songs()).songs.find(x => x.id === url.pathname.split('/').pop());
+      if (!item) fail(404, 'Song not found.');
+      return reply(200, await songContent(item));
+    }
+    if (['GET', 'HEAD'].includes(req.method) && /^\/scores\/[a-z0-9-]+\.(svg|pdf|midi)$/.test(url.pathname)) {
+      const filename = url.pathname.split('/').pop();
+      if (!(await songs()).songs.some(x => [...x.notationFiles, ...(x.downloadFiles || [])].includes(filename))) fail(404, 'Score not found.');
+      const score = await readFile(path.join(ROOT, 'content', 'songs', filename));
+      res.writeHead(200, { 'Content-Type': { '.svg': 'image/svg+xml', '.pdf': 'application/pdf', '.midi': 'audio/midi' }[path.extname(filename)], 'Cache-Control': 'no-cache' });
+      return res.end(req.method === 'HEAD' ? undefined : score);
+    }
     if (req.method === 'GET' && url.pathname === '/api/state') { await writing; return reply(200, await state()); }
     if (req.method === 'GET' && /^\/api\/lessons\/\d+$/.test(url.pathname)) {
       const item = await lesson(url.pathname.split('/').pop());
@@ -85,7 +105,8 @@ const server = http.createServer(async (req, res) => {
       await writing;
       const manifest = await course();
       const lessons = await Promise.all(manifest.lessons.filter(x => x.file).map(async x => ({ ...x, markdown: await readFile(path.join(ROOT, 'content', 'lessons', x.file), 'utf8') })));
-      return reply(200, { exportedAt: new Date().toISOString(), course: manifest, lessons, progress: await state() }, { 'Content-Disposition': 'attachment; filename="migs-keys-backup.json"' });
+      const songLibrary = await Promise.all((await songs()).songs.map(async item => ({ ...await songContent(item), scores: await Promise.all(item.notationFiles.map(async file => ({ file, svg: await readFile(path.join(ROOT, 'content', 'songs', file), 'utf8') }))) })));
+      return reply(200, { exportedAt: new Date().toISOString(), course: manifest, lessons, songs: songLibrary, progress: await state() }, { 'Content-Disposition': 'attachment; filename="migs-keys-backup.json"' });
     }
     if (req.method === 'PUT' && url.pathname === '/api/active') {
       const data = await body(req); const item = await lesson(data.lessonId, true);
@@ -95,8 +116,10 @@ const server = http.createServer(async (req, res) => {
       const data = await body(req);
       if (data.tempo !== undefined && (!Number.isInteger(data.tempo) || data.tempo < 30 || data.tempo > 180)) fail(400, 'Tempo must be between 30 and 180.');
       if (data.melodyTempo !== undefined && (!Number.isInteger(data.melodyTempo) || data.melodyTempo < 30 || data.melodyTempo > 180)) fail(400, 'Melody tempo must be between 30 and 180.');
+      if (data.soundPreset !== undefined && !['piano','electric','organ','pad'].includes(data.soundPreset)) fail(400, 'Choose a sound preset.');
+      if (data.songView !== undefined && !['notes', 'notation'].includes(data.songView)) fail(400, 'Choose note names or sheet music.');
       if (data.timer !== undefined && (!data.timer || !Number.isFinite(data.timer.elapsed) || data.timer.elapsed < 0 || !(data.timer.startedAt === null || (Number.isFinite(data.timer.startedAt) && data.timer.startedAt > 0 && data.timer.startedAt <= Date.now() + 10000)))) fail(400, 'Invalid practice timer.');
-      return reply(200, await update(s => { s.settings ??= emptyState().settings; if (data.tempo !== undefined) s.settings.tempo = data.tempo; if (data.melodyTempo !== undefined) s.settings.melodyTempo = data.melodyTempo; if (data.timer !== undefined) s.settings.timer = { elapsed: data.timer.elapsed, startedAt: data.timer.startedAt }; }));
+      return reply(200, await update(s => { s.settings ??= emptyState().settings; if (data.tempo !== undefined) s.settings.tempo = data.tempo; if (data.melodyTempo !== undefined) s.settings.melodyTempo = data.melodyTempo; if (data.soundPreset !== undefined) s.settings.soundPreset = data.soundPreset; if (data.songView !== undefined) s.settings.songView = data.songView; if (data.timer !== undefined) s.settings.timer = { elapsed: data.timer.elapsed, startedAt: data.timer.startedAt }; }));
     }
     if (req.method === 'PUT' && /^\/api\/checkpoints\/\d+$/.test(url.pathname)) {
       const item = await lesson(url.pathname.split('/').pop(), true); const data = await body(req);
@@ -106,7 +129,15 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'PUT' && /^\/api\/completion\/\d+$/.test(url.pathname)) {
       const item = await lesson(url.pathname.split('/').pop(), true); const data = await body(req);
       if (typeof data.completed !== 'boolean') fail(400, 'Invalid completion status.');
-      return reply(200, await update(s => { s.completed = s.completed.filter(x => x !== item.id); if (data.completed) s.completed.push(item.id); }));
+      const lessons = (await course()).lessons;
+      return reply(200, await update(s => {
+        s.completed = s.completed.filter(x => x !== item.id);
+        if (data.completed) {
+          s.completed.push(item.id);
+          const next = lessons.find(x => x.id > item.id && x.file && !s.completed.includes(x.id));
+          if (next && s.activeLesson === item.id) s.activeLesson = next.id;
+        }
+      }));
     }
     if (req.method === 'PUT' && /^\/api\/drafts\/\d+$/.test(url.pathname)) {
       const item = await lesson(url.pathname.split('/').pop(), true); const data = sessionFields(await body(req));
@@ -121,7 +152,18 @@ const server = http.createServer(async (req, res) => {
         delete s.drafts[item.id];
       }));
     }
+    if (['GET','HEAD'].includes(req.method) && /^\/audio\/piano\/(?:A0|(?:C|Ds|Fs|A)[1-7]|C8)\.mp3$/.test(url.pathname)) {
+      const bytes=await readFile(path.join(ROOT,'public',url.pathname));
+      res.writeHead(200,{'Content-Type':'audio/mpeg','Cache-Control':'public, max-age=86400'});
+      return res.end(req.method==='HEAD'?undefined:bytes);
+    }
     const staticFiles = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/styles.css': ['styles.css', 'text/css'], '/markdown.js': ['markdown.js', 'text/javascript'], '/playback.js': ['playback.js', 'text/javascript'], '/favicon.svg': ['favicon.svg', 'image/svg+xml'] };
+    staticFiles['/music.js'] = ['music.js', 'text/javascript'];
+    staticFiles['/recording.js'] = ['recording.js', 'text/javascript'];
+    staticFiles['/piano-view.js'] = ['piano-view.js', 'text/javascript'];
+    staticFiles['/midi.js'] = ['midi.js', 'text/javascript'];
+    staticFiles['/sound.js'] = ['sound.js', 'text/javascript'];
+    staticFiles['/performance.js'] = ['performance.js', 'text/javascript'];
     const file = staticFiles[url.pathname];
     if (file && ['GET', 'HEAD'].includes(req.method)) {
       const data = await readFile(path.join(ROOT, 'public', file[0]));

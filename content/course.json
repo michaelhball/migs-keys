@@ -49,7 +49,94 @@
         "Keyboard",
         "Rhythm",
         "Improvisation"
-      ]
+      ],
+      "exercise": {
+        "title": "Eight-note melody",
+        "events": [
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          }
+        ],
+        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+      },
+      "defaultView": "notes"
     },
     {
       "id": 2,
@@ -57,7 +144,100 @@
       "focus": "Reading a few treble-clef notes",
       "description": "Connect C, D, and E on the keyboard to their positions on a staff.",
       "duration": 20,
-      "status": "planned"
+      "status": "ready",
+      "exercise": {
+        "title": "Read C, D, and E",
+        "events": [
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          }
+        ],
+        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+      },
+      "defaultView": "notation",
+      "file": "02-reading-cde.md",
+      "checkpoints": [
+        "I can identify middle C, D, and E on the treble staff.",
+        "I can read the exercise in small groups without relying only on its letter names.",
+        "I can keep a steady pulse at a pace that leaves time to read."
+      ]
     },
     {
       "id": 3,
@@ -65,7 +245,75 @@
       "focus": "Note lengths and rests",
       "description": "Read basic durations and rests in a four-measure melody.",
       "duration": 20,
-      "status": "planned"
+      "status": "ready",
+      "exercise": {
+        "title": "Hold notes and count rests",
+        "events": [
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          }
+        ],
+        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+      },
+      "defaultView": "notation",
+      "file": "03-lengths-rests.md",
+      "checkpoints": [
+        "I can hold a half note for two beats without striking it twice.",
+        "I can count through a two-beat rest.",
+        "I can play the phrase without shortening the long notes or the silence."
+      ]
     },
     {
       "id": 4,
@@ -73,7 +321,100 @@
       "focus": "Left-hand movement and bass-clef landmarks",
       "description": "Read and play a short left-hand melody.",
       "duration": 20,
-      "status": "planned"
+      "status": "ready",
+      "exercise": {
+        "title": "Left-hand melody",
+        "events": [
+          {
+            "beats": 1,
+            "right": [],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [],
+            "left": [
+              {
+                "midi": 50,
+                "finger": 4
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [],
+            "left": [
+              {
+                "midi": 52,
+                "finger": 3
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [],
+            "left": [
+              {
+                "midi": 50,
+                "finger": 4
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [],
+            "left": [
+              {
+                "midi": 52,
+                "finger": 3
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [],
+            "left": [
+              {
+                "midi": 50,
+                "finger": 4
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          }
+        ],
+        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+      },
+      "defaultView": "notation",
+      "file": "04-left-hand.md",
+      "checkpoints": [
+        "I can find C3, one octave below middle C, and use left-hand fingers 5, 4, and 3.",
+        "I can locate C3, D3, and E3 in the bass clef.",
+        "I can play the left-hand melody at a comfortable steady pace."
+      ]
     },
     {
       "id": 5,
@@ -81,7 +422,110 @@
       "focus": "Coordinating the hands",
       "description": "Combine a melody with occasional left-hand notes.",
       "duration": 20,
-      "status": "planned"
+      "status": "ready",
+      "exercise": {
+        "title": "Melody with a bass note",
+        "events": [
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          }
+        ],
+        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+      },
+      "defaultView": "notation",
+      "file": "05-both-hands.md",
+      "checkpoints": [
+        "I can play both hands together on beat 1.",
+        "I can release the left-hand note while the right hand continues.",
+        "I can join the two bars without an extra pause."
+      ]
     },
     {
       "id": 6,
@@ -89,7 +533,380 @@
       "focus": "Finishing a first piece",
       "description": "Build an eight-measure piece using overlapping sections.",
       "duration": 20,
-      "status": "planned"
+      "status": "ready",
+      "exercise": {
+        "title": "Eight-bar study",
+        "events": [
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          }
+        ],
+        "description": "Four beats per bar. Numbers below the notes are finger numbers."
+      },
+      "defaultView": "notation",
+      "file": "06-first-piece.md",
+      "checkpoints": [
+        "I can play each two-bar section with the written fingering.",
+        "I can practise a join without always starting at bar 1.",
+        "I can play all eight bars slowly and identify one thing to improve."
+      ]
     },
     {
       "id": 7,

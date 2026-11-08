@@ -92,3 +92,11 @@ test('stopping cancels future notes and replay starts at the selected tempo', ()
   assert.deepEqual(heard.map(x => [x.note, x.at]), [[60, 0], [60, 5200], [62, 5700]]);
   assert.equal(player.playing, false);
 });
+
+test('mixed note lengths, rests, and starting from a later position keep musical time', () => {
+  const {player,heard,advance}=setup();
+  const events=[{beats:.5,right:[{midi:60}]},{beats:.5,right:[{midi:62}]},{beats:2,right:[]},{beats:1,right:[{midi:64}]}];
+  player.start(events,60,1);advance(3500);
+  assert.deepEqual(heard.map(x=>[x.index,x.at,x.duration]),[[1,0,.5],[2,500,2],[3,2500,1]]);
+  assert.equal(player.playing,false);
+});

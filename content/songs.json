@@ -1,0 +1,141 @@
+{
+  "songs": [
+    {
+      "id": "dont-stop-believin",
+      "title": "Don't Stop Believin'",
+      "artist": "Journey",
+      "status": "Opening excerpt + full tutorial",
+      "summary": "The actual opening right-hand accompaniment, plus the full Pianote lesson you requested.",
+      "materialTitle": "Opening right hand — one-bar excerpt",
+      "materialDescription": "A short excerpt of the song's opening accompaniment in E major. Alternate E4 + B4 together with B3. The linked video teaches the walking bass and the rest of the song.",
+      "notesFile": "dont-stop-believin-notes.md",
+      "practiceFile": "dont-stop-believin-practice.md",
+      "notationFiles": [],
+      "exercise": {
+        "title": "Opening right hand — one-bar excerpt",
+        "description": "Count 1 & 2 & 3 & 4 &. Each event lasts half a beat. Start around 40 BPM.",
+        "events": [
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 2
+              },
+              {
+                "midi": 71,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 2
+              },
+              {
+                "midi": 71,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 2
+              },
+              {
+                "midi": 71,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 2
+              },
+              {
+                "midi": 71,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              }
+            ],
+            "left": []
+          }
+        ]
+      },
+      "tutorialUrl": "https://www.youtube.com/watch?v=amRtNe2uVwE"
+    },
+    {
+      "id": "fur-elise",
+      "title": "Für Elise",
+      "artist": "Ludwig van Beethoven",
+      "status": "Complete score and playback",
+      "summary": "The complete piece in its original 3/8, with both hands, slower playback, and shorter practice passages.",
+      "materialTitle": "Original score and practice player",
+      "materialDescription": "Start with the opening, or select the whole piece. Piano view follows both hands through the performance, including repeats.",
+      "notesFile": "fur-elise-notes.md",
+      "practiceFile": "fur-elise-practice.md",
+      "notationFiles": [
+        "fur-elise-page-1.svg",
+        "fur-elise-page-2.svg",
+        "fur-elise-page-3.svg"
+      ],
+      "notationAlt": "Complete public-domain score of Für Elise in 3/8, both hands.",
+      "exerciseFile": "fur-elise-performance.json",
+      "downloadFiles": [
+        "fur-elise.pdf",
+        "fur-elise.midi"
+      ]
+    }
+  ]
+}

@@ -35,10 +35,28 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   const first = await request('/api/lessons/1');
   assert.equal(first.status, 200);
   assert.match(first.data.markdown, /Second session/);
-  assert.equal((await request('/api/lessons/2')).data.markdown, null);
+  assert.match((await request('/api/lessons/2')).data.markdown, /ledger line/);
+  assert.equal((await request('/api/lessons/7')).data.markdown, null);
   assert.equal((await fetch(server.url + '/')).status, 200);
-  for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/playback.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
+  for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/playback.js', '/music.js', '/performance.js', '/sound.js', '/recording.js', '/piano-view.js', '/midi.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
   assert.equal((await request('/api/state')).data.settings.melodyTempo, 60);
+  assert.equal((await request('/api/state')).data.settings.songView, 'notes');
+  const library = await request('/api/songs');
+  assert.deepEqual(library.data.songs.map(song => song.id), ['dont-stop-believin', 'fur-elise']);
+  for (const song of library.data.songs) {
+    const detail = await request(`/api/songs/${song.id}`);
+    assert.equal(detail.status, 200);
+    assert.ok(detail.data.noteNames.length > 0);
+    assert.ok(detail.data.practice.length > 0);
+    for (const file of song.notationFiles) {
+      const score = await fetch(server.url + `/scores/${file}`);
+      assert.equal(score.status, 200);
+      assert.match(score.headers.get('content-type'), /image\/svg\+xml/);
+      assert.match(await score.text(), /<svg/);
+    }
+  }
+  assert.equal((await request('/api/songs/missing')).status, 404);
+  assert.equal((await fetch(server.url + '/scores/unlisted.svg')).status, 404);
   const html = markdown(first.data.markdown);
   assert.match(html, /<h3>Your goal<\/h3>/);
   assert.equal((html.match(/<ol>/g) || []).length, 1);
@@ -50,7 +68,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   await Promise.all([
     request('/api/checkpoints/1', 'PUT', { checked: [0, 1] }),
     request('/api/completion/1', 'PUT', { completed: true }),
-    request('/api/settings', 'PUT', { tempo: 72, melodyTempo: 105, timer: { elapsed: 42, startedAt: null } })
+    request('/api/settings', 'PUT', { tempo: 72, melodyTempo: 105, songView: 'notation', soundPreset: 'electric', timer: { elapsed: 42, startedAt: null } })
   ]);
   const session = { ...draft, lessonId: 1, id: 'test-session-0001' };
   assert.equal((await request('/api/sessions', 'POST', session)).status, 201);
@@ -65,13 +83,31 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal(saved.settings.timer.elapsed, 42);
   await request('/api/drafts/1', 'PUT', { ...draft, worked: 'A new draft to resume.' });
   const exported = await request('/api/export');
-  assert.equal(exported.data.lessons.length, 1);
+  assert.equal(exported.data.lessons.length, 6);
+  assert.equal(exported.data.songs.length, 2);
+  assert.match(exported.data.songs[1].scores[0].svg, /<svg/);
+  assert.match(exported.data.songs[1].noteNames, /D♯5/);
   assert.equal(exported.data.progress.sessions[0].sticky, draft.sticky);
   assert.equal(JSON.parse(await readFile(path.join(directory, 'progress.json'), 'utf8')).sessions.length, 1);
   assert.equal(JSON.parse(await readFile(path.join(directory, 'progress.previous.json'), 'utf8')).sessions.length, 1);
 
+  const midiId='12345678-1234-4123-8123-123456789012', audioId='12345678-1234-4123-8123-123456789013';
+  const take={duration:1000,events:[{at:0,data:[144,60,90]},{at:500,data:[128,60,0]}]};
+  const upload=async(id,kind,bytes,mime='application/json')=>fetch(server.url+`/api/recordings?id=${id}&kind=${kind}&duration=1000&context=Test`,{method:'POST',headers:{'X-Migs-Local':'1','Content-Type':mime},body:bytes});
+  assert.equal((await upload(midiId,'midi',JSON.stringify(take))).status,201);
+  assert.equal((await upload(midiId,'midi',JSON.stringify(take))).status,201);
+  assert.equal((await upload(audioId,'audio',new Uint8Array([1,2,3,4]),'audio/webm')).status,201);
+  assert.equal((await request('/api/recordings')).data.length,2,'retries do not duplicate takes');
+  assert.equal((await upload('bad','midi',JSON.stringify(take))).status,400);
+  assert.equal((await upload(crypto.randomUUID(),'midi',JSON.stringify({...take,events:[{at:20,data:[240,1,247]}]}))).status,400);
+  assert.equal((await request('/api/settings','PUT',{soundPreset:'invalid'})).status,400);
+  for(const file of ['/scores/fur-elise.pdf','/scores/fur-elise.midi','/audio/piano/C4.mp3'])assert.equal((await fetch(server.url+file)).status,200);
   await server.stop();
   server = await launch(directory);
+  assert.equal((await request('/api/recordings')).data.length,2);
+  assert.deepEqual((await request(`/api/recordings/${midiId}`)).data,take);
+  const mid=Buffer.from(await(await fetch(server.url+`/api/recordings/${midiId}/midi`)).arrayBuffer());assert.equal(mid.subarray(0,4).toString(),'MThd');
+  assert.deepEqual(new Uint8Array(await(await fetch(server.url+`/api/recordings/${audioId}`)).arrayBuffer()),new Uint8Array([1,2,3,4]));
   saved = (await request('/api/state')).data;
   assert.equal(saved.sessions.length, 1);
   assert.equal(saved.drafts['1'].worked, 'A new draft to resume.');
@@ -79,11 +115,16 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal(saved.settings.tempo, 72);
   assert.equal(saved.settings.melodyTempo, 105);
   assert.equal(saved.settings.timer.elapsed, 42);
+  assert.equal(saved.settings.songView, 'notation');
+  assert.equal(saved.settings.soundPreset,'electric');
 
-  assert.equal((await request('/api/active', 'PUT', { lessonId: 2 })).status, 404, 'planned lessons cannot become the active assignment');
+  assert.equal(saved.activeLesson, 2, 'completing the active lesson advances to the next available lesson');
+  assert.equal((await request('/api/active', 'PUT', { lessonId: 7 })).status, 404, 'planned lessons cannot become the active assignment');
   assert.equal((await request('/api/sessions', 'POST', { ...session, id: 'invalid-entry-123', minutes: -1 })).status, 400);
   assert.equal((await request('/api/checkpoints/1', 'PUT', { checked: [100] })).status, 400);
   for (const melodyTempo of [0, 29, 181, 60.5, '90', null]) assert.equal((await request('/api/settings', 'PUT', { melodyTempo })).status, 400);
+  assert.equal((await request('/api/settings', 'PUT', { songView: 'invalid' })).status, 400);
+  assert.equal((await request('/api/state')).data.settings.songView, 'notation');
   assert.equal((await request('/api/state')).data.settings.melodyTempo, 105);
   const forbidden = await fetch(server.url + '/api/completion/1', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ completed: false }) });
   assert.equal(forbidden.status, 403);

@@ -23,7 +23,7 @@ Each lesson contains:
 | 13–19 | Seventh chords, 12-bar blues, swing, improvisation, jazz progressions, and lead sheets |
 | 20–24 | Classical reading, pop accompaniment, backing tracks, synthesizers, and repertoire review |
 
-The complete lesson list is in `content/course.json`. Lesson 1 is written; the remaining lessons are planned. New lessons will use the learner's practice notes and check-ins to set the difficulty.
+The complete lesson list is in `content/course.json`. Lessons 1–6 are written; Lessons 7–24 are planned. New lessons will use the learner's practice notes and check-ins to set the difficulty.
 
 ## Practice schedule
 
