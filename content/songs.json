@@ -79,7 +79,8 @@
       "downloadFiles": [
         "amazing-grace.pdf",
         "amazing-grace.midi"
-      ]
+      ],
+      "defaultPassage": "full"
     },
     {
       "id": "lord-of-the-dance",
@@ -104,7 +105,8 @@
       "downloadFiles": [
         "lord-of-the-dance.pdf",
         "lord-of-the-dance.midi"
-      ]
+      ],
+      "defaultPassage": "full"
     }
   ]
 }

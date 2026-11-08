@@ -56,6 +56,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   for (const song of library.data.songs) {
     const detail = await request(`/api/songs/${song.id}`);
     assert.equal(detail.status, 200);
+    if (song.category === 'Hymns') assert.equal(detail.data.defaultPassage, 'full');
     assert.ok(detail.data.noteNames.length > 0);
     assert.ok(detail.data.practice.length > 0);
     for (const file of song.notationFiles) {

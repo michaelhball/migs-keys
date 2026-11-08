@@ -157,7 +157,7 @@ async function showSongs(id) {
   }
   const song = await api(`songs/${encodeURIComponent(id)}`);
   if (version !== routeVersion) return;
-  currentSong = song; songPassage = 'opening'; currentExercise = song.exercise.timeline ? selectPassage(song.exercise) : song.exercise;
+  currentSong = song; songPassage = song.defaultPassage || 'opening'; currentExercise = song.exercise.timeline ? selectPassage(song.exercise, songPassage) : song.exercise;
   main.innerHTML = `<a class="text-link" href="#songs">← All songs</a>${intro(song.artist, song.title, song.summary)}<section class="card song-material"><div class="section-top"><div><h2>${esc(song.materialTitle)}</h2><p class="muted">${esc(song.materialDescription)}</p></div></div><div class="song-view-controls" role="group" aria-label="Music display"><button class="button small outline" data-action="song-view" data-view="notes" aria-controls="song-score">Piano view</button><button class="button small outline" data-action="song-view" data-view="notation" aria-controls="song-score">Sheet music</button></div><div id="song-score"></div></section><article class="card lesson-body song-practice">${markdown(song.practice)}</article>`;
   renderSongView();
 }
