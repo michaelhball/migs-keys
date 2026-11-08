@@ -37,7 +37,8 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.match(first.data.markdown, /Second session/);
   assert.equal((await request('/api/lessons/2')).data.markdown, null);
   assert.equal((await fetch(server.url + '/')).status, 200);
-  for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
+  for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/playback.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
+  assert.equal((await request('/api/state')).data.settings.melodyTempo, 60);
   const html = markdown(first.data.markdown);
   assert.match(html, /<h3>Your goal<\/h3>/);
   assert.equal((html.match(/<ol>/g) || []).length, 1);
@@ -49,7 +50,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   await Promise.all([
     request('/api/checkpoints/1', 'PUT', { checked: [0, 1] }),
     request('/api/completion/1', 'PUT', { completed: true }),
-    request('/api/settings', 'PUT', { tempo: 72, timer: { elapsed: 42, startedAt: null } })
+    request('/api/settings', 'PUT', { tempo: 72, melodyTempo: 105, timer: { elapsed: 42, startedAt: null } })
   ]);
   const session = { ...draft, lessonId: 1, id: 'test-session-0001' };
   assert.equal((await request('/api/sessions', 'POST', session)).status, 201);
@@ -60,6 +61,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.deepEqual(saved.completed, [1]);
   assert.deepEqual(saved.checkpoints['1'], [0, 1]);
   assert.equal(saved.settings.tempo, 72);
+  assert.equal(saved.settings.melodyTempo, 105);
   assert.equal(saved.settings.timer.elapsed, 42);
   await request('/api/drafts/1', 'PUT', { ...draft, worked: 'A new draft to resume.' });
   const exported = await request('/api/export');
@@ -75,11 +77,14 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal(saved.drafts['1'].worked, 'A new draft to resume.');
   assert.deepEqual(saved.checkpoints['1'], [0, 1]);
   assert.equal(saved.settings.tempo, 72);
+  assert.equal(saved.settings.melodyTempo, 105);
   assert.equal(saved.settings.timer.elapsed, 42);
 
   assert.equal((await request('/api/active', 'PUT', { lessonId: 2 })).status, 404, 'planned lessons cannot become the active assignment');
   assert.equal((await request('/api/sessions', 'POST', { ...session, id: 'invalid-entry-123', minutes: -1 })).status, 400);
   assert.equal((await request('/api/checkpoints/1', 'PUT', { checked: [100] })).status, 400);
+  for (const melodyTempo of [0, 29, 181, 60.5, '90', null]) assert.equal((await request('/api/settings', 'PUT', { melodyTempo })).status, 400);
+  assert.equal((await request('/api/state')).data.settings.melodyTempo, 105);
   const forbidden = await fetch(server.url + '/api/completion/1', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ completed: false }) });
   assert.equal(forbidden.status, 403);
   const foreignOrigin = await fetch(server.url + '/api/completion/1', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Migs-Local': '1', Origin: 'https://example.com' }, body: JSON.stringify({ completed: false }) });

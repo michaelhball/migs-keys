@@ -7,6 +7,7 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 
 /* Keep the layout focused on lesson text and controls. */
+.melody-card .section-top{flex-wrap:wrap;gap:14px}.melody-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.melody-controls label,.melody-controls>span{font-size:11px;color:#65735f}.melody-controls input{width:65px;min-height:34px;padding:5px 6px;border:1px solid #d8dfd2;border-radius:5px;background:white;color:var(--ink);font-size:13px;font-variant-numeric:tabular-nums}.melody-controls .button{margin-left:4px}
 :root{--paper:#f7f8f6;--card:#fff;--serif:var(--sans)}
 h1,h2{font-weight:600;letter-spacing:-.02em;line-height:1.3}
 h1{font-size:30px}h2{font-size:22px}.eyebrow{letter-spacing:.04em;font-size:11px}

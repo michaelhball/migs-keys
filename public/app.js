@@ -1,12 +1,28 @@
 import { markdown, escapeHtml as esc } from './markdown.js';
+import { MelodyPlayer } from './playback.js';
 
 const $ = selector => document.querySelector(selector);
 let course, state, currentLesson, routeVersion = 0;
-let audio, metronome = null, beat = 0, melodyTimers = [];
+let audio, metronome = null, beat = 0;
+let melodyTempo = 60, tempoWrites = Promise.resolve();
+const activeTones = new Set();
 let elapsed = 0, timerStarted = null, practiceTimer = null;
 let draftTimeout, draftQueue = Promise.resolve(), sessionId, formLesson;
 const main = $('#main');
 const dialog = $('#journal-dialog');
+const melodyPlayer = new MelodyPlayer({
+  onNote(note, index, beatSeconds) {
+    silenceTones();
+    tone(note, beatSeconds * .8);
+    flashKey(note);
+    document.querySelectorAll('.note-cell').forEach(x => x.classList.toggle('sounding', Number(x.dataset.sequence) === index));
+  },
+  onStop() {
+    silenceTones();
+    document.querySelectorAll('.note-cell.sounding').forEach(x => x.classList.remove('sounding'));
+    if ($('[data-action="melody"]')) $('[data-action="melody"]').textContent = '▷ Listen';
+  }
+});
 
 async function api(path, method = 'GET', body) {
   const response = await fetch(`/api/${path}`, { method, headers: method === 'GET' ? {} : { 'Content-Type': 'application/json', 'X-Migs-Local': '1' }, ...(body ? { body: JSON.stringify(body) } : {}) });
@@ -56,7 +72,7 @@ async function showLesson(id, today) {
   const isActive = state.activeLesson === item.id;
   main.innerHTML = `${intro(today ? new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date()).toUpperCase() : `LESSON ${item.id}`, item.title, item.description)}
     <section class="lesson-hero"><div class="hero-copy"><div class="hero-tags">${badge(`Lesson ${item.id} / ${course.lessons.length}`)}${badge('Foundations')}${badge('20 minutes')}</div><div class="hero-actions"><a class="button light" href="#lesson-steps" data-action="begin">Begin practice <span>↓</span></a><button class="text-button" data-action="log" data-id="${item.id}">Log a session ↗</button></div></div><div class="hero-visual"><span class="eyebrow">C, D, AND E</span>${keyboard()}<span class="keyboard-caption">Tap a key to hear a reference tone</span></div></section>
-    <div class="lesson-layout"><div class="lesson-column"><section class="card melody-card"><div class="section-top"><div><h2>Eight-note melody</h2></div><button class="button outline small" data-action="melody">▷ Listen</button></div><div class="note-sequence" aria-label="C D E D, E D C C, one note per beat">${['C', 'D', 'E', 'D', 'E', 'D', 'C', 'C'].map((n, i) => `<div class="note-cell ${i === 4 ? 'measure-start' : ''}" data-sequence="${i}"><small>${i % 4 + 1}</small><strong>${n}</strong><span>${{ C: 1, D: 2, E: 3 }[n]}</span></div>`).join('')}</div><div class="sequence-legend"><span>Count · note · right-hand finger</span><span>One note per beat</span></div></section>
+    <div class="lesson-layout"><div class="lesson-column"><section class="card melody-card"><div class="section-top"><div><h2>Eight-note melody</h2></div><div class="melody-controls"><label for="melody-tempo">Tempo</label><input id="melody-tempo" type="number" min="30" max="180" step="1" value="${melodyTempo}" aria-label="Melody tempo in beats per minute"><span>BPM</span><button class="button outline small" data-action="melody">▷ Listen</button></div></div><div class="note-sequence" aria-label="C D E D, E D C C, one note per beat">${['C', 'D', 'E', 'D', 'E', 'D', 'C', 'C'].map((n, i) => `<div class="note-cell ${i === 4 ? 'measure-start' : ''}" data-sequence="${i}"><small>${i % 4 + 1}</small><strong>${n}</strong><span>${{ C: 1, D: 2, E: 3 }[n]}</span></div>`).join('')}</div><div class="sequence-legend"><span>Count · note · right-hand finger</span><span>One note per beat</span></div></section>
     <article class="card lesson-body" id="lesson-steps">${markdown(item.markdown)}</article>
     </div>
     <aside class="lesson-aside">${toolsCard()}${checkpoints(item)}<section class="card checkin-card"><h2>Record your session</h2><p>Record what improved, where you hesitated, and what you want to practise next.</p><button class="button outline full" data-action="log" data-id="${item.id}">Write a practice note</button>${!isActive ? `<button class="text-button dark" data-action="set-active" data-id="${item.id}">Make this my current lesson</button>` : ''}</section></aside></div>`;
@@ -79,7 +95,7 @@ function showResources() {
 }
 function stopSounds() {
   clearInterval(metronome); metronome = null; beat = 0;
-  melodyTimers.forEach(clearTimeout); melodyTimers = [];
+  melodyPlayer.stop();
   document.querySelectorAll('.sounding, .beat-active').forEach(x => x.classList.remove('sounding', 'beat-active'));
   if ($('#metro-button')) $('#metro-button').textContent = 'Start';
   if ($('[data-action="melody"]')) $('[data-action="melody"]').textContent = '▷ Listen';
@@ -109,20 +125,35 @@ function tone(midi, duration = .7, quiet = false) {
   oscillator.type = quiet ? 'sine' : 'triangle';
   oscillator.frequency.value = 440 * 2 ** ((midi - 69) / 12);
   gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(quiet ? .07 : .13, now + .012); gain.gain.exponentialRampToValueAtTime(.001, now + duration);
-  oscillator.connect(gain).connect(audio.destination); oscillator.start(now); oscillator.stop(now + duration + .02);
+  oscillator.connect(gain).connect(audio.destination);
+  activeTones.add(oscillator);
+  oscillator.onended = () => { activeTones.delete(oscillator); oscillator.disconnect(); gain.disconnect(); };
+  oscillator.start(now); oscillator.stop(now + duration + .02);
+}
+function silenceTones() {
+  for (const oscillator of activeTones) { oscillator.stop(); oscillator.disconnect(); }
+  activeTones.clear();
 }
 function flashKey(midi) {
   const key = document.querySelector(`[data-note="${midi}"]`); if (!key) return;
   key.classList.add('sounding'); setTimeout(() => key.classList.remove('sounding'), 350);
 }
 async function playMelody() {
-  if (melodyTimers.length) { stopSounds(); return; }
+  if (melodyPlayer.playing) { stopSounds(); return; }
+  const version = routeVersion;
   await audioReady(); stopSounds();
+  if (version !== routeVersion) return;
+  melodyPlayer.start([60, 62, 64, 62, 64, 62, 60, 60], melodyTempo);
   const button = $('[data-action="melody"]'); button.textContent = '■ Stop';
-  [60, 62, 64, 62, 64, 62, 60, 60].forEach((n, i) => melodyTimers.push(setTimeout(() => {
-    tone(n, .8); flashKey(n); document.querySelectorAll('.note-cell').forEach(x => x.classList.toggle('sounding', Number(x.dataset.sequence) === i));
-  }, i * 1000)));
-  melodyTimers.push(setTimeout(stopSounds, 8000));
+}
+function changeMelodyTempo(input) {
+  const tempo = Math.min(180, Math.max(30, Math.round(Number(input.value) || 60)));
+  input.value = tempo;
+  melodyTempo = tempo;
+  melodyPlayer.setTempo(tempo);
+  state.settings.melodyTempo = tempo;
+  tempoWrites = tempoWrites.catch(() => {}).then(() => api('settings', 'PUT', { melodyTempo: tempo }));
+  return tempoWrites;
 }
 async function toggleMetronome() {
   if (metronome) { stopSounds(); return; }
@@ -201,7 +232,7 @@ document.addEventListener('click', async event => {
     else if (action === 'log') openLog(button.dataset.id);
     else if (action === 'close-dialog') await closeDialog();
     else if (action === 'copy-checkin') await copyCheckin(button.dataset.id);
-    else if (action === 'melody') await playMelody();
+    else if (action === 'melody') { button.disabled = true; await playMelody(); button.disabled = false; }
     else if (action === 'metronome') await toggleMetronome();
     else if (action === 'timer') { button.disabled = true; await toggleTimer(); button.disabled = false; }
     else if (action === 'complete') {
@@ -214,6 +245,10 @@ document.addEventListener('click', async event => {
   } catch (error) { button.disabled = false; toast(error.message, true); }
 });
 document.addEventListener('change', async event => {
+  if (event.target.id === 'melody-tempo') {
+    try { await changeMelodyTempo(event.target); }
+    catch { toast('Tempo changed, but it could not be saved. Change it again to retry.', true); }
+  }
   if (event.target.matches('[data-checkpoint]')) {
     const checked = [...document.querySelectorAll('[data-checkpoint]:checked')].map(x => Number(x.dataset.checkpoint));
     const checkbox = event.target; checkbox.disabled = true;
@@ -239,6 +274,7 @@ window.addEventListener('pagehide', () => {
 async function init() {
   try {
     [course, state] = await Promise.all([api('course'), api('state')]);
+    melodyTempo = state.settings?.melodyTempo || 60;
     elapsed = state.settings?.timer?.elapsed || 0; timerStarted = state.settings?.timer?.startedAt || null;
     clearInterval(practiceTimer); if (timerStarted) practiceTimer = setInterval(updateTimer, 1000);
     updateStats(); await route();

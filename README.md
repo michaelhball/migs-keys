@@ -29,6 +29,8 @@ Open **http://127.0.0.1:4317**. Keep the server running while using the app. Sto
 
 Notes, progress, settings, and timer state are saved to disk. Journal drafts save after a short pause in typing and when closing the note dialog. Audio playback itself stops on navigation or page close. The timer can be resumed across a page reload because its start time is persisted. Pause it when leaving your practice session.
 
+The melody player has its own tempo setting, from 30 to 180 BPM, starting at 60 BPM. Changing tempo during playback adjusts the remaining notes without restarting the melody. This setting is saved separately from the metronome tempo.
+
 Writes are serialized and use a temporary file followed by an atomic rename. A failed write leaves the previous progress file in place. Corrupt files produce an error instead of silently resetting progress. The server binds to `127.0.0.1` only; other devices cannot connect.
 
 ## Backup and restore

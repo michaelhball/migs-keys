@@ -7,13 +7,13 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const DATA = process.env.MIGS_DATA_DIR || path.join(ROOT, 'data');
 const PORT = Number(process.env.PORT ?? 4317);
 const STATE = path.join(DATA, 'progress.json');
-const emptyState = () => ({ version: 1, activeLesson: 1, completed: [], checkpoints: {}, drafts: {}, sessions: [], settings: { tempo: 60, timer: { elapsed: 0, startedAt: null } } });
+const emptyState = () => ({ version: 1, activeLesson: 1, completed: [], checkpoints: {}, drafts: {}, sessions: [], settings: { tempo: 60, melodyTempo: 60, timer: { elapsed: 0, startedAt: null } } });
 let writing = Promise.resolve();
 
 async function jsonFile(file) { return JSON.parse(await readFile(file, 'utf8')); }
 async function course() { return jsonFile(path.join(ROOT, 'content', 'course.json')); }
 async function state() {
-  try { return await jsonFile(STATE); }
+  try { const saved = await jsonFile(STATE); return { ...saved, settings: { ...emptyState().settings, ...saved.settings } }; }
   catch (error) { if (error.code === 'ENOENT') return emptyState(); throw error; }
 }
 async function update(change) {
@@ -94,8 +94,9 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'PUT' && url.pathname === '/api/settings') {
       const data = await body(req);
       if (data.tempo !== undefined && (!Number.isInteger(data.tempo) || data.tempo < 30 || data.tempo > 180)) fail(400, 'Tempo must be between 30 and 180.');
+      if (data.melodyTempo !== undefined && (!Number.isInteger(data.melodyTempo) || data.melodyTempo < 30 || data.melodyTempo > 180)) fail(400, 'Melody tempo must be between 30 and 180.');
       if (data.timer !== undefined && (!data.timer || !Number.isFinite(data.timer.elapsed) || data.timer.elapsed < 0 || !(data.timer.startedAt === null || (Number.isFinite(data.timer.startedAt) && data.timer.startedAt > 0 && data.timer.startedAt <= Date.now() + 10000)))) fail(400, 'Invalid practice timer.');
-      return reply(200, await update(s => { s.settings ??= emptyState().settings; if (data.tempo !== undefined) s.settings.tempo = data.tempo; if (data.timer !== undefined) s.settings.timer = { elapsed: data.timer.elapsed, startedAt: data.timer.startedAt }; }));
+      return reply(200, await update(s => { s.settings ??= emptyState().settings; if (data.tempo !== undefined) s.settings.tempo = data.tempo; if (data.melodyTempo !== undefined) s.settings.melodyTempo = data.melodyTempo; if (data.timer !== undefined) s.settings.timer = { elapsed: data.timer.elapsed, startedAt: data.timer.startedAt }; }));
     }
     if (req.method === 'PUT' && /^\/api\/checkpoints\/\d+$/.test(url.pathname)) {
       const item = await lesson(url.pathname.split('/').pop(), true); const data = await body(req);
@@ -120,7 +121,7 @@ const server = http.createServer(async (req, res) => {
         delete s.drafts[item.id];
       }));
     }
-    const staticFiles = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/styles.css': ['styles.css', 'text/css'], '/markdown.js': ['markdown.js', 'text/javascript'], '/favicon.svg': ['favicon.svg', 'image/svg+xml'] };
+    const staticFiles = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/styles.css': ['styles.css', 'text/css'], '/markdown.js': ['markdown.js', 'text/javascript'], '/playback.js': ['playback.js', 'text/javascript'], '/favicon.svg': ['favicon.svg', 'image/svg+xml'] };
     const file = staticFiles[url.pathname];
     if (file && ['GET', 'HEAD'].includes(req.method)) {
       const data = await readFile(path.join(ROOT, 'public', file[0]));
