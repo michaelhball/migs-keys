@@ -224,6 +224,7 @@ function previewPiano() {
   const event=currentExercise.events[currentStep];
   document.querySelectorAll('.piano-key').forEach(key=>{key.classList.remove('sounding');key.querySelector('.key-finger').textContent='';});
   for (const hand of ['right','left']) for (const note of handNotes(event,hand)) {
+    if (currentExercise.timeline && playingHand!=='both' && playingHand!==hand) continue;
     const key=document.querySelector(`[data-hand="${hand}"] [data-note="${note.midi}"]`);
     if (key) {key.classList.add('sounding');key.querySelector('.key-finger').textContent=note.finger||'';}
   }
@@ -375,7 +376,7 @@ document.addEventListener('change', async event => {
   }
 
   if (event.target.id === 'song-passage') { stopSounds(); songPassage=event.target.value; currentStep=0; currentExercise=selectPassage(currentSong.exercise,songPassage); renderSongView(); }
-  if (event.target.id === 'song-hands') { stopSounds(); playingHand=event.target.value; }
+  if (event.target.id === 'song-hands') { playingHand=event.target.value; stopSounds(); previewPiano(); }
   if (event.target.id === 'song-loop') repeatPassage=event.target.checked;
   if (event.target.id === 'melody-tempo') {
     try { await changeMelodyTempo(event.target); }
