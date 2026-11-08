@@ -2,6 +2,31 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { MelodyPlayer } from '../public/playback.js';
 
+test('default timers use the browser global receiver for start, tempo changes, and stop', t => {
+  let time = 0, nextId = 0;
+  const jobs = new Map(), heard = [];
+  t.mock.method(globalThis, 'setTimeout', function (fn, delay) {
+    if (this !== globalThis) throw new TypeError('Illegal invocation');
+    const id = ++nextId; jobs.set(id, { fn, delay }); return id;
+  });
+  t.mock.method(globalThis, 'clearTimeout', function (id) {
+    if (this !== globalThis) throw new TypeError('Illegal invocation');
+    jobs.delete(id);
+  });
+  const player = new MelodyPlayer({ now: () => time, onNote: note => heard.push(note), onStop() {} });
+  player.start([60, 62, 64], 60);
+  assert.deepEqual(heard, [60]);
+  time = 500;
+  player.setTempo(120);
+  assert.equal(jobs.size, 1);
+  const [id, job] = [...jobs][0];
+  assert.equal(job.delay, 250);
+  time = 750; jobs.delete(id); job.fn();
+  assert.deepEqual(heard, [60, 62]);
+  player.stop();
+  assert.equal(jobs.size, 0);
+});
+
 function setup() {
   let time = 0, nextId = 0;
   const jobs = new Map(), heard = [];

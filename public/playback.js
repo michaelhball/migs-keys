@@ -1,5 +1,9 @@
 export class MelodyPlayer {
-  constructor({ onNote, onStop, now = () => performance.now(), schedule = setTimeout, cancel = clearTimeout }) {
+  constructor({
+    onNote, onStop, now = () => performance.now(),
+    schedule = (fn, delay) => globalThis.setTimeout(fn, delay),
+    cancel = id => globalThis.clearTimeout(id)
+  }) {
     Object.assign(this, { onNote, onStop, now, schedule, cancel });
     this.playing = false;
     this.timer = null;
