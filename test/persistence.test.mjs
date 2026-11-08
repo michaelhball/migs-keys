@@ -32,11 +32,19 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
 
   const manifest = await request('/api/course');
   assert.equal(manifest.data.lessons.length, 24);
+  const flashcards = await request('/api/anki');
+  assert.equal(flashcards.data.current.lesson, 1);
+  assert.equal(flashcards.data.current.cards, 15);
+  assert.equal(flashcards.data.releasedThrough, 12);
+  const packageResponse = await fetch(server.url + '/anki/current.apkg');
+  assert.equal(packageResponse.status, 200);
+  assert.equal(Buffer.from(await packageResponse.arrayBuffer()).subarray(0,2).toString(), 'PK');
+  assert.equal((await fetch(server.url + '/anki/not-listed.apkg')).status,404);
   const first = await request('/api/lessons/1');
   assert.equal(first.status, 200);
   assert.match(first.data.markdown, /Second session/);
   assert.match((await request('/api/lessons/2')).data.markdown, /ledger line/);
-  assert.equal((await request('/api/lessons/7')).data.markdown, null);
+  assert.equal((await request('/api/lessons/13')).data.markdown, null);
   assert.equal((await fetch(server.url + '/')).status, 200);
   for (const resource of ['/app.js', '/styles.css', '/markdown.js', '/playback.js', '/music.js', '/lesson-guide.js', '/music-symbols.js', '/performance.js', '/sound.js', '/recording.js', '/piano-view.js', '/midi.js', '/favicon.svg']) assert.equal((await fetch(server.url + resource)).status, 200);
   assert.equal((await request('/api/state')).data.settings.melodyTempo, 60);
@@ -85,7 +93,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal(saved.settings.timer.elapsed, 42);
   await request('/api/drafts/1', 'PUT', { ...draft, worked: 'A new draft to resume.' });
   const exported = await request('/api/export');
-  assert.equal(exported.data.lessons.length, 6);
+  assert.equal(exported.data.lessons.length, 12);
   assert.equal(exported.data.songs.length, 4);
   assert.match(exported.data.songs[1].scores[0].svg, /<svg/);
   assert.match(exported.data.songs[1].noteNames, /D♯5/);
@@ -122,7 +130,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal(saved.settings.soundPreset,'electric');
 
   assert.equal(saved.activeLesson, 2, 'completing the active lesson advances to the next available lesson');
-  assert.equal((await request('/api/active', 'PUT', { lessonId: 7 })).status, 404, 'planned lessons cannot become the active assignment');
+  assert.equal((await request('/api/active', 'PUT', { lessonId: 13 })).status, 404, 'planned lessons cannot become the active assignment');
   assert.equal((await request('/api/sessions', 'POST', { ...session, id: 'invalid-entry-123', minutes: -1 })).status, 400);
   assert.equal((await request('/api/checkpoints/1', 'PUT', { checked: [100] })).status, 400);
   for (const melodyTempo of [0, 29, 181, 60.5, '90', null]) assert.equal((await request('/api/settings', 'PUT', { melodyTempo })).status, 400);

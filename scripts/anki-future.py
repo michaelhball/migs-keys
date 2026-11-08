@@ -184,9 +184,46 @@ for n in notes:
 
 # Visual harmony and key-signature recall use independently engraved examples.
 for name,ly in [('C major',"<c' e' g'>"),('C minor',"<c' ees' g'>"),('C diminished',"<c' ees' ges'>"),('C augmented',"<c' e' gis'>"),('C7',"<c' e' g' bes'>"),('Cmaj7',"<c' e' g' b'>"),('Cm7',"<c' ees' g' bes'>"),('Cm7♭5',"<c' ees' ges' bes'>"),('Cdim7',"<c' ees' ges' beses'>")]:
-    key='chord-'+name.lower().replace(' ','-').replace('♭','flat');diagram(key,ly+'1')
+    key='chord-'+name.lower().replace(' ','-').replace('♭','flat');diagram(key,ly+'2')
     level=8 if ' ' in name else 13 if name=='C7' else 17
     fact('visual-'+key,level,'Identify this chord.'+img(key),name+'.',f'Picture or draw {name} in root position, starting on middle C.',img(key),'chords','40' if level==8 else '45')
 for keyname,ly in [('C','c'),('G','g'),('D','d'),('A','a'),('E','e'),('B','b'),('F♯','fis'),('C♯','cis'),('F','f'),('B♭','bes'),('E♭','ees'),('A♭','aes'),('D♭','des'),('G♭','ges'),('C♭','ces')]:
     key='keysig-'+ly;diagram(key,'\\key '+ly+' \\major s1')
     fact('visual-'+key,20,'Which <b>major</b> key has this key signature?'+img(key),keyname+' major.',f'Picture or draw the key signature of {keyname} major.',img(key),'keys','24',extra='The same signature can also belong to its relative minor; the prompt specifies major.')
+
+# Reviewed release map: lessons 7–12 now have written exercises. Keep everything
+# else prepared, but do not assign an untaught concept to an available lesson.
+reviewed={
+ 7: 'treble-a4 treble-b4 treble-c5 semitone whole-tone white-semitones major-pattern c-major-scale major-distinct-letters',
+ 8: 'triad-c-major triad-spelling-a-minor visual-chord-c-major',
+ 9: 'triad-spelling-f triad-spelling-g treble-d5 bass-f2 bass-g2 bass-a2',
+ 10:'triad-bass-root-position triad-bass-first-inversion triad-bass-second-inversion root-not-bass voice-leading voicing-inversion',
+ 11:'phrase beam-flags eighth-note-shape quarter-eighth-ratio dot-value dotted-quarter-shape eighth-count-44',
+ 12:'generic-interval-count interval-perfect-5 transpose'
+}
+release={id:lesson for lesson,ids in reviewed.items() for id in ids.split()}
+for n in notes:
+ if n['id'] in release:
+  if n['pack']=='course':n['lesson']=release[n['id']]
+  else:n['alsoLesson']=release[n['id']]
+ elif n['pack']=='course' and 7<=n['lesson']<=12:
+  n['plannedLesson']=n['lesson'];n['lesson']=99;n['pack']='advanced'
+ elif 7<=n.get('alsoLesson',999)<=12:n['alsoLesson']=99
+position('A3','a','treble','the second ledger line below the staff',8)
+position('B3','b','treble','the space just below middle C’s ledger line',10)
+fact('triad-definition',8,'What is a triad?','A three-note chord built by stacking two thirds.',topic='chords',ref='40')
+fact('chord-root',8,'What is the root of A minor?','A, the note from which its stacked thirds are built. It remains the root when the notes are rearranged.',topic='chords',ref='40')
+fact('transpose-c-g',12,'Transpose C–D–E up a perfect fifth.','G–A–B.',topic='transposition',ref='30')
+for n in notes:
+ for field in ('front','reverse'):
+  for phrase in ('augmented','authentic','anticipation','appoggiatura','escape','eighth'):
+   n[field]=n[field].replace('a '+phrase,'an '+phrase)
+ if n['id']=='sharp':n['back']='Raises the natural letter-name pitch by one semitone.'
+ if n['id']=='flat-sign':n['back']='Lowers the natural letter-name pitch by one semitone.'
+ if n['id']=='synth-tremolo':n['front']='In a synthesizer tremolo effect, what varies periodically?';n['extra']='In piano notation, tremolo can instead mean rapidly repeated notes or alternating notes/chords.'
+ if n['id']=='synth-sine':n['back']='It contains one frequency, with no higher harmonics.'
+ if n['id']=='nonchord-appoggiatura':n['extra']='This is the common harmony-textbook definition; ornamental appoggiaturas can be described more broadly.'
+ if n['id']=='dominant7-formula':n['front']='What is the formula for a dominant seventh chord, relative to a major scale?'
+ if n['id'].startswith('seventh-formula-'):n['front']=n['front'].replace('chord?','chord, relative to a major scale?')
+ if n['id']=='minor-pentatonic-formula':n['front']='What is the minor pentatonic formula, relative to a major scale?'
+ if n['id'] in ('transpose','transpose-c-d'):n['source']='https://viva.pressbooks.pub/openmusictheory/chapter/intervals/'

@@ -910,51 +910,2457 @@
     },
     {
       "id": 7,
-      "title": "C major scale and intervals",
-      "focus": "Scales and intervals",
-      "description": "Play C major and hear the distance between notes.",
-      "duration": 20,
-      "status": "planned"
+      "title": "C major: a full octave",
+      "focus": "C major: a full octave",
+      "description": "Move beyond the five-note position and play an eight-bar melody.",
+      "duration": 25,
+      "status": "ready",
+      "defaultView": "notation",
+      "file": "07-c-major.md",
+      "exercise": {
+        "title": "Scale, then an eight-bar melody",
+        "events": [
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          }
+        ],
+        "description": "Four quarter-note beats per bar. Tempo counts quarter notes. Finger numbers are suggestions."
+      },
+      "checkpoints": [
+        "I can find A4, B4 and C5 on the staff and keyboard.",
+        "I can pass my thumb after E4 without twisting or rushing.",
+        "I can play the eight-bar melody in short sections."
+      ]
     },
     {
       "id": 8,
-      "title": "Major and minor chords",
-      "focus": "Major and minor chords",
-      "description": "Play C, F, G, and A minor chords.",
-      "duration": 20,
-      "status": "planned"
+      "title": "C major and A minor chords",
+      "focus": "C major and A minor chords",
+      "description": "Play two three-note chords, hear the difference, and change between them.",
+      "duration": 25,
+      "status": "ready",
+      "defaultView": "notation",
+      "file": "08-first-chords.md",
+      "exercise": {
+        "title": "C major and A minor chord study",
+        "events": [
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [],
+            "left": []
+          }
+        ],
+        "description": "Four quarter-note beats per bar. Tempo counts quarter notes. Finger numbers are suggestions."
+      },
+      "checkpoints": [
+        "I can play C–E–G together with fingers 1–3–5.",
+        "I can move the whole right hand to A3–C4–E4 for A minor.",
+        "I can release each chord for two beats and prepare the next one."
+      ]
     },
     {
       "id": 9,
-      "title": "Pop chord progressions",
-      "focus": "Chords with a bass note",
-      "description": "Play a simple accompaniment with a bass note and a chord.",
-      "duration": 20,
-      "status": "planned"
+      "title": "A four-chord pop accompaniment",
+      "focus": "A four-chord pop accompaniment",
+      "description": "Add F and G chords and play an eight-bar accompaniment with bass notes.",
+      "duration": 25,
+      "status": "ready",
+      "defaultView": "notation",
+      "file": "09-pop-accompaniment.md",
+      "exercise": {
+        "title": "C–Am–F–G accompaniment",
+        "events": [
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              },
+              {
+                "midi": 69,
+                "finger": 3
+              },
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              },
+              {
+                "midi": 69,
+                "finger": 3
+              },
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 1
+              },
+              {
+                "midi": 71,
+                "finger": 3
+              },
+              {
+                "midi": 74,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 1
+              },
+              {
+                "midi": 71,
+                "finger": 3
+              },
+              {
+                "midi": 74,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              },
+              {
+                "midi": 69,
+                "finger": 3
+              },
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 1
+              },
+              {
+                "midi": 69,
+                "finger": 3
+              },
+              {
+                "midi": 72,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 1
+              },
+              {
+                "midi": 71,
+                "finger": 3
+              },
+              {
+                "midi": 74,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 1
+              },
+              {
+                "midi": 71,
+                "finger": 3
+              },
+              {
+                "midi": 74,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          }
+        ],
+        "description": "Four quarter-note beats per bar. Tempo counts quarter notes. Finger numbers are suggestions."
+      },
+      "checkpoints": [
+        "I can find the four root-position chords without guessing the keys.",
+        "I can match each chord with its left-hand bass note.",
+        "I can play the full eight-bar loop with a steady half-note rhythm."
+      ]
     },
     {
       "id": 10,
-      "title": "Chord inversions",
-      "focus": "Moving smoothly between chords",
-      "description": "Find nearby chord positions and hear smooth voice leading.",
-      "duration": 20,
-      "status": "planned"
+      "title": "Chord inversions and a longer accompaniment",
+      "focus": "Chord inversions and a longer accompaniment",
+      "description": "Keep the right hand in a smaller area while playing a 16-bar accompaniment.",
+      "duration": 25,
+      "status": "ready",
+      "defaultView": "notation",
+      "file": "10-inversions.md",
+      "exercise": {
+        "title": "Sixteen-bar accompaniment with inversions",
+        "events": [
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 65,
+                "finger": 3
+              },
+              {
+                "midi": 69,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 65,
+                "finger": 3
+              },
+              {
+                "midi": 69,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              },
+              {
+                "midi": 62,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              },
+              {
+                "midi": 62,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 65,
+                "finger": 3
+              },
+              {
+                "midi": 69,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 65,
+                "finger": 3
+              },
+              {
+                "midi": 69,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              },
+              {
+                "midi": 62,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              },
+              {
+                "midi": 62,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 57,
+                "finger": 1
+              },
+              {
+                "midi": 60,
+                "finger": 3
+              },
+              {
+                "midi": 64,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 45,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 65,
+                "finger": 3
+              },
+              {
+                "midi": 69,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 65,
+                "finger": 3
+              },
+              {
+                "midi": 69,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              },
+              {
+                "midi": 62,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              },
+              {
+                "midi": 62,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 65,
+                "finger": 3
+              },
+              {
+                "midi": 69,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 65,
+                "finger": 3
+              },
+              {
+                "midi": 69,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 41,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              },
+              {
+                "midi": 62,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 59,
+                "finger": 1
+              },
+              {
+                "midi": 62,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 43,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              },
+              {
+                "midi": 64,
+                "finger": 3
+              },
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": [
+              {
+                "midi": 48,
+                "finger": 5
+              }
+            ]
+          }
+        ],
+        "description": "Four quarter-note beats per bar. Tempo counts quarter notes. Finger numbers are suggestions."
+      },
+      "checkpoints": [
+        "I can explain a chord’s root separately from its lowest note.",
+        "I can play the written C, Am, F and G shapes near middle C.",
+        "I can join the four-bar groups and end on C."
+      ]
     },
     {
       "id": 11,
-      "title": "Classical phrasing",
-      "focus": "Phrasing and musical expression",
-      "description": "Practise melody balance, dynamics, and phrasing in a short classical-style piece.",
-      "duration": 20,
-      "status": "planned"
+      "title": "Ode to Joy: rhythm and phrasing",
+      "focus": "Ode to Joy: rhythm and phrasing",
+      "description": "Play Beethoven’s eight-bar opening theme with its dotted rhythm.",
+      "duration": 25,
+      "status": "ready",
+      "defaultView": "notation",
+      "file": "11-ode-to-joy.md",
+      "exercise": {
+        "title": "Ode to Joy · opening theme in C",
+        "events": [
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1.5,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1.5,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          }
+        ],
+        "description": "Four quarter-note beats per bar. Tempo counts quarter notes. Finger numbers are suggestions."
+      },
+      "checkpoints": [
+        "I can count a dotted quarter plus an eighth as 1 & 2 &.",
+        "I can play the eight-bar melody without shortening its half notes.",
+        "I can shape the two phrases while keeping the rhythm clear."
+      ]
     },
     {
       "id": 12,
-      "title": "Playing by ear and transposing",
-      "focus": "Learning by ear and moving a tune",
-      "description": "Find a familiar phrase and move it to a different starting note.",
-      "duration": 20,
-      "status": "planned"
+      "title": "Play by ear and move a melody",
+      "focus": "Play by ear and move a melody",
+      "description": "Find a phrase by ear, then move Ode to Joy from C to G.",
+      "duration": 25,
+      "status": "ready",
+      "defaultView": "notation",
+      "file": "12-by-ear.md",
+      "exercise": {
+        "title": "Ode to Joy phrase · C, then G",
+        "events": [
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 65,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 60,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1.5,
+            "right": [
+              {
+                "midi": 64,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 62,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 72,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 74,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 74,
+                "finger": 5
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 72,
+                "finger": 4
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 67,
+                "finger": 1
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 1.5,
+            "right": [
+              {
+                "midi": 71,
+                "finger": 3
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 0.5,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 2
+              }
+            ],
+            "left": []
+          },
+          {
+            "beats": 2,
+            "right": [
+              {
+                "midi": 69,
+                "finger": 2
+              }
+            ],
+            "left": []
+          }
+        ],
+        "description": "Four quarter-note beats per bar. Tempo counts quarter notes. Finger numbers are suggestions."
+      },
+      "checkpoints": [
+        "I can find a short phrase by listening before checking the score.",
+        "I can play the same finger pattern from C4 and from G4.",
+        "I can explain that transposing keeps the intervals and rhythm."
+      ]
     },
     {
       "id": 13,

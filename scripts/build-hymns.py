@@ -39,6 +39,7 @@ SONGS=[dict(slug='amazing-grace',title='Amazing Grace',composer='Traditional · 
  material='Original beginner arrangement of the traditional Simple Gifts tune used for Lord of the Dance. Includes both sections of the tune; no lyrics.')]
 
 def run(*args):subprocess.run(args,cwd=ROOT,check=True)
+library=json.loads((ROOT/'content/songs.json').read_text())
 for song in SONGS:
  slug=song['slug']; beats=int(song['meter'][0]); source=FOLDER/'source'/f'{slug}.ly'
  right=[song['pickup']]+song['bars']; left=['r4']+[n+('2.' if beats==3 else '1')+'-5' for n in song['bass']]
@@ -85,11 +86,12 @@ for song in SONGS:
   data['passages']=[{'id':'opening','label':'Opening · pickup + bars 1–4','from':0,'to':4},{'id':'full','label':'Complete tune · 16 bars','from':0,'to':16}]+[{'id':str(a),'label':f'Bars {a}–{b}','from':a,'to':b} for a,b in [(1,4),(4,8),(8,12),(12,16),(9,16)]]
   performance.write_text(json.dumps(data,separators=(',',':'))+'\n')
   run(sys.executable,'scripts/link-score.py',str(work/'capture-events.tsv'),str(work/'score'),'--performance',str(performance),'--output',str(FOLDER/f'{slug}-score-map.json'),'--timed')
-  library=json.loads((ROOT/'content/songs.json').read_text())
   item=dict(id=slug,title=song['title'],artist=song['composer'],category='Hymns',status='Complete beginner arrangement',summary=song['summary'],materialTitle='Melody and bass · score and practice player',materialDescription=song['material'],notesFile=f'{slug}-notes.md',practiceFile=f'{slug}-practice.md',exerciseFile=f'{slug}-performance.json',scoreMapFile=f'{slug}-score-map.json',notationFiles=[f'{slug}-page-{i}.svg' for i in range(1,len(pages)+1)],notationAlt=song['title']+' in C major, melody and single-note bass.',scoreViewBoxes=viewboxes,downloadFiles=[f'{slug}.pdf',f'{slug}.midi'])
-  library['songs']=[s for s in library['songs'] if s['id']!=slug]+[item]
+  existing=next((s for s in library['songs'] if s['id']==slug),None)
+  if existing is None:library['songs'].append(item)
+  else:existing.update(item)
   for s in library['songs']:
    if s['id']=='fur-elise':s['category']='Classical'
    if s['id']=='dont-stop-believin':s['category']='Pop / rock'
-  (ROOT/'content/songs.json').write_text(json.dumps(library,ensure_ascii=False,indent=2)+'\n')
+(ROOT/'content/songs.json').write_text(json.dumps(library,ensure_ascii=False,indent=2)+'\n')
 print('Built both hymns.')

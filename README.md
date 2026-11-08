@@ -18,7 +18,7 @@ Open **http://127.0.0.1:4317**. Keep the server running while using the app. Sto
 | File | Purpose |
 | --- | --- |
 | `content/course.json` | Course roadmap, lesson metadata, checkpoints, and source links |
-| `content/lessons/01-first-notes.md` | First of six available lessons, in editable Markdown |
+| `content/lessons/01-first-notes.md` | First of twelve available lessons, in editable Markdown |
 | `content/songs.json` | Requested songs and the files for each study or arrangement |
 | `content/songs/` | Scores, MIDI-derived playback, source files, and practice instructions |
 | `content/practice-method.md` | Attentive slow practice and overlapping sections |
@@ -41,6 +41,14 @@ Use the **Sound** selector beside the tempo control for acoustic piano, electric
 
 Writes are serialized and use a temporary file followed by an atomic rename. A failed write leaves the previous progress file in place. Corrupt files produce an error instead of silently resetting progress. The server binds to `127.0.0.1` only; other devices cannot connect.
 
+## Theory flashcards and lesson notation
+
+The **Flashcards** page offers cumulative Anki packages matched to the current lesson. There are 70 cards through Lesson 6 and a larger prepared library released in stages. Packages contain their own notation images. Import into the same Anki profile with learning progress and deck presets disabled on updates. All three sibling-burying options separate forward and reverse cards across days. See `content/anki/README.md` for the build, review and import workflow.
+
+From Lesson 7, score finger numbers are hidden by default. **Show fingering** toggles them, with a per-lesson preference saved to disk. Piano view keeps its finger guidance. Lesson clefs and quarter rests use LilyPond vector glyphs anchored to staff coordinates, avoiding font-dependent positioning and missing symbols.
+
+The **Hymns** category contains complete 16-bar beginner arrangements of **Amazing Grace** (3/4) and **Simple Gifts**, the tune behind **Lord of the Dance** (4/4). Both include a pickup, a single-note bass part, all-note finger suggestions, short practice passages, synchronized score dots, and PDF/MIDI downloads. Song pages identify sources and arrangement scope.
+
 ## Backup and restore
 
 Copy this entire folder, including the normally Git-ignored `data/` directory, to back up the project. To restore it, stop the server, restore the folder, then run `npm start`. The **Export backup** link downloads a JSON snapshot of the course, available lessons, songs (including notation SVGs), and progress metadata; it excludes recording media files and there is currently no in-app importer. To recover just progress from that export, with the server stopped, save its `progress` object as `data/progress.json`.
@@ -49,7 +57,7 @@ The app works offline after starting the local server. Optional external teachin
 
 ## Continue the course
 
-Start by reading `content/learner-guide.md`, `content/course.json`, and `data/progress.json`. Use the learner's check-in to revise or add lessons. Add a Markdown file and reference it from a lesson's `file` field, set its status to `ready`, and add its checkpoints. Refresh the browser to load content edits. The roadmap contains 24 lessons; Lessons 1–6 have complete walkthroughs; Lessons 7–24 are planned.
+Start by reading `content/learner-guide.md`, `content/course.json`, and `data/progress.json`. Use the learner's check-in to revise or add lessons. Add a Markdown file and reference it from a lesson's `file` field, set its status to `ready`, and add its checkpoints. Refresh the browser to load content edits. The roadmap contains 24 lessons; Lessons 1–12 have complete walkthroughs; Lessons 13–24 are planned.
 
 The app does not send notes to an assistant automatically. **Copy check-in** prepares a summary to paste into the ongoing conversation. An assistant working in this project can also read the journal file directly when asked to continue.
 
@@ -73,3 +81,5 @@ Run `python3 scripts/build-fur-elise.py` from the repository root with LilyPond 
 Run `python3 scripts/build-journey.py` to rebuild the Journey accompaniment from the committed arrangement code. Source review timestamps and adaptation decisions are in `content/songs/journey-source-review.md`; no downloaded-video paths are stored in the repository. Both score builders share the meter-aware MIDI importer and score-linking code.
 
 `scripts/convert-video.py INPUT --output OUTPUT.mp4` creates H.264/AAC MP4 using FFmpeg and reports the output codecs/duration. It refuses to overwrite an existing file or the original. Frame extraction supports `--crop width:height:x:y` after scaling and merges its inspection manifest when adding timestamps.
+
+Run `python3 scripts/build-hymns.py` to regenerate the two hymn arrangements. Run `python3 scripts/build-lessons.py` to rebuild the original lesson 7–12 exercises (plus Beethoven’s public-domain Ode to Joy opening). `python3 scripts/build-music-symbols.py` regenerates the lesson renderer’s vector glyphs. After any content or code change, run the relevant checks and commit and push the completed change to `main`; see `content/learner-guide.md`.

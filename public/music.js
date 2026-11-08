@@ -40,6 +40,7 @@ export function notation(exercise, showFingering = true) {
   const bars = measures(exercise), hands = handsFor(exercise), height = hands.length === 2 ? 300 : 175;
   let html = '';
   for (let row = 0; row < bars.length; row += 2) {
+    const barWidth = bars[row + 1] ? 320 : 640;
     let drawing = hands.length === 2 ? '<path d="M15 65 C3 65 15 140 3 150 C15 160 3 235 15 235 M20 65 V235" class="staff-line"/>' : '';
     hands.forEach((hand, handIndex) => {
       const bottom = 105 + handIndex * 130, top = bottom - 40;
@@ -50,9 +51,9 @@ export function notation(exercise, showFingering = true) {
       drawing += `<text x="87" y="${top + 17}" font-size="24" font-family="serif">4</text><text x="87" y="${bottom - 2}" font-size="24" font-family="serif">4</text>`;
       for (let b = 0; b < 2 && bars[row + b]; b++) {
         const accidentals = new Map();
-        drawing += `<text x="${130 + b * 320}" y="${bottom + 35}" font-size="11">Bar ${row + b + 1}</text>`;
+        drawing += `<text x="${130 + b * barWidth}" y="${bottom + 35}" font-size="11">Bar ${row + b + 1}</text>`;
         for (const { event, index, beat } of bars[row + b]) {
-          const x = 150 + b * 320 + beat * 74, beats = eventBeats(event), notes = handNotes(event, hand);
+          const x = 150 + b * barWidth + beat * (barWidth - 24) / 4, beats = eventBeats(event), notes = handNotes(event, hand);
           drawing += `<g class="score-event" data-sequence="${index}"><circle class="score-playhead" cx="${x}" cy="${top - 35}" r="4"/>`;
           if (!notes.length) {
             if (beats === 1) drawing += `<g class="quarter-rest" transform="translate(${x - 5} ${top + 20})"><path d="${musicGlyphs.quarterRest}" transform="scale(.04 -.04)" fill="currentColor"/></g>`;
@@ -79,7 +80,7 @@ export function notation(exercise, showFingering = true) {
           }
           drawing += '</g>';
         }
-        drawing += `<path d="M${450 + b * 320} ${top}V${bottom}" class="staff-line"/>`;
+        drawing += `<path d="M${130 + (b + 1) * barWidth} ${top}V${bottom}" class="staff-line"/>`;
       }
     });
     html += `<div class="score-scroll"><svg class="notation-display" viewBox="0 0 800 ${height}" role="img" aria-label="${esc(exercise.title)}. Bars ${row + 1} to ${Math.min(row + 2, bars.length)}. Four beats per bar.">${drawing}</svg></div>`;

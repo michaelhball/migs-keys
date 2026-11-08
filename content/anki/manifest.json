@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "releasedThrough": 6,
+  "releasedThrough": 12,
   "lessons": [
     {
       "lesson": 1,
@@ -41,110 +41,110 @@
     {
       "lesson": 7,
       "file": "lessons-01-07.apkg",
-      "facts": 67,
-      "cards": 103
+      "facts": 53,
+      "cards": 82
     },
     {
       "lesson": 8,
       "file": "lessons-01-08.apkg",
-      "facts": 88,
-      "cards": 141
+      "facts": 59,
+      "cards": 92
     },
     {
       "lesson": 9,
       "file": "lessons-01-09.apkg",
-      "facts": 107,
-      "cards": 167
+      "facts": 65,
+      "cards": 104
     },
     {
       "lesson": 10,
       "file": "lessons-01-10.apkg",
-      "facts": 117,
-      "cards": 181
+      "facts": 72,
+      "cards": 115
     },
     {
       "lesson": 11,
       "file": "lessons-01-11.apkg",
-      "facts": 143,
-      "cards": 226
+      "facts": 79,
+      "cards": 125
     },
     {
       "lesson": 12,
       "file": "lessons-01-12.apkg",
-      "facts": 164,
-      "cards": 247
+      "facts": 83,
+      "cards": 129
     },
     {
       "lesson": 13,
       "file": "lessons-01-13.apkg",
-      "facts": 170,
-      "cards": 258
+      "facts": 89,
+      "cards": 140
     },
     {
       "lesson": 14,
       "file": "lessons-01-14.apkg",
-      "facts": 173,
-      "cards": 261
+      "facts": 92,
+      "cards": 143
     },
     {
       "lesson": 15,
       "file": "lessons-01-15.apkg",
-      "facts": 189,
-      "cards": 285
+      "facts": 107,
+      "cards": 165
     },
     {
       "lesson": 16,
       "file": "lessons-01-16.apkg",
-      "facts": 194,
-      "cards": 290
+      "facts": 112,
+      "cards": 170
     },
     {
       "lesson": 17,
       "file": "lessons-01-17.apkg",
-      "facts": 221,
-      "cards": 339
+      "facts": 139,
+      "cards": 219
     },
     {
       "lesson": 18,
       "file": "lessons-01-18.apkg",
-      "facts": 225,
-      "cards": 343
+      "facts": 143,
+      "cards": 223
     },
     {
       "lesson": 19,
       "file": "lessons-01-19.apkg",
-      "facts": 232,
-      "cards": 352
+      "facts": 150,
+      "cards": 232
     },
     {
       "lesson": 20,
       "file": "lessons-01-20.apkg",
-      "facts": 322,
-      "cards": 509
+      "facts": 233,
+      "cards": 375
     },
     {
       "lesson": 21,
       "file": "lessons-01-21.apkg",
-      "facts": 324,
-      "cards": 511
+      "facts": 235,
+      "cards": 377
     },
     {
       "lesson": 22,
       "file": "lessons-01-22.apkg",
-      "facts": 329,
-      "cards": 516
+      "facts": 240,
+      "cards": 382
     },
     {
       "lesson": 23,
       "file": "lessons-01-23.apkg",
-      "facts": 343,
-      "cards": 530
+      "facts": 254,
+      "cards": 396
     },
     {
       "lesson": 24,
       "file": "lessons-01-24.apkg",
-      "facts": 345,
-      "cards": 532
+      "facts": 256,
+      "cards": 398
     }
   ],
   "optional": [
@@ -168,15 +168,15 @@
       "id": "advanced",
       "title": "Advanced tonal theory",
       "file": "advanced-theory.apkg",
-      "facts": 26,
-      "cards": 36
+      "facts": 113,
+      "cards": 164
     },
     {
       "id": "complete",
       "title": "Complete prepared library",
       "file": "complete-library.apkg",
-      "facts": 374,
-      "cards": 571
+      "facts": 379,
+      "cards": 578
     }
   ],
   "media": [
@@ -246,8 +246,10 @@
     "migs-time-44.png",
     "migs-time-68.png",
     "migs-time-98.png",
+    "migs-treble-a3.png",
     "migs-treble-a4.png",
     "migs-treble-a5.png",
+    "migs-treble-b3.png",
     "migs-treble-b4.png",
     "migs-treble-c4.png",
     "migs-treble-c5.png",
@@ -263,6 +265,6 @@
     "migs-whole-note.png",
     "migs-whole-rest.png"
   ],
-  "preparedFacts": 374,
-  "preparedCards": 571
+  "preparedFacts": 379,
+  "preparedCards": 578
 }

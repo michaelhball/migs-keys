@@ -18,10 +18,10 @@ test('available lesson exercises have complete bars, matching hand keyboards, an
 test('treble and bass landmarks use the expected staff positions', () => {
   const svg = notation({ title: 'Landmarks', events: [{beats:1,right:[{midi:60}],left:[{midi:48}]},{beats:1,right:[{midi:62}],left:[{midi:50}]},{beats:2,right:[{midi:64}],left:[{midi:52}]}] });
   assert.match(svg, /cx="150" cy="115"/, 'middle C sits on the ledger line below treble staff');
-  assert.match(svg, /cx="224" cy="110"/, 'D4 is below the bottom treble line');
-  assert.match(svg, /cx="298" cy="105"/, 'E4 is the bottom treble line');
+  assert.match(svg, /cx="304" cy="110"/, 'D4 is below the bottom treble line');
+  assert.match(svg, /cx="458" cy="105"/, 'E4 is the bottom treble line');
   assert.match(svg, /cx="150" cy="220"/, 'C3 is the second bass space');
-  assert.match(svg, /cx="224" cy="215"/, 'D3 is the middle bass line');
+  assert.match(svg, /cx="304" cy="215"/, 'D3 is the middle bass line');
 });
 
 test('score playhead is a dot; piano view avoids note-name grids and sheet music',async()=>{
@@ -100,4 +100,34 @@ test('score fingering can be hidden without removing piano-view guidance', () =>
   assert.match(notation(exercise,true), /class="score-fingering"/);
   assert.doesNotMatch(notation(exercise,false), /class="score-fingering"/);
   assert.match(musicPlayer(exercise,60,'notes','piano',false), /key-finger/);
+});
+
+
+test('hymns have complete tunes, valid fingerings and a score location for every note', async () => {
+  const {selectPassage}=await import('../public/performance.js');
+  for(const [slug,beats] of [['amazing-grace',3],['lord-of-the-dance',4]]) {
+    const piece=JSON.parse(await readFile(new URL(`../content/songs/${slug}-performance.json`,import.meta.url),'utf8'));
+    const map=JSON.parse(await readFile(new URL(`../content/songs/${slug}-score-map.json`,import.meta.url),'utf8'));
+    assert.deepEqual(piece.meter,[beats,4]);
+    assert.equal(piece.events.reduce((sum,e)=>sum+e.beats,0),16*beats);
+    const barTotals=new Map(), fingers=new Map();
+    for(const event of piece.events) {
+      barTotals.set(event.bar,(barTotals.get(event.bar)||0)+event.beats);
+      for(const hand of ['right','left']) for(const note of event[hand]) {
+        assert.ok(map[note.scoreKey]); assert.ok(note.finger>=1&&note.finger<=5);
+        if(fingers.has(note.id)) assert.equal(note.finger,fingers.get(note.id));
+        fingers.set(note.id,note.finger);
+      }
+    }
+    assert.equal(barTotals.get(0),1); assert.equal(barTotals.get(16),beats-1);
+    for(let bar=1;bar<16;bar++) assert.equal(barTotals.get(bar),beats);
+    assert.equal(selectPassage(piece,'full').events.at(-1).bar,16);
+  }
+});
+
+test('dotted rhythms and chords render their durations without duplicate stems', () => {
+  const svg=notation({title:'Dotted rhythm',events:[{beats:1.5,right:[{midi:64}]},{beats:.5,right:[{midi:62}]},{beats:2,right:[{midi:60,midiLabel:'C'},{midi:64},{midi:67}]}]},false);
+  assert.equal((svg.match(/class="augmentation-dot"/g)||[]).length,1);
+  assert.equal((svg.match(/class="note-stem"/g)||[]).length,4, 'three stems plus one eighth-note flag');
+  assert.doesNotMatch(svg,/𝄞|𝄢|𝄽/, 'font-dependent clefs and rests must not return');
 });

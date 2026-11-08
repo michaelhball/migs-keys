@@ -564,7 +564,7 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/15",
     "pack": "fur-elise",
-    "alsoLesson": 7
+    "alsoLesson": 99
   },
   {
     "id": "38-flowing-pulse",
@@ -584,13 +584,13 @@
     "lesson": 0,
     "front": "What kind of note is this?<img class=\"notation\" src=\"migs-eighth-note.png\" alt=\"Music notation to identify\">",
     "back": "Eighth note (quaver).",
-    "reverse": "Picture or draw a eighth note.",
+    "reverse": "Picture or draw an eighth note.",
     "reverseAnswer": "<img class=\"notation\" src=\"migs-eighth-note.png\" alt=\"Music notation to identify\">A filled head, stem and one flag; notes may be joined with one beam.",
     "extra": "",
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/11",
     "pack": "fur-elise",
-    "alsoLesson": 7
+    "alsoLesson": 11
   },
   {
     "id": "sixteenth-note-shape",
@@ -629,7 +629,7 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/11",
     "pack": "fur-elise",
-    "alsoLesson": 7
+    "alsoLesson": 11
   },
   {
     "id": "dot-value",
@@ -642,7 +642,7 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/14",
     "pack": "fur-elise",
-    "alsoLesson": 7
+    "alsoLesson": 11
   },
   {
     "id": "pickup",
@@ -655,7 +655,7 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/15",
     "pack": "fur-elise",
-    "alsoLesson": 11
+    "alsoLesson": 99
   },
   {
     "id": "elise-pickup",
@@ -693,20 +693,20 @@
     "topic": "song-theory",
     "source": "https://dictionary.onmusic.org/terms/2589-pianissimo",
     "pack": "fur-elise",
-    "alsoLesson": 11
+    "alsoLesson": 99
   },
   {
     "id": "sharp",
     "lesson": 0,
     "front": "What does a sharp (♯) do to a pitch?",
-    "back": "Raises it by one semitone.",
+    "back": "Raises the natural letter-name pitch by one semitone.",
     "reverse": "Which accidental raises a note by one semitone?",
     "reverseAnswer": "A sharp (♯).",
     "extra": "A semitone is the distance to the next piano key, including black keys.",
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/20",
     "pack": "fur-elise",
-    "alsoLesson": 7
+    "alsoLesson": 99
   },
   {
     "id": "dsharp5",
@@ -732,7 +732,7 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/14",
     "pack": "journey",
-    "alsoLesson": 7
+    "alsoLesson": 99
   },
   {
     "id": "tie-vs-slur",
@@ -745,7 +745,7 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/14",
     "pack": "journey",
-    "alsoLesson": 11
+    "alsoLesson": 99
   },
   {
     "id": "e-major-sharps",
@@ -771,7 +771,7 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/12",
     "pack": "journey",
-    "alsoLesson": 7
+    "alsoLesson": 11
   },
   {
     "id": "bass-anticipation",
@@ -808,7 +808,7 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/13",
     "pack": "fur-elise",
-    "alsoLesson": 7
+    "alsoLesson": 99
   },
   {
     "id": "dotted-quarter-shape",
@@ -821,11 +821,11 @@
     "topic": "song-theory",
     "source": "https://www.musictheory.net/lessons/14",
     "pack": "fur-elise",
-    "alsoLesson": 15
+    "alsoLesson": 11
   },
   {
     "id": "treble-a4",
-    "lesson": 20,
+    "lesson": 7,
     "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-treble-a4.png\" alt=\"Music notation to identify\">",
     "back": "<b>A4</b> — the second space.",
     "reverse": "Picture or draw <b>A4</b> on a <b>treble</b> staff.",
@@ -837,7 +837,7 @@
   },
   {
     "id": "treble-b4",
-    "lesson": 20,
+    "lesson": 7,
     "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-treble-b4.png\" alt=\"Music notation to identify\">",
     "back": "<b>B4</b> — the middle line.",
     "reverse": "Picture or draw <b>B4</b> on a <b>treble</b> staff.",
@@ -849,7 +849,7 @@
   },
   {
     "id": "treble-c5",
-    "lesson": 20,
+    "lesson": 7,
     "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-treble-c5.png\" alt=\"Music notation to identify\">",
     "back": "<b>C5</b> — the third space.",
     "reverse": "Picture or draw <b>C5</b> on a <b>treble</b> staff.",
@@ -861,7 +861,7 @@
   },
   {
     "id": "treble-d5",
-    "lesson": 20,
+    "lesson": 9,
     "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-treble-d5.png\" alt=\"Music notation to identify\">",
     "back": "<b>D5</b> — the fourth line.",
     "reverse": "Picture or draw <b>D5</b> on a <b>treble</b> staff.",
@@ -933,7 +933,7 @@
   },
   {
     "id": "bass-f2",
-    "lesson": 20,
+    "lesson": 9,
     "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-bass-f2.png\" alt=\"Music notation to identify\">",
     "back": "<b>F2</b> — the space below the staff.",
     "reverse": "Picture or draw <b>F2</b> on a <b>bass</b> staff.",
@@ -945,7 +945,7 @@
   },
   {
     "id": "bass-g2",
-    "lesson": 20,
+    "lesson": 9,
     "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-bass-g2.png\" alt=\"Music notation to identify\">",
     "back": "<b>G2</b> — the bottom line.",
     "reverse": "Picture or draw <b>G2</b> on a <b>bass</b> staff.",
@@ -957,7 +957,7 @@
   },
   {
     "id": "bass-a2",
-    "lesson": 20,
+    "lesson": 9,
     "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-bass-a2.png\" alt=\"Music notation to identify\">",
     "back": "<b>A2</b> — the bottom space.",
     "reverse": "Picture or draw <b>A2</b> on a <b>bass</b> staff.",
@@ -1065,7 +1065,7 @@
   },
   {
     "id": "whole-shape",
-    "lesson": 7,
+    "lesson": 99,
     "front": "Name this note value.<img class=\"notation\" src=\"migs-whole-note.png\" alt=\"Music notation to identify\">",
     "back": "Whole note (semibreve).",
     "reverse": "Picture a whole note.",
@@ -1073,11 +1073,12 @@
     "extra": "",
     "topic": "duration",
     "source": "https://www.musictheory.net/lessons/11",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 7
   },
   {
     "id": "whole-duration",
-    "lesson": 7,
+    "lesson": 99,
     "front": "How many quarter notes equal a whole note?",
     "back": "Four.",
     "reverse": "Which note value equals four quarter notes?",
@@ -1085,11 +1086,12 @@
     "extra": "",
     "topic": "duration",
     "source": "https://www.musictheory.net/lessons/11",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 7
   },
   {
     "id": "whole-rest-shape",
-    "lesson": 7,
+    "lesson": 99,
     "front": "Name this rest.<img class=\"notation\" src=\"migs-whole-rest.png\" alt=\"Music notation to identify\">",
     "back": "Whole rest (semibreve rest).",
     "reverse": "Picture a whole rest.",
@@ -1097,11 +1099,12 @@
     "extra": "It hangs below a staff line. A whole-bar rest uses this symbol even when the bar is not four quarter notes long.",
     "topic": "rests",
     "source": "https://www.musictheory.net/lessons/13",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 7
   },
   {
     "id": "whole-bar-rest",
-    "lesson": 7,
+    "lesson": 99,
     "front": "Can a whole-rest symbol represent an entire 3/4 bar?",
     "back": "Yes, as a whole-bar rest it fills that bar. Its context determines the duration.",
     "reverse": "",
@@ -1109,7 +1112,8 @@
     "extra": "",
     "topic": "rests",
     "source": "https://www.musictheory.net/lessons/13",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 7
   },
   {
     "id": "sixteenth-rest-shape",
@@ -1137,7 +1141,7 @@
   },
   {
     "id": "beam-flags",
-    "lesson": 7,
+    "lesson": 11,
     "front": "Do beams change the duration of the notes they join?",
     "back": "No. One beam corresponds to one flag, two beams to two flags.",
     "reverse": "",
@@ -1149,7 +1153,7 @@
   },
   {
     "id": "time-24-capacity",
-    "lesson": 7,
+    "lesson": 99,
     "front": "What total written note length fits in one complete bar?<img class=\"notation\" src=\"migs-time-24.png\" alt=\"Music notation to identify\">",
     "back": "2 quarter notes, or an equivalent total.",
     "reverse": "",
@@ -1157,11 +1161,12 @@
     "extra": "",
     "topic": "meter",
     "source": "https://www.musictheory.net/lessons/15",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 7
   },
   {
     "id": "time-34-capacity",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What total written note length fits in one complete bar?<img class=\"notation\" src=\"migs-time-34.png\" alt=\"Music notation to identify\">",
     "back": "3 quarter notes, or an equivalent total.",
     "reverse": "",
@@ -1169,7 +1174,8 @@
     "extra": "",
     "topic": "meter",
     "source": "https://www.musictheory.net/lessons/15",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "time-22-capacity",
@@ -1377,19 +1383,20 @@
   },
   {
     "id": "flat-sign",
-    "lesson": 7,
+    "lesson": 99,
     "front": "What does ♭ do to a pitch?",
-    "back": "Lowers it by one semitone.",
+    "back": "Lowers the natural letter-name pitch by one semitone.",
     "reverse": "Which accidental lowers a pitch by one semitone?",
     "reverseAnswer": "Flat (♭).",
     "extra": "",
     "topic": "accidentals",
     "source": "https://www.musictheory.net/lessons/20",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 7
   },
   {
     "id": "natural-sign",
-    "lesson": 7,
+    "lesson": 99,
     "front": "What does ♮ mean?",
     "back": "Use the unaltered letter-name pitch, cancelling a sharp or flat that would otherwise apply.",
     "reverse": "Which accidental restores a letter-name pitch to its natural form?",
@@ -1397,11 +1404,12 @@
     "extra": "",
     "topic": "accidentals",
     "source": "https://www.musictheory.net/lessons/20",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 7
   },
   {
     "id": "accidental-bar",
-    "lesson": 7,
+    "lesson": 99,
     "front": "In ordinary modern notation, how long does a written accidental normally apply?",
     "back": "Through the rest of that bar, for the same pitch and octave.",
     "reverse": "",
@@ -1409,7 +1417,8 @@
     "extra": "A tie across a bar line preserves the tied pitch. A key signature continues beyond the bar.",
     "topic": "accidentals",
     "source": "https://www.musictheory.net/lessons/20",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 7
   },
   {
     "id": "semitone",
@@ -1449,7 +1458,7 @@
   },
   {
     "id": "enharmonic",
-    "lesson": 12,
+    "lesson": 99,
     "front": "What are enharmonic equivalents on an equal-tempered piano?",
     "back": "Different spellings for the same sounding key, such as C♯ and D♭.",
     "reverse": "",
@@ -1457,7 +1466,8 @@
     "extra": "",
     "topic": "accidentals",
     "source": "https://www.musictheory.net/lessons/20",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "double-sharp-sign",
@@ -1593,7 +1603,7 @@
   },
   {
     "id": "degree-1",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What is the traditional name for scale degree 1?",
     "back": "Tonic.",
     "reverse": "Which scale degree is the tonic?",
@@ -1601,11 +1611,12 @@
     "extra": "",
     "topic": "scale-degrees",
     "source": "https://www.musictheory.net/lessons/23",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "degree-2",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What is the traditional name for scale degree 2?",
     "back": "Supertonic.",
     "reverse": "Which scale degree is the supertonic?",
@@ -1613,11 +1624,12 @@
     "extra": "",
     "topic": "scale-degrees",
     "source": "https://www.musictheory.net/lessons/23",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "degree-3",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What is the traditional name for scale degree 3?",
     "back": "Mediant.",
     "reverse": "Which scale degree is the mediant?",
@@ -1625,11 +1637,12 @@
     "extra": "",
     "topic": "scale-degrees",
     "source": "https://www.musictheory.net/lessons/23",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "degree-4",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What is the traditional name for scale degree 4?",
     "back": "Subdominant.",
     "reverse": "Which scale degree is the subdominant?",
@@ -1637,11 +1650,12 @@
     "extra": "",
     "topic": "scale-degrees",
     "source": "https://www.musictheory.net/lessons/23",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "degree-5",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What is the traditional name for scale degree 5?",
     "back": "Dominant.",
     "reverse": "Which scale degree is the dominant?",
@@ -1649,11 +1663,12 @@
     "extra": "",
     "topic": "scale-degrees",
     "source": "https://www.musictheory.net/lessons/23",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "degree-6",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What is the traditional name for scale degree 6?",
     "back": "Submediant.",
     "reverse": "Which scale degree is the submediant?",
@@ -1661,11 +1676,12 @@
     "extra": "",
     "topic": "scale-degrees",
     "source": "https://www.musictheory.net/lessons/23",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "leading-tone",
-    "lesson": 9,
+    "lesson": 99,
     "front": "When is scale degree 7 called the leading tone?",
     "back": "When it is a semitone below the tonic.",
     "reverse": "What is the name for scale degree 7 a semitone below the tonic?",
@@ -1673,7 +1689,8 @@
     "extra": "",
     "topic": "scale-degrees",
     "source": "https://www.musictheory.net/lessons/23",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "subtonic",
@@ -2109,7 +2126,7 @@
   },
   {
     "id": "interval-perfect-1",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a perfect unison?",
     "back": "0.",
     "reverse": "",
@@ -2117,11 +2134,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-minor-2",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a minor second?",
     "back": "1.",
     "reverse": "",
@@ -2129,11 +2147,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-major-2",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a major second?",
     "back": "2.",
     "reverse": "",
@@ -2141,11 +2160,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-minor-3",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a minor third?",
     "back": "3.",
     "reverse": "",
@@ -2153,11 +2173,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-major-3",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a major third?",
     "back": "4.",
     "reverse": "",
@@ -2165,11 +2186,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-perfect-4",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a perfect fourth?",
     "back": "5.",
     "reverse": "",
@@ -2177,7 +2199,8 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-perfect-5",
@@ -2193,7 +2216,7 @@
   },
   {
     "id": "interval-minor-6",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a minor sixth?",
     "back": "8.",
     "reverse": "",
@@ -2201,11 +2224,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-major-6",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a major sixth?",
     "back": "9.",
     "reverse": "",
@@ -2213,11 +2237,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-minor-7",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a minor seventh?",
     "back": "10.",
     "reverse": "",
@@ -2225,11 +2250,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-major-7",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a major seventh?",
     "back": "11.",
     "reverse": "",
@@ -2237,11 +2263,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-perfect-8",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a perfect octave?",
     "back": "12.",
     "reverse": "",
@@ -2249,11 +2276,12 @@
     "extra": "The letter-name spelling also matters: semitone distance alone does not determine every interval name.",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "tritone",
-    "lesson": 12,
+    "lesson": 99,
     "front": "How many semitones span a tritone?",
     "back": "Six. It can be spelled as an augmented fourth or diminished fifth.",
     "reverse": "",
@@ -2261,11 +2289,12 @@
     "extra": "",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/31",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-invert-number",
-    "lesson": 12,
+    "lesson": 99,
     "front": "What do the numbers of two inverted simple intervals add up to?",
     "back": "Nine: for example, a third inverts to a sixth.",
     "reverse": "",
@@ -2273,11 +2302,12 @@
     "extra": "",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/33",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-invert-quality",
-    "lesson": 12,
+    "lesson": 99,
     "front": "What does a major interval become when inverted?",
     "back": "Minor. Minor becomes major; perfect remains perfect.",
     "reverse": "",
@@ -2285,7 +2315,8 @@
     "extra": "",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/33",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "interval-invert-augmented",
@@ -2301,7 +2332,7 @@
   },
   {
     "id": "spell-third",
-    "lesson": 12,
+    "lesson": 99,
     "front": "Why is C♯ to E♯ a third, while C♯ to F is not spelled as a third?",
     "back": "C to E spans three letter names; C to F spans four. The keyboard distance alone is not enough.",
     "reverse": "",
@@ -2309,11 +2340,12 @@
     "extra": "",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/32",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "melodic-harmonic-interval",
-    "lesson": 12,
+    "lesson": 99,
     "front": "What distinguishes a melodic interval from a harmonic interval?",
     "back": "Melodic: pitches sound successively. Harmonic: pitches sound together.",
     "reverse": "",
@@ -2321,11 +2353,12 @@
     "extra": "",
     "topic": "intervals",
     "source": "https://www.musictheory.net/lessons/30",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "triad-formula-major",
-    "lesson": 8,
+    "lesson": 99,
     "front": "What is the formula for a major triad, relative to a major scale?",
     "back": "1–3–5.",
     "reverse": "Which triad quality has formula 1–3–5?",
@@ -2333,11 +2366,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-thirds-major",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Which two thirds build a major triad from the root upward?",
     "back": "Major third, then minor third.",
     "reverse": "",
@@ -2345,7 +2379,8 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-c-major",
@@ -2361,7 +2396,7 @@
   },
   {
     "id": "triad-formula-minor",
-    "lesson": 8,
+    "lesson": 99,
     "front": "What is the formula for a minor triad, relative to a major scale?",
     "back": "1–♭3–5.",
     "reverse": "Which triad quality has formula 1–♭3–5?",
@@ -2369,11 +2404,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-thirds-minor",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Which two thirds build a minor triad from the root upward?",
     "back": "Minor third, then major third.",
     "reverse": "",
@@ -2381,11 +2417,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-c-minor",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Spell a C minor triad.",
     "back": "C–E♭–G.",
     "reverse": "Name the triad spelled C–E♭–G.",
@@ -2393,11 +2430,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-formula-diminished",
-    "lesson": 8,
+    "lesson": 99,
     "front": "What is the formula for a diminished triad, relative to a major scale?",
     "back": "1–♭3–♭5.",
     "reverse": "Which triad quality has formula 1–♭3–♭5?",
@@ -2405,11 +2443,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-thirds-diminished",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Which two thirds build a diminished triad from the root upward?",
     "back": "Two minor thirds.",
     "reverse": "",
@@ -2417,11 +2456,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-c-diminished",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Spell a C diminished triad.",
     "back": "C–E♭–G♭.",
     "reverse": "Name the triad spelled C–E♭–G♭.",
@@ -2429,35 +2469,38 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-formula-augmented",
-    "lesson": 8,
-    "front": "What is the formula for a augmented triad, relative to a major scale?",
+    "lesson": 99,
+    "front": "What is the formula for an augmented triad, relative to a major scale?",
     "back": "1–3–♯5.",
     "reverse": "Which triad quality has formula 1–3–♯5?",
     "reverseAnswer": "Augmented.",
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-thirds-augmented",
-    "lesson": 8,
-    "front": "Which two thirds build a augmented triad from the root upward?",
+    "lesson": 99,
+    "front": "Which two thirds build an augmented triad from the root upward?",
     "back": "Two major thirds.",
     "reverse": "",
     "reverseAnswer": "",
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-c-augmented",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Spell a C augmented triad.",
     "back": "C–E–G♯.",
     "reverse": "Name the triad spelled C–E–G♯.",
@@ -2465,11 +2508,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-spelling-f",
-    "lesson": 8,
+    "lesson": 9,
     "front": "Spell the F chord.",
     "back": "F–A–C.",
     "reverse": "Name the chord F–A–C.",
@@ -2481,7 +2525,7 @@
   },
   {
     "id": "triad-spelling-g",
-    "lesson": 8,
+    "lesson": 9,
     "front": "Spell the G chord.",
     "back": "G–B–D.",
     "reverse": "Name the chord G–B–D.",
@@ -2505,7 +2549,7 @@
   },
   {
     "id": "triad-spelling-d-minor",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Spell the D minor chord.",
     "back": "D–F–A.",
     "reverse": "Name the chord D–F–A.",
@@ -2513,11 +2557,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-spelling-e-minor",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Spell the E minor chord.",
     "back": "E–G–B.",
     "reverse": "Name the chord E–G–B.",
@@ -2525,7 +2570,8 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "triad-bass-root-position",
@@ -2541,7 +2587,7 @@
   },
   {
     "id": "triad-figure-root-position",
-    "lesson": 10,
+    "lesson": 99,
     "front": "What figured-bass numbers denote a triad in root position?",
     "back": "5/3.",
     "reverse": "",
@@ -2549,7 +2595,8 @@
     "extra": "",
     "topic": "inversions",
     "source": "https://www.musictheory.net/lessons/42",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 10
   },
   {
     "id": "triad-bass-first-inversion",
@@ -2565,7 +2612,7 @@
   },
   {
     "id": "triad-figure-first-inversion",
-    "lesson": 10,
+    "lesson": 99,
     "front": "What figured-bass numbers denote a triad in first inversion?",
     "back": "6/3, usually abbreviated 6.",
     "reverse": "",
@@ -2573,7 +2620,8 @@
     "extra": "",
     "topic": "inversions",
     "source": "https://www.musictheory.net/lessons/42",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 10
   },
   {
     "id": "triad-bass-second-inversion",
@@ -2589,7 +2637,7 @@
   },
   {
     "id": "triad-figure-second-inversion",
-    "lesson": 10,
+    "lesson": 99,
     "front": "What figured-bass numbers denote a triad in second inversion?",
     "back": "6/4.",
     "reverse": "",
@@ -2597,11 +2645,12 @@
     "extra": "",
     "topic": "inversions",
     "source": "https://www.musictheory.net/lessons/42",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 10
   },
   {
     "id": "slash-chord",
-    "lesson": 10,
+    "lesson": 99,
     "front": "What does C/E mean?",
     "back": "A C-major chord with E in the bass.",
     "reverse": "How do you write a C-major chord with E in the bass as a slash chord?",
@@ -2609,7 +2658,8 @@
     "extra": "",
     "topic": "inversions",
     "source": "https://www.musictheory.net/lessons/42",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 10
   },
   {
     "id": "root-not-bass",
@@ -2625,7 +2675,7 @@
   },
   {
     "id": "diatonic",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What does diatonic mean in the context of a key?",
     "back": "Using notes belonging to its scale/key, rather than chromatic alterations.",
     "reverse": "",
@@ -2633,11 +2683,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/43",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "major-triad-qualities",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What is the triad-quality pattern in a major key?",
     "back": "I ii iii IV V vi vii°: major, minor, minor, major, major, minor, diminished.",
     "reverse": "",
@@ -2645,11 +2696,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/43",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "roman-c-i",
-    "lesson": 9,
+    "lesson": 99,
     "front": "In C major, which chord is I?",
     "back": "C.",
     "reverse": "",
@@ -2657,11 +2709,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/44",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "roman-c-ii",
-    "lesson": 9,
+    "lesson": 99,
     "front": "In C major, which chord is ii?",
     "back": "D minor.",
     "reverse": "",
@@ -2669,11 +2722,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/44",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "roman-c-iii",
-    "lesson": 9,
+    "lesson": 99,
     "front": "In C major, which chord is iii?",
     "back": "E minor.",
     "reverse": "",
@@ -2681,11 +2735,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/44",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "roman-c-iv",
-    "lesson": 9,
+    "lesson": 99,
     "front": "In C major, which chord is IV?",
     "back": "F.",
     "reverse": "",
@@ -2693,11 +2748,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/44",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "roman-c-v",
-    "lesson": 9,
+    "lesson": 99,
     "front": "In C major, which chord is V?",
     "back": "G.",
     "reverse": "",
@@ -2705,11 +2761,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/44",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "roman-c-vi",
-    "lesson": 9,
+    "lesson": 99,
     "front": "In C major, which chord is vi?",
     "back": "A minor.",
     "reverse": "",
@@ -2717,11 +2774,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/44",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "roman-c-viidim",
-    "lesson": 9,
+    "lesson": 99,
     "front": "In C major, which chord is vii°?",
     "back": "B diminished.",
     "reverse": "",
@@ -2729,11 +2787,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/44",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "roman-case",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What do uppercase and lowercase Roman numerals normally distinguish?",
     "back": "Uppercase: major chords. Lowercase: minor chords. A ° marks a diminished chord.",
     "reverse": "",
@@ -2741,11 +2800,12 @@
     "extra": "",
     "topic": "harmony",
     "source": "https://www.musictheory.net/lessons/44",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "pop-1564-c",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What chords are I–V–vi–IV in C major?",
     "back": "C–G–A minor–F.",
     "reverse": "",
@@ -2753,11 +2813,12 @@
     "extra": "",
     "topic": "progressions",
     "source": "https://www.musictheory.net/lessons/57",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "pop-1645-c",
-    "lesson": 9,
+    "lesson": 99,
     "front": "What chords are I–vi–IV–V in C major?",
     "back": "C–A minor–F–G.",
     "reverse": "",
@@ -2765,7 +2826,8 @@
     "extra": "",
     "topic": "progressions",
     "source": "https://www.musictheory.net/lessons/57",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 9
   },
   {
     "id": "minor-triad-qualities",
@@ -2805,7 +2867,7 @@
   },
   {
     "id": "term-p",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>p</i> mean?",
     "back": "Piano — soft.",
     "reverse": "Which marking means “soft”?",
@@ -2813,11 +2875,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-mp",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>mp</i> mean?",
     "back": "Mezzo piano — moderately soft.",
     "reverse": "Which marking means “moderately soft”?",
@@ -2825,11 +2888,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-mf",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>mf</i> mean?",
     "back": "Mezzo forte — moderately loud.",
     "reverse": "Which marking means “moderately loud”?",
@@ -2837,11 +2901,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-f",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>f</i> mean?",
     "back": "Forte — loud.",
     "reverse": "Which marking means “loud”?",
@@ -2849,11 +2914,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-ff",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>ff</i> mean?",
     "back": "Fortissimo — very loud.",
     "reverse": "Which marking means “very loud”?",
@@ -2861,11 +2927,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-cresc",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>cresc.</i> mean?",
     "back": "Crescendo — gradually louder.",
     "reverse": "Which marking means “gradually louder”?",
@@ -2873,11 +2940,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-dim",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>dim.</i> mean?",
     "back": "Diminuendo — gradually softer.",
     "reverse": "Which marking means “gradually softer”?",
@@ -2885,11 +2953,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-rit",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>rit.</i> mean?",
     "back": "Ritardando — gradually slower.",
     "reverse": "Which marking means “gradually slower”?",
@@ -2897,11 +2966,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-a-tempo",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>a tempo</i> mean?",
     "back": "Return to the previous tempo.",
     "reverse": "Which marking means “return to the previous tempo”?",
@@ -2909,11 +2979,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-legato",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>legato</i> mean?",
     "back": "Connected and smooth.",
     "reverse": "Which marking means “connected and smooth”?",
@@ -2921,11 +2992,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-staccato",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>staccato</i> mean?",
     "back": "Detached.",
     "reverse": "Which marking means “detached”?",
@@ -2933,11 +3005,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-cantabile",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>cantabile</i> mean?",
     "back": "In a singing style.",
     "reverse": "Which marking means “in a singing style”?",
@@ -2945,11 +3018,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-dolce",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>dolce</i> mean?",
     "back": "Sweetly.",
     "reverse": "Which marking means “sweetly”?",
@@ -2957,11 +3031,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-andante",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>andante</i> mean?",
     "back": "At a walking pace.",
     "reverse": "Which marking means “at a walking pace”?",
@@ -2969,11 +3044,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-allegro",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>allegro</i> mean?",
     "back": "Fast and lively.",
     "reverse": "Which marking means “fast and lively”?",
@@ -2981,11 +3057,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "term-adagio",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does <i>adagio</i> mean?",
     "back": "Slowly.",
     "reverse": "Which marking means “slowly”?",
@@ -2993,11 +3070,12 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "fermata",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What does a fermata ask the player to do?",
     "back": "Hold the note or rest longer than its written duration; the exact length depends on context.",
     "reverse": "",
@@ -3005,7 +3083,8 @@
     "extra": "",
     "topic": "expression",
     "source": "https://dictionary.onmusic.org/",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "phrase",
@@ -3021,19 +3100,20 @@
   },
   {
     "id": "cadence-authentic",
-    "lesson": 11,
-    "front": "What is the basic idea of a authentic cadence?",
+    "lesson": 99,
+    "front": "What is the basic idea of an authentic cadence?",
     "back": "V–I (or V–i in minor).",
     "reverse": "",
     "reverseAnswer": "",
     "extra": "",
     "topic": "cadences",
     "source": "https://www.musictheory.net/lessons/55",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "cadence-half",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What is the basic idea of a half cadence?",
     "back": "A phrase ending on V.",
     "reverse": "",
@@ -3041,11 +3121,12 @@
     "extra": "",
     "topic": "cadences",
     "source": "https://www.musictheory.net/lessons/55",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "cadence-plagal",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What is the basic idea of a plagal cadence?",
     "back": "IV–I.",
     "reverse": "",
@@ -3053,11 +3134,12 @@
     "extra": "",
     "topic": "cadences",
     "source": "https://www.musictheory.net/lessons/55",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "cadence-deceptive",
-    "lesson": 11,
+    "lesson": 99,
     "front": "What is the basic idea of a deceptive cadence?",
     "back": "V moving to a chord other than the tonic, commonly vi in major.",
     "reverse": "",
@@ -3065,7 +3147,8 @@
     "extra": "",
     "topic": "cadences",
     "source": "https://www.musictheory.net/lessons/55",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 11
   },
   {
     "id": "perfect-authentic",
@@ -3082,7 +3165,7 @@
   {
     "id": "dominant7-formula",
     "lesson": 13,
-    "front": "What is the formula for a dominant seventh chord?",
+    "front": "What is the formula for a dominant seventh chord, relative to a major scale?",
     "back": "1–3–5–♭7.",
     "reverse": "Which seventh-chord type uses 1–3–5–♭7?",
     "reverseAnswer": "Dominant seventh.",
@@ -3202,7 +3285,7 @@
   {
     "id": "minor-pentatonic-formula",
     "lesson": 16,
-    "front": "What is the minor pentatonic formula?",
+    "front": "What is the minor pentatonic formula, relative to a major scale?",
     "back": "1–♭3–4–5–♭7.",
     "reverse": "",
     "reverseAnswer": "",
@@ -3262,7 +3345,7 @@
   {
     "id": "seventh-formula-major-seventh",
     "lesson": 17,
-    "front": "What is the formula for a major seventh chord?",
+    "front": "What is the formula for a major seventh chord, relative to a major scale?",
     "back": "1–3–5–7.",
     "reverse": "Name the seventh-chord type with formula 1–3–5–7.",
     "reverseAnswer": "Major seventh.",
@@ -3286,7 +3369,7 @@
   {
     "id": "seventh-formula-minor-seventh",
     "lesson": 17,
-    "front": "What is the formula for a minor seventh chord?",
+    "front": "What is the formula for a minor seventh chord, relative to a major scale?",
     "back": "1–♭3–5–♭7.",
     "reverse": "Name the seventh-chord type with formula 1–♭3–5–♭7.",
     "reverseAnswer": "Minor seventh.",
@@ -3310,7 +3393,7 @@
   {
     "id": "seventh-formula-half-diminished-seventh",
     "lesson": 17,
-    "front": "What is the formula for a half-diminished seventh chord?",
+    "front": "What is the formula for a half-diminished seventh chord, relative to a major scale?",
     "back": "1–♭3–♭5–♭7.",
     "reverse": "Name the seventh-chord type with formula 1–♭3–♭5–♭7.",
     "reverseAnswer": "Half-diminished seventh.",
@@ -3334,7 +3417,7 @@
   {
     "id": "seventh-formula-diminished-seventh",
     "lesson": 17,
-    "front": "What is the formula for a diminished seventh chord?",
+    "front": "What is the formula for a diminished seventh chord, relative to a major scale?",
     "back": "1–♭3–♭5–𝄫7.",
     "reverse": "Name the seventh-chord type with formula 1–♭3–♭5–𝄫7.",
     "reverseAnswer": "Diminished seventh.",
@@ -3358,7 +3441,7 @@
   {
     "id": "seventh-formula-minor-major-seventh",
     "lesson": 17,
-    "front": "What is the formula for a minor-major seventh chord?",
+    "front": "What is the formula for a minor-major seventh chord, relative to a major scale?",
     "back": "1–♭3–5–7.",
     "reverse": "Name the seventh-chord type with formula 1–♭3–5–7.",
     "reverseAnswer": "Minor-major seventh.",
@@ -3382,7 +3465,7 @@
   {
     "id": "seventh-formula-augmented-major-seventh",
     "lesson": 17,
-    "front": "What is the formula for a augmented-major seventh chord?",
+    "front": "What is the formula for an augmented-major seventh chord, relative to a major scale?",
     "back": "1–3–♯5–7.",
     "reverse": "Name the seventh-chord type with formula 1–3–♯5–7.",
     "reverseAnswer": "Augmented-major seventh.",
@@ -3406,7 +3489,7 @@
   {
     "id": "seventh-formula-augmented-seventh",
     "lesson": 17,
-    "front": "What is the formula for a augmented seventh chord?",
+    "front": "What is the formula for an augmented seventh chord, relative to a major scale?",
     "back": "1–3–♯5–♭7.",
     "reverse": "Name the seventh-chord type with formula 1–3–♯5–♭7.",
     "reverseAnswer": "Augmented seventh.",
@@ -3766,7 +3849,7 @@
   {
     "id": "nonchord-anticipation",
     "lesson": 99,
-    "front": "What is a anticipation?",
+    "front": "What is an anticipation?",
     "back": "A note of the next harmony sounded early.",
     "reverse": "Name this device: a note of the next harmony sounded early.",
     "reverseAnswer": "Anticipation.",
@@ -3778,11 +3861,11 @@
   {
     "id": "nonchord-appoggiatura",
     "lesson": 99,
-    "front": "What is a appoggiatura?",
+    "front": "What is an appoggiatura?",
     "back": "An accented non-chord tone approached by leap and resolved by step.",
     "reverse": "Name this device: an accented non-chord tone approached by leap and resolved by step.",
     "reverseAnswer": "Appoggiatura.",
-    "extra": "",
+    "extra": "This is the common harmony-textbook definition; ornamental appoggiaturas can be described more broadly.",
     "topic": "nonchord-tones",
     "source": "https://www.musictheory.net/lessons/53",
     "pack": "advanced"
@@ -3790,7 +3873,7 @@
   {
     "id": "nonchord-escape-tone",
     "lesson": 99,
-    "front": "What is a escape tone?",
+    "front": "What is an escape tone?",
     "back": "A non-chord tone approached by step and left by a leap in the opposite direction.",
     "reverse": "Name this device: a non-chord tone approached by step and left by a leap in the opposite direction.",
     "reverseAnswer": "Escape tone.",
@@ -4090,11 +4173,11 @@
   {
     "id": "synth-tremolo",
     "lesson": 23,
-    "front": "What changes in tremolo?",
+    "front": "In a synthesizer tremolo effect, what varies periodically?",
     "back": "Loudness varies periodically.",
     "reverse": "",
     "reverseAnswer": "",
-    "extra": "",
+    "extra": "In piano notation, tremolo can instead mean rapidly repeated notes or alternating notes/chords.",
     "topic": "synth",
     "source": "https://learningsynths.ableton.com/",
     "pack": "course"
@@ -4127,7 +4210,7 @@
     "id": "synth-sine",
     "lesson": 23,
     "front": "What is special about a pure sine wave?",
-    "back": "It contains one frequency, without harmonics.",
+    "back": "It contains one frequency, with no higher harmonics.",
     "reverse": "",
     "reverseAnswer": "",
     "extra": "",
@@ -4156,20 +4239,21 @@
     "reverseAnswer": "",
     "extra": "",
     "topic": "transposition",
-    "source": "https://www.musictheory.net/lessons/32",
+    "source": "https://viva.pressbooks.pub/openmusictheory/chapter/intervals/",
     "pack": "course"
   },
   {
     "id": "transpose-c-d",
-    "lesson": 12,
+    "lesson": 99,
     "front": "Transpose C–D–E up a major second.",
     "back": "D–E–F♯.",
     "reverse": "",
     "reverseAnswer": "",
     "extra": "",
     "topic": "transposition",
-    "source": "https://www.musictheory.net/lessons/32",
-    "pack": "course"
+    "source": "https://viva.pressbooks.pub/openmusictheory/chapter/intervals/",
+    "pack": "advanced",
+    "plannedLesson": 12
   },
   {
     "id": "key-not-first-note",
@@ -4233,7 +4317,7 @@
   },
   {
     "id": "visual-chord-c-minor",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Identify this chord.<img class=\"notation\" src=\"migs-chord-c-minor.png\" alt=\"Music notation to identify\">",
     "back": "C minor.",
     "reverse": "Picture or draw C minor in root position, starting on middle C.",
@@ -4241,11 +4325,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "visual-chord-c-diminished",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Identify this chord.<img class=\"notation\" src=\"migs-chord-c-diminished.png\" alt=\"Music notation to identify\">",
     "back": "C diminished.",
     "reverse": "Picture or draw C diminished in root position, starting on middle C.",
@@ -4253,11 +4338,12 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "visual-chord-c-augmented",
-    "lesson": 8,
+    "lesson": 99,
     "front": "Identify this chord.<img class=\"notation\" src=\"migs-chord-c-augmented.png\" alt=\"Music notation to identify\">",
     "back": "C augmented.",
     "reverse": "Picture or draw C augmented in root position, starting on middle C.",
@@ -4265,7 +4351,8 @@
     "extra": "",
     "topic": "chords",
     "source": "https://www.musictheory.net/lessons/40",
-    "pack": "course"
+    "pack": "advanced",
+    "plannedLesson": 8
   },
   {
     "id": "visual-chord-c7",
@@ -4505,6 +4592,66 @@
     "extra": "The same signature can also belong to its relative minor; the prompt specifies major.",
     "topic": "keys",
     "source": "https://www.musictheory.net/lessons/24",
+    "pack": "course"
+  },
+  {
+    "id": "treble-a3",
+    "lesson": 8,
+    "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-treble-a3.png\" alt=\"Music notation to identify\">",
+    "back": "<b>A3</b> — the second ledger line below the staff.",
+    "reverse": "Picture or draw <b>A3</b> on a <b>treble</b> staff.",
+    "reverseAnswer": "<img class=\"notation\" src=\"migs-treble-a3.png\" alt=\"Music notation to identify\">A3 — the second ledger line below the staff.",
+    "extra": "Count staff lines and spaces from the bottom. The notehead determines pitch.",
+    "topic": "staff",
+    "source": "https://www.musictheory.net/lessons/10",
+    "pack": "course"
+  },
+  {
+    "id": "treble-b3",
+    "lesson": 10,
+    "front": "Name this note (include the octave if you know it).<img class=\"notation\" src=\"migs-treble-b3.png\" alt=\"Music notation to identify\">",
+    "back": "<b>B3</b> — the space just below middle C’s ledger line.",
+    "reverse": "Picture or draw <b>B3</b> on a <b>treble</b> staff.",
+    "reverseAnswer": "<img class=\"notation\" src=\"migs-treble-b3.png\" alt=\"Music notation to identify\">B3 — the space just below middle C’s ledger line.",
+    "extra": "Count staff lines and spaces from the bottom. The notehead determines pitch.",
+    "topic": "staff",
+    "source": "https://www.musictheory.net/lessons/10",
+    "pack": "course"
+  },
+  {
+    "id": "triad-definition",
+    "lesson": 8,
+    "front": "What is a triad?",
+    "back": "A three-note chord built by stacking two thirds.",
+    "reverse": "",
+    "reverseAnswer": "",
+    "extra": "",
+    "topic": "chords",
+    "source": "https://www.musictheory.net/lessons/40",
+    "pack": "course"
+  },
+  {
+    "id": "chord-root",
+    "lesson": 8,
+    "front": "What is the root of A minor?",
+    "back": "A, the note from which its stacked thirds are built. It remains the root when the notes are rearranged.",
+    "reverse": "",
+    "reverseAnswer": "",
+    "extra": "",
+    "topic": "chords",
+    "source": "https://www.musictheory.net/lessons/40",
+    "pack": "course"
+  },
+  {
+    "id": "transpose-c-g",
+    "lesson": 12,
+    "front": "Transpose C–D–E up a perfect fifth.",
+    "back": "G–A–B.",
+    "reverse": "",
+    "reverseAnswer": "",
+    "extra": "",
+    "topic": "transposition",
+    "source": "https://www.musictheory.net/lessons/30",
     "pack": "course"
   }
 ]

@@ -23,25 +23,13 @@ for cid, expected in before.items():
     assert (c.type, c.queue, c.ivl, c.due, c.reps, c.lapses) == expected, 'Review progress changed'
 deck = col.decks.by_name('Migs Keys::Music theory')
 config = col.decks.config_dict_for_deck_id(deck['id'])
-users = [d.name for d in col.decks.all_names_and_ids()
-         if col.decks.get(d.id).get('conf') == config['id']]
-# Do not modify a shared Default preset when imported without deck settings.
-if any(not name.startswith('Migs Keys') for name in users):
-    config['id'] = 0
-    config['name'] = 'Migs Keys'
-    col.decks.update_config(config)
-    deck['conf'] = config['id']
-    col.decks.save(deck)
-config['new']['bury'] = config['rev']['bury'] = True
-config['buryInterdayLearning'] = True
-config['newGatherPriority'] = config['newSortOrder'] = 4
-col.decks.update_config(config)
+# Preserve the learner's existing preset and scheduling options.
 total = len(col.find_cards('deck:"Migs Keys::Music theory"'))
 assert total >= stage['cards']
 mw.reset()
 report = dict(throughLesson=through_lesson, cards=total,
               previousCards=len(before), reviewProgressPreserved=True,
-              dailyNew=config['new']['perDay'], siblingBurying=True,
-              randomCardOrder=True)
+              dailyNew=config['new']['perDay'], siblingBurying=bool(config['new']['bury'] and config['rev']['bury'] and config.get('buryInterdayLearning')),
+              randomCardOrder=config.get('newGatherPriority')==4 and config.get('newSortOrder')==4)
 (root / 'data/anki-import-last.json').write_text(json.dumps(report, indent=2) + '\n')
 print(json.dumps(report, indent=2))

@@ -45,7 +45,7 @@ class CoursePackage(genanki.Package):
         config=json.loads(cursor.execute('SELECT dconf FROM col').fetchone()[0])
         if not config:raise ValueError('Missing Anki deck configuration')
         preset=json.loads(json.dumps(next(iter(config.values()))));preset.update(id=1936742501,name='Migs Keys · 5 new cards',mod=int(timestamp),usn=-1)
-        preset['new'].update(perDay=5,bury=True);preset['rev']['bury']=True;preset['buryInterdayLearning']=True
+        preset['new'].update(perDay=5,bury=True);preset['rev']['bury']=True;preset['buryInterdayLearning']=True;preset['newGatherPriority']=4;preset['newSortOrder']=4
         config[str(preset['id'])]=preset
         decks=json.loads(cursor.execute('SELECT decks FROM col').fetchone()[0])
         for deck in decks.values():

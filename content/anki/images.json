@@ -300,47 +300,47 @@
     "meter": null
   },
   "chord-c-major": {
-    "music": "<c' e' g'>1",
+    "music": "<c' e' g'>2",
     "clef": "treble",
     "meter": null
   },
   "chord-c-minor": {
-    "music": "<c' ees' g'>1",
+    "music": "<c' ees' g'>2",
     "clef": "treble",
     "meter": null
   },
   "chord-c-diminished": {
-    "music": "<c' ees' ges'>1",
+    "music": "<c' ees' ges'>2",
     "clef": "treble",
     "meter": null
   },
   "chord-c-augmented": {
-    "music": "<c' e' gis'>1",
+    "music": "<c' e' gis'>2",
     "clef": "treble",
     "meter": null
   },
   "chord-c7": {
-    "music": "<c' e' g' bes'>1",
+    "music": "<c' e' g' bes'>2",
     "clef": "treble",
     "meter": null
   },
   "chord-cmaj7": {
-    "music": "<c' e' g' b'>1",
+    "music": "<c' e' g' b'>2",
     "clef": "treble",
     "meter": null
   },
   "chord-cm7": {
-    "music": "<c' ees' g' bes'>1",
+    "music": "<c' ees' g' bes'>2",
     "clef": "treble",
     "meter": null
   },
   "chord-cm7flat5": {
-    "music": "<c' ees' ges' bes'>1",
+    "music": "<c' ees' ges' bes'>2",
     "clef": "treble",
     "meter": null
   },
   "chord-cdim7": {
-    "music": "<c' ees' ges' beses'>1",
+    "music": "<c' ees' ges' beses'>2",
     "clef": "treble",
     "meter": null
   },
@@ -416,6 +416,16 @@
   },
   "keysig-ces": {
     "music": "\\key ces \\major s1",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-a3": {
+    "music": "a4",
+    "clef": "treble",
+    "meter": null
+  },
+  "treble-b3": {
+    "music": "b4",
     "clef": "treble",
     "meter": null
   }
