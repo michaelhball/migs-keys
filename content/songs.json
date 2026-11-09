@@ -72,7 +72,7 @@
       "notationFiles": [
         "amazing-grace-page-1.svg"
       ],
-      "notationAlt": "Amazing Grace in C major, melody and single-note bass.",
+      "notationAlt": "Amazing Grace in C major, both hands with lyrics.",
       "scoreViewBoxes": [
         "0.0000 -0.0000 132.7795 187.7882"
       ],
@@ -81,26 +81,32 @@
         "amazing-grace.midi"
       ],
       "defaultPassage": "full",
-      "lyricsFile": "amazing-grace-lyrics.json"
+      "lyricsFile": "amazing-grace-lyrics.json",
+      "scoreLyricsNote": "The printed score shows John Newton’s first stanza. The Words panel contains all six original stanzas.",
+      "fingeredNotationFiles": [
+        "amazing-grace-fingering-page-1.svg"
+      ]
     },
     {
       "id": "lord-of-the-dance",
       "title": "Lord of the Dance · Simple Gifts",
       "artist": "Joseph Brackett · traditional tune",
       "category": "Hymns",
-      "status": "Complete beginner arrangement",
-      "summary": "The complete 16-bar Simple Gifts tune behind Lord of the Dance, arranged in C with a simple bass part.",
+      "status": "Traditional tune study",
+      "summary": "The complete Simple Gifts tune. The separate Lord of the Dance adaptation, including its chorus, is not yet in the player.",
       "materialTitle": "Melody and bass · score and practice player",
-      "materialDescription": "Original beginner arrangement of the traditional Simple Gifts tune used for Lord of the Dance. Includes both sections of the tune, with the original Simple Gifts words.",
+      "materialDescription": "Complete traditional Simple Gifts tune with its original words and a beginner bass part. Sydney Carter’s Lord of the Dance adaptation and chorus are not included.",
       "notesFile": "lord-of-the-dance-notes.md",
       "practiceFile": "lord-of-the-dance-practice.md",
       "exerciseFile": "lord-of-the-dance-performance.json",
       "scoreMapFile": "lord-of-the-dance-score-map.json",
       "notationFiles": [
-        "lord-of-the-dance-page-1.svg"
+        "lord-of-the-dance-page-1.svg",
+        "lord-of-the-dance-page-2.svg"
       ],
-      "notationAlt": "Lord of the Dance · Simple Gifts in C major, melody and single-note bass.",
+      "notationAlt": "Lord of the Dance · Simple Gifts in C major, both hands with lyrics.",
       "scoreViewBoxes": [
+        "0.0000 -0.0000 132.7795 187.7882",
         "0.0000 -0.0000 132.7795 187.7882"
       ],
       "downloadFiles": [
@@ -108,7 +114,12 @@
         "lord-of-the-dance.midi"
       ],
       "defaultPassage": "full",
-      "lyricsFile": "lord-of-the-dance-lyrics.json"
+      "lyricsFile": "lord-of-the-dance-lyrics.json",
+      "scoreLyricsNote": "The printed words are the original Simple Gifts lyrics.",
+      "fingeredNotationFiles": [
+        "lord-of-the-dance-fingering-page-1.svg",
+        "lord-of-the-dance-fingering-page-2.svg"
+      ]
     }
   ]
 }

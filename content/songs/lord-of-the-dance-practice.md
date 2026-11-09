@@ -1,6 +1,10 @@
 ## What this version contains
 
-This is a complete beginner arrangement of **Simple Gifts**, the traditional tune used for **Lord of the Dance**. It contains both eight-bar sections. Familiar sung versions can differ in repeated notes and rhythm; this uses the traditional tune with its original Simple Gifts words. The lyric highlight follows the current phrase as you play or step through the music. Sydney Carter’s modern lyrics and adaptation are separate: [read the authorised Lord of the Dance lyrics at the publisher](https://stainer.co.uk/lord-of-the-dance/).
+The player contains the complete traditional **Simple Gifts** tune, with its original words and a beginner bass part. **Sydney Carter’s Lord of the Dance version, including its separate chorus, is not yet in this player.** The current tune should not be treated as the complete requested hymn.
+
+The publisher offers the full [Lord of the Dance piano/vocal score as a PDF](https://stainer.co.uk/shop/f001/) and [authorised lyrics](https://stainer.co.uk/lord-of-the-dance/). A score supplied by the learner can be used to prepare the complete beginner version locally. Extra difficulty levels are deferred until that version is ready.
+
+For this traditional tune, **Section A** runs from the pickup through bar 8, beat 1. **Section B** starts with “When true” on bar 8, beat 2, and continues to the end. Both have direct passage selectors. Lyrics appear below the melody staff; Piano view keeps the synchronized Words panel.
 
 Choose **Organ** beside playback, then select **Right hand** and **Opening**. Start around **45–60 quarter notes per minute**. Amazing Grace is the easier of these two arrangements if the eighth notes feel too quick.
 

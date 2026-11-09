@@ -2,7 +2,7 @@
 
 Select **Right hand**, **Opening**, and about **50–60 quarter notes per minute**. Choose **Organ** in the Sound menu beside the playback controls. This arrangement contains one complete 16-bar verse of the tune; repeat it for further verses. The Words panel includes all six original stanzas by John Newton. Choose a stanza; its current line is highlighted during playback and manual stepping.
 
-The right hand starts on **G3**, below middle C, with the thumb (1). Move toward middle C as the melody rises: C4 with 2, E4 with 4. Finger numbers are shown throughout. They suggest movements, not a position to stretch and hold. Later, move the hand right for G4 with finger 5.
+The right hand starts on **G3**, below middle C, with the thumb (1). Move toward middle C as the melody rises: C4 with 2, E4 with 4. Piano view shows finger numbers throughout. In Sheet music, use **Show fingering** when you need them; they are hidden by default. They suggest movements, not a position to stretch and hold. Later, move the hand right for G4 with finger 5.
 
 ## Count 3/4
 

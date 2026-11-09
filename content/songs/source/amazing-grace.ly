@@ -1,10 +1,12 @@
 \version "2.26.0"
-\header { title = "Amazing Grace" subtitle = "Beginner piano arrangement · C major" composer = "Traditional · NEW BRITAIN" tagline = ##f }
+\header { title = "Amazing Grace" subtitle = "Beginner · melody and bass · C major" composer = "Traditional · NEW BRITAIN" poet = "John Newton · stanza 1 (1779)" tagline = ##f }
 #(set-global-staff-size 18)
 \paper { top-margin = 10\mm bottom-margin = 10\mm ragged-last-bottom = ##t }
+\layout { \context { \Voice \override Fingering.output-attributes = #'((class . "score-fingering")) } }
 \score {
 \new PianoStaff <<
 \new Staff = "up" {
+\new Voice = "melody" {
 \clef treble \key c \major \numericTimeSignature \time 3/4 \tempo 4 = 60 \partial 4
 g4-1 | % 0
 c'2-2 e'8-4 c'8-2 | % 1
@@ -24,6 +26,26 @@ e'2-4 d'4-3 | % 14
 c'2.-2~ | % 15
 c'2-2 \break % 16
 \bar "|."
+}
+}
+\new Lyrics \lyricsto "melody" {
+A --
+maz -- ing __ _
+grace! How
+sweet the
+sound That
+saved a __ _
+wretch like
+me!
+I
+once was __ _
+lost, but
+now am
+found; Was
+blind, but __ _
+now I
+see.
+
 }
 \new Staff = "down" {
 \clef bass \key c \major \numericTimeSignature \time 3/4 \tempo 4 = 60 \partial 4

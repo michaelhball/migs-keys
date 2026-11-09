@@ -1,4 +1,6 @@
 import { test } from 'node:test';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { musicPlayer, measures, notation } from '../public/music.js';
@@ -142,4 +144,36 @@ test('hymn lyric phrases follow absolute score positions when stepping or changi
   assert.equal(lyricIndexAt(lyrics,{bar:12,beat:2},3),3);
   assert.match(lyricsPanel(lyrics,5),/earth shall soon/);
   assert.equal(lyricsPanel(null),'');
+});
+
+test('song fingering is opt-in and removing it preserves score geometry and lyrics', async () => {
+  execFileSync('python3',[fileURLToPath(new URL('./score-assets.py',import.meta.url))]);
+  const {performancePlayer}=await import('../public/performance.js');
+  const library=JSON.parse(await readFile(new URL('../content/songs.json',import.meta.url),'utf8'));
+  for (const song of library.songs.filter(s=>s.fingeredNotationFiles)) {
+    const exercise=JSON.parse(await readFile(new URL('../content/songs/'+song.exerciseFile,import.meta.url),'utf8'));
+    const model={...song,exercise};
+    assert.match(performancePlayer(model,exercise,60,'notation'),/Show fingering/);
+    assert.doesNotMatch(performancePlayer(model,exercise,60,'notation'),/src="[^"]*fingering-page/);
+    assert.match(performancePlayer(model,exercise,60,'notation','full','piano',0,true),/src="[^"]*fingering-page/);
+    assert.match(performancePlayer(model,exercise,60,'notes'),/key-finger/);
+    for(let i=0;i<song.notationFiles.length;i++) {
+      const plain=await readFile(new URL('../content/songs/'+song.notationFiles[i],import.meta.url),'utf8');
+      const fingered=await readFile(new URL('../content/songs/'+song.fingeredNotationFiles[i],import.meta.url),'utf8');
+      assert.doesNotMatch(plain,/class="score-fingering"/); assert.match(fingered,/class="score-fingering"/);
+      assert.equal(plain.match(/viewBox="[^"]+"/)[0],fingered.match(/viewBox="[^"]+"/)[0]);
+      if(i===0) assert.match(plain,song.id==='amazing-grace'?/>grace!</:/>gift</);
+    }
+  }
+});
+
+test('Simple Gifts section B starts at its sung pickup within bar 8', async () => {
+  const {selectPassage,lyricIndexAt}=await import('../public/performance.js');
+  const read=async name=>JSON.parse(await readFile(new URL('../content/songs/lord-of-the-dance-'+name+'.json',import.meta.url),'utf8'));
+  const piece=await read('performance'),lyrics=await read('lyrics');
+  const a=selectPassage(piece,'a'),b=selectPassage(piece,'b');
+  assert.equal(b.events[0].bar,8); assert.equal(b.events[0].beat,1);
+  assert.equal(a.events.reduce((sum,e)=>sum+e.beats,0)+b.events.reduce((sum,e)=>sum+e.beats,0),64);
+  assert.equal(lyricIndexAt(lyrics,{bar:6,beat:1.5},4),3);
+  assert.equal(lyricIndexAt(lyrics,b.events[0],4),4);
 });

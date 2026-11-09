@@ -47,7 +47,7 @@ The **Flashcards** page offers cumulative Anki packages matched to the current l
 
 From Lesson 7, score finger numbers are hidden by default. **Show fingering** toggles them, with a per-lesson preference saved to disk. Piano view keeps its finger guidance. Lesson clefs and quarter rests use LilyPond vector glyphs anchored to staff coordinates, avoiding font-dependent positioning and missing symbols.
 
-The **Hymns** category contains complete 16-bar beginner arrangements of **Amazing Grace** (3/4) and **Simple Gifts**, the tune behind **Lord of the Dance** (4/4). Both include a pickup, a single-note bass part, all-note finger suggestions, short practice passages, synchronized score dots, and PDF/MIDI downloads. Song pages identify sources and arrangement scope.
+The **Hymns** category contains complete 16-bar beginner arrangements of **Amazing Grace** (3/4) and **Simple Gifts**, the tune behind **Lord of the Dance** (4/4). Both include a pickup, a single-note bass part, aligned public-domain lyrics, short practice passages, synchronized score dots, and PDF/MIDI downloads. Printed scores hide finger numbers by default; Show fingering is available where the score contains suggestions, with the preference saved per song. Piano view retains finger guidance. Amazing Grace has six original lyric stanzas in the Words panel and its first stanza engraved in the score. The Simple Gifts study is not the complete Sydney Carter adaptation: the requested Lord of the Dance chorus remains pending a supplied score. Song pages identify sources and arrangement scope.
 
 ## Backup and restore
 
@@ -70,6 +70,8 @@ npm run check
 npm test
 ```
 
+`node scripts/check-song-ui.mjs` checks all four song pages in headless Chrome, including saved fingering, score playback dots and hand-filtered stepping. It uses a temporary server and profile and leaves screenshots in the printed temporary directory. It requires Node 22+ and Chrome; set `MIGS_CHROME` if Chrome is installed elsewhere.
+
 Integration tests use an isolated temporary data directory, exercise real HTTP endpoints, restart the server, and verify saved data survives. They do not alter the learner's progress.
 
 ## Rebuilding music and inspecting source video
@@ -82,4 +84,4 @@ Run `python3 scripts/build-journey.py` to rebuild the Journey accompaniment from
 
 `scripts/convert-video.py INPUT --output OUTPUT.mp4` creates H.264/AAC MP4 using FFmpeg and reports the output codecs/duration. It refuses to overwrite an existing file or the original. Frame extraction supports `--crop width:height:x:y` after scaling and merges its inspection manifest when adding timestamps.
 
-Run `python3 scripts/build-hymns.py` to regenerate the two hymn arrangements. Run `python3 scripts/build-lessons.py` to rebuild the original lesson 7–12 exercises (plus Beethoven’s public-domain Ode to Joy opening). `python3 scripts/build-music-symbols.py` regenerates the lesson renderer’s vector glyphs. After any content or code change, run the relevant checks and commit and push the completed change to `main`; see `content/learner-guide.md`.
+Run `python3 scripts/build-hymns.py` to regenerate the two beginner hymn tunes. `scripts/score_output.py` removes only tagged fingering groups from the default SVGs, preserving score coordinates, and builds plain PDF scores. Higher-level Simple Gifts arrangement helpers are retained in the builder but not published or built by default. Run `python3 scripts/build-lessons.py` to rebuild the original lesson 7–12 exercises (plus Beethoven’s public-domain Ode to Joy opening). `python3 scripts/build-music-symbols.py` regenerates the lesson renderer’s vector glyphs. After any content or code change, run the relevant checks and commit and push the completed change to `main`; see `content/learner-guide.md`.

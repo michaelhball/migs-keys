@@ -92,7 +92,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (['GET', 'HEAD'].includes(req.method) && /^\/scores\/[a-z0-9-]+\.(svg|pdf|midi)$/.test(url.pathname)) {
       const filename = url.pathname.split('/').pop();
-      if (!(await songs()).songs.some(x => [...x.notationFiles, ...(x.downloadFiles || [])].includes(filename))) fail(404, 'Score not found.');
+      if (!(await songs()).songs.some(x => [...x.notationFiles, ...(x.fingeredNotationFiles || []), ...(x.downloadFiles || [])].includes(filename))) fail(404, 'Score not found.');
       const score = await readFile(path.join(ROOT, 'content', 'songs', filename));
       res.writeHead(200, { 'Content-Type': { '.svg': 'image/svg+xml', '.pdf': 'application/pdf', '.midi': 'audio/midi' }[path.extname(filename)], 'Cache-Control': 'no-cache' });
       return res.end(req.method === 'HEAD' ? undefined : score);
@@ -107,7 +107,7 @@ const server = http.createServer(async (req, res) => {
       await writing;
       const manifest = await course();
       const lessons = await Promise.all(manifest.lessons.filter(x => x.file).map(async x => ({ ...x, markdown: await readFile(path.join(ROOT, 'content', 'lessons', x.file), 'utf8') })));
-      const songLibrary = await Promise.all((await songs()).songs.map(async item => ({ ...await songContent(item), scores: await Promise.all(item.notationFiles.map(async file => ({ file, svg: await readFile(path.join(ROOT, 'content', 'songs', file), 'utf8') }))) })));
+      const songLibrary = await Promise.all((await songs()).songs.map(async item => ({ ...await songContent(item), scores: await Promise.all([...item.notationFiles, ...(item.fingeredNotationFiles || [])].map(async file => ({ file, svg: await readFile(path.join(ROOT, 'content', 'songs', file), 'utf8') }))) })));
       return reply(200, { exportedAt: new Date().toISOString(), course: manifest, lessons, songs: songLibrary, progress: await state() }, { 'Content-Disposition': 'attachment; filename="migs-keys-backup.json"' });
     }
     if (req.method === 'PUT' && url.pathname === '/api/active') {
@@ -119,6 +119,10 @@ const server = http.createServer(async (req, res) => {
       if (data.tempo !== undefined && (!Number.isInteger(data.tempo) || data.tempo < 30 || data.tempo > 180)) fail(400, 'Tempo must be between 30 and 180.');
       if (data.melodyTempo !== undefined && (!Number.isInteger(data.melodyTempo) || data.melodyTempo < 30 || data.melodyTempo > 180)) fail(400, 'Melody tempo must be between 30 and 180.');
       if (data.soundPreset !== undefined && !['piano','electric','organ','pad'].includes(data.soundPreset)) fail(400, 'Choose a sound preset.');
+      if (data.songFingering !== undefined) {
+        const song=(await songs()).songs.find(s=>s.id===data.songFingering?.songId);
+        if (!song || typeof data.songFingering?.show !== 'boolean') fail(400,'Choose a song and whether to show score fingering.');
+      }
       if (data.lyricVerse !== undefined) {
         const song = (await songs()).songs.find(s => s.id === data.lyricVerse?.songId);
         const lyrics = song?.lyricsFile ? await jsonFile(path.join(ROOT, 'content/songs', song.lyricsFile)) : null;
@@ -127,7 +131,7 @@ const server = http.createServer(async (req, res) => {
       if (data.lessonFingering !== undefined && (!Number.isInteger(data.lessonFingering?.lessonId) || data.lessonFingering.lessonId < 1 || data.lessonFingering.lessonId > 24 || typeof data.lessonFingering.show !== 'boolean')) fail(400, 'Choose a lesson and whether to show score fingering.');
       if (data.songView !== undefined && !['notes', 'notation'].includes(data.songView)) fail(400, 'Choose note names or sheet music.');
       if (data.timer !== undefined && (!data.timer || !Number.isFinite(data.timer.elapsed) || data.timer.elapsed < 0 || !(data.timer.startedAt === null || (Number.isFinite(data.timer.startedAt) && data.timer.startedAt > 0 && data.timer.startedAt <= Date.now() + 10000)))) fail(400, 'Invalid practice timer.');
-      return reply(200, await update(s => { s.settings ??= emptyState().settings; if (data.lyricVerse !== undefined) { s.settings.lyricVerses ??= {}; s.settings.lyricVerses[data.lyricVerse.songId] = data.lyricVerse.verse; } if (data.lessonFingering !== undefined) { s.settings.lessonFingerings ??= {}; s.settings.lessonFingerings[data.lessonFingering.lessonId] = data.lessonFingering.show; } if (data.tempo !== undefined) s.settings.tempo = data.tempo; if (data.melodyTempo !== undefined) s.settings.melodyTempo = data.melodyTempo; if (data.soundPreset !== undefined) s.settings.soundPreset = data.soundPreset; if (data.songView !== undefined) s.settings.songView = data.songView; if (data.timer !== undefined) s.settings.timer = { elapsed: data.timer.elapsed, startedAt: data.timer.startedAt }; }));
+      return reply(200, await update(s => { s.settings ??= emptyState().settings; if (data.songFingering !== undefined) { s.settings.songFingerings ??= {}; s.settings.songFingerings[data.songFingering.songId]=data.songFingering.show; } if (data.lyricVerse !== undefined) { s.settings.lyricVerses ??= {}; s.settings.lyricVerses[data.lyricVerse.songId] = data.lyricVerse.verse; } if (data.lessonFingering !== undefined) { s.settings.lessonFingerings ??= {}; s.settings.lessonFingerings[data.lessonFingering.lessonId] = data.lessonFingering.show; } if (data.tempo !== undefined) s.settings.tempo = data.tempo; if (data.melodyTempo !== undefined) s.settings.melodyTempo = data.melodyTempo; if (data.soundPreset !== undefined) s.settings.soundPreset = data.soundPreset; if (data.songView !== undefined) s.settings.songView = data.songView; if (data.timer !== undefined) s.settings.timer = { elapsed: data.timer.elapsed, startedAt: data.timer.startedAt }; }));
     }
     if (req.method === 'PUT' && /^\/api\/checkpoints\/\d+$/.test(url.pathname)) {
       const item = await lesson(url.pathname.split('/').pop(), true); const data = await body(req);

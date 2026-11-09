@@ -164,7 +164,7 @@ async function showSongs(id) {
 function renderSongView() {
   const view = state.settings.songView || 'notes';
   document.querySelectorAll('[data-action="song-view"]').forEach(button => { const selected = button.dataset.view === view; button.setAttribute('aria-pressed', String(selected)); button.classList.toggle('selected', selected); });
-  $('#song-score').innerHTML = (currentSong.exercise.timeline ? performancePlayer(currentSong,currentExercise,melodyTempo,view,songPassage,state.settings.soundPreset,state.settings.lyricVerses?.[currentSong.id] || 0) : musicPlayer(currentExercise, melodyTempo, view, state.settings.soundPreset));
+  $('#song-score').innerHTML = (currentSong.exercise.timeline ? performancePlayer(currentSong,currentExercise,melodyTempo,view,songPassage,state.settings.soundPreset,state.settings.lyricVerses?.[currentSong.id] || 0,state.settings.songFingerings?.[currentSong.id] ?? false) : musicPlayer(currentExercise, melodyTempo, view, state.settings.soundPreset));
   installPianoNavigation(); updatePianoPosition();
   if ($('#song-hands')) $('#song-hands').value = playingHand;
   if ($('#song-loop')) $('#song-loop').checked = repeatPassage;
@@ -361,6 +361,13 @@ document.addEventListener('click', async event => {
       state.settings.lessonFingerings = result.settings.lessonFingerings;
       button.setAttribute('aria-pressed', String(show)); button.textContent = `${show ? 'Hide' : 'Show'} fingering`;
       $('#lesson-player').innerHTML = musicPlayer(currentExercise, melodyTempo, 'notation', state.settings.soundPreset, show);
+    }
+    else if (action === 'song-fingering') {
+      stopSounds(); button.disabled=true;
+      const version=routeVersion, id=currentSong.id, show=!(state.settings.songFingerings?.[id] ?? false);
+      const result=await api('settings','PUT',{songFingering:{songId:id,show}});
+      state.settings.songFingerings=result.settings.songFingerings;
+      if (version===routeVersion && currentSong?.id===id) renderSongView();
     }
     else if (action === 'song-view') {
       stopSounds();

@@ -53,6 +53,9 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   await request('/api/settings', 'PUT', {lessonFingering:{lessonId:7,show:true}});
   await request('/api/settings','PUT',{lyricVerse:{songId:'amazing-grace',verse:2}});
   assert.equal((await request('/api/settings','PUT',{lyricVerse:{songId:'amazing-grace',verse:6}})).status,400);
+  assert.equal((await request('/api/settings','PUT',{songFingering:{songId:'missing',show:true}})).status,400);
+  assert.equal((await request('/api/settings','PUT',{songFingering:{songId:'amazing-grace',show:'yes'}})).status,400);
+  await request('/api/settings','PUT',{songFingering:{songId:'amazing-grace',show:true}});
   const library = await request('/api/songs');
   assert.deepEqual(library.data.songs.map(song => song.id), ['dont-stop-believin', 'fur-elise', 'amazing-grace', 'lord-of-the-dance']);
   for (const song of library.data.songs) {
@@ -61,7 +64,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
     if (song.category === 'Hymns') assert.equal(detail.data.defaultPassage, 'full');
     assert.ok(detail.data.noteNames.length > 0);
     assert.ok(detail.data.practice.length > 0);
-    for (const file of song.notationFiles) {
+    for (const file of [...song.notationFiles,...(song.fingeredNotationFiles||[])]) {
       const score = await fetch(server.url + `/scores/${file}`);
       assert.equal(score.status, 200);
       assert.match(score.headers.get('content-type'), /image\/svg\+xml/);
@@ -131,6 +134,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal(saved.settings.songView, 'notation');
   assert.equal(saved.settings.lessonFingerings['7'], true);
   assert.equal(saved.settings.lyricVerses['amazing-grace'],2);
+  assert.equal(saved.settings.songFingerings['amazing-grace'],true);
   assert.equal(saved.settings.soundPreset,'electric');
 
   assert.equal(saved.activeLesson, 2, 'completing the active lesson advances to the next available lesson');
