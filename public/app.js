@@ -228,6 +228,13 @@ function installPianoNavigation() {
 function updatePianoPosition() {
   if (!currentExercise) return;
   const event=currentExercise.events[currentStep]; if (!event) return;
+  const panel=$('.lyrics-panel');
+  if (panel && currentExercise.automaticVerses && Number(panel.dataset.displayedVerse)!==event.verse) {
+    const lines=currentSong.lyrics.verses[event.verse];
+    panel.querySelector('.lyric-lines').replaceChildren(...lines.map((text,i)=>{const p=document.createElement('p');p.dataset.lyricLine=i;p.textContent=text;return p;}));
+    panel.dataset.displayedVerse=event.verse;
+    if ($('#lyric-verse')) $('#lyric-verse').value=event.verse;
+  }
   const lyricIndex = lyricIndexAt(currentSong?.lyrics,event,currentExercise.meter?.[0] || 4);
   document.querySelectorAll('[data-lyric-line]').forEach(line => line.classList.toggle('current-lyric',Number(line.dataset.lyricLine) === lyricIndex));
   if ($('#piano-position')) $('#piano-position').value=currentStep;

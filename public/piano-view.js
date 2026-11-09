@@ -3,7 +3,8 @@ export function pianoPosition(exercise,index) {
   const event=exercise.events[index], total=exercise.events.length, elapsed=exercise.events.slice(0,index).reduce((sum,e)=>sum+(e.beats||1),0);
   const beat=event.beat ?? elapsed%4, fraction=beat-Math.floor(beat);
   const count=fraction===.5?`${Math.floor(beat)+1} &`:String(Number((beat+1).toFixed(2)));
-  return `${event.bar===0?'Pickup':`Bar ${event.bar ?? Math.floor(elapsed/4)+1}`} · count ${count} · position ${index+1} of ${total}`;
+  const bar=event.scoreBar ?? event.bar;
+  return `${event.verse!==undefined?`Verse ${event.verse+1} · `:''}${bar===0?'Pickup':`Bar ${bar ?? Math.floor(elapsed/4)+1}`} · count ${count} · position ${index+1} of ${total}`;
 }
 export function pianoNavigation(exercise,index=0) {
   const bars=[...new Set(exercise.events.map((e,i)=>e.bar??Math.floor(i/4)+1))];

@@ -1,13 +1,43 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, mkdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { markdown } from '../public/markdown.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+test('local arrangements replace all song content and survive restart and export', async t => {
+  const directory = await mkdtemp(path.join(tmpdir(), 'migs-local-song-test-'));
+  let server;
+  t.after(async () => { await server?.stop(); await rm(directory, {recursive:true,force:true}); });
+  const folder = path.join(directory,'songs','lord-of-the-dance');
+  await mkdir(folder,{recursive:true});
+  const entry = {id:'lord-of-the-dance',title:'Local study',notesFile:'study-notes.md',practiceFile:'study-practice.md',notationFiles:['study.svg'],fingeredNotationFiles:['study-fingering.svg'],downloadFiles:['study.midi']};
+  await writeFile(path.join(directory,'songs/index.json'),JSON.stringify({songs:[entry]}));
+  for (const [file,text] of Object.entries({'study-notes.md':'Local notes','study-practice.md':'Local practice','study.svg':'<svg>plain</svg>','study-fingering.svg':'<svg>fingers</svg>','study.midi':'test MIDI'})) await writeFile(path.join(folder,file),text);
+  server = await launch(directory);
+  const detail = await (await fetch(server.url+'/api/songs/lord-of-the-dance')).json();
+  assert.equal(detail.title,'Local study');
+  assert.equal(detail.localContent,true);
+  assert.equal(detail.lyrics,undefined,'old traditional-tune lyrics must not survive replacement');
+  assert.equal(detail.exercise,undefined,'old exercise must not survive replacement');
+  assert.equal(detail.noteNames,'Local notes');
+  assert.equal((await (await fetch(server.url+'/scores/study.svg')).text()),'<svg>plain</svg>');
+  assert.equal((await (await fetch(server.url+'/scores/study-fingering.svg')).text()),'<svg>fingers</svg>');
+  assert.equal((await fetch(server.url+'/scores/study.midi')).status,200);
+  assert.equal((await fetch(server.url+'/scores/lord-of-the-dance-page-1.svg')).status,404);
+  assert.equal((await fetch(server.url+'/data/songs/index.json')).status,404);
+  const backup = await (await fetch(server.url+'/api/export')).json();
+  const saved = backup.songs.find(song=>song.id===entry.id);
+  assert.equal(saved.practice,'Local practice');
+  assert.equal(saved.scores[0].svg,'<svg>plain</svg>');
+  assert.equal(JSON.stringify(backup).includes(directory),false,'backup metadata does not expose filesystem paths');
+  await server.stop(); server = await launch(directory);
+  assert.equal((await (await fetch(server.url+'/api/songs/lord-of-the-dance')).json()).title,'Local study');
+});
 async function launch(directory) {
   const process = spawn(globalThis.process.execPath, ['server.mjs'], { cwd: root, env: { ...globalThis.process.env, PORT: '0', MIGS_DATA_DIR: directory }, stdio: ['ignore', 'pipe', 'pipe'] });
   const url = await new Promise((resolve, reject) => {

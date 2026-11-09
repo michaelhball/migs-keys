@@ -1,5 +1,6 @@
 import { ankiRoute } from './anki.mjs';
 import { recordingRoute } from './recordings.mjs';
+import { songLibrary } from './songs.mjs';
 import http from 'node:http';
 import { readFile, writeFile, mkdir, rename, copyFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -14,11 +15,7 @@ let writing = Promise.resolve();
 
 async function jsonFile(file) { return JSON.parse(await readFile(file, 'utf8')); }
 async function course() { return jsonFile(path.join(ROOT, 'content', 'course.json')); }
-async function songs() { return jsonFile(path.join(ROOT, 'content', 'songs.json')); }
-async function songContent(item) {
-  const folder = path.join(ROOT, 'content', 'songs');
-  return { ...item, ...(item.lyricsFile ? { lyrics: await jsonFile(path.join(folder,item.lyricsFile)) } : {}), ...(item.exerciseFile ? { exercise: await jsonFile(path.join(folder, item.exerciseFile)) } : {}), ...(item.scoreMapFile ? { scoreMap: await jsonFile(path.join(folder,item.scoreMapFile)) } : {}), noteNames: await readFile(path.join(folder, item.notesFile), 'utf8'), practice: await readFile(path.join(folder, item.practiceFile), 'utf8') };
-}
+const {catalogue: songs, content: songContent, filePath: songFile} = songLibrary(ROOT, DATA);
 async function state() {
   try { const saved = await jsonFile(STATE); return { ...emptyState(), ...saved, settings: { ...emptyState().settings, ...saved.settings } }; }
   catch (error) { if (error.code === 'ENOENT') return emptyState(); throw error; }
@@ -92,8 +89,9 @@ const server = http.createServer(async (req, res) => {
     }
     if (['GET', 'HEAD'].includes(req.method) && /^\/scores\/[a-z0-9-]+\.(svg|pdf|midi)$/.test(url.pathname)) {
       const filename = url.pathname.split('/').pop();
-      if (!(await songs()).songs.some(x => [...x.notationFiles, ...(x.fingeredNotationFiles || []), ...(x.downloadFiles || [])].includes(filename))) fail(404, 'Score not found.');
-      const score = await readFile(path.join(ROOT, 'content', 'songs', filename));
+      const item = (await songs()).songs.find(x => [...x.notationFiles, ...(x.fingeredNotationFiles || []), ...(x.downloadFiles || [])].includes(filename));
+      if (!item) fail(404, 'Score not found.');
+      const score = await readFile(songFile(item, filename));
       res.writeHead(200, { 'Content-Type': { '.svg': 'image/svg+xml', '.pdf': 'application/pdf', '.midi': 'audio/midi' }[path.extname(filename)], 'Cache-Control': 'no-cache' });
       return res.end(req.method === 'HEAD' ? undefined : score);
     }
@@ -107,7 +105,7 @@ const server = http.createServer(async (req, res) => {
       await writing;
       const manifest = await course();
       const lessons = await Promise.all(manifest.lessons.filter(x => x.file).map(async x => ({ ...x, markdown: await readFile(path.join(ROOT, 'content', 'lessons', x.file), 'utf8') })));
-      const songLibrary = await Promise.all((await songs()).songs.map(async item => ({ ...await songContent(item), scores: await Promise.all([...item.notationFiles, ...(item.fingeredNotationFiles || [])].map(async file => ({ file, svg: await readFile(path.join(ROOT, 'content', 'songs', file), 'utf8') }))) })));
+      const songLibrary = await Promise.all((await songs()).songs.map(async item => ({ ...await songContent(item), scores: await Promise.all([...item.notationFiles, ...(item.fingeredNotationFiles || [])].map(async file => ({ file, svg: await readFile(songFile(item, file), 'utf8') }))) })));
       return reply(200, { exportedAt: new Date().toISOString(), course: manifest, lessons, songs: songLibrary, progress: await state() }, { 'Content-Disposition': 'attachment; filename="migs-keys-backup.json"' });
     }
     if (req.method === 'PUT' && url.pathname === '/api/active') {
@@ -125,7 +123,7 @@ const server = http.createServer(async (req, res) => {
       }
       if (data.lyricVerse !== undefined) {
         const song = (await songs()).songs.find(s => s.id === data.lyricVerse?.songId);
-        const lyrics = song?.lyricsFile ? await jsonFile(path.join(ROOT, 'content/songs', song.lyricsFile)) : null;
+        const lyrics = song?.lyricsFile ? await jsonFile(songFile(song, song.lyricsFile)) : null;
         if (!lyrics || !Number.isInteger(data.lyricVerse.verse) || data.lyricVerse.verse < 0 || data.lyricVerse.verse >= lyrics.verses.length) fail(400, 'Choose an available lyric verse.');
       }
       if (data.lessonFingering !== undefined && (!Number.isInteger(data.lessonFingering?.lessonId) || data.lessonFingering.lessonId < 1 || data.lessonFingering.lessonId > 24 || typeof data.lessonFingering.show !== 'boolean')) fail(400, 'Choose a lesson and whether to show score fingering.');

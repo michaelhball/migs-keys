@@ -14,8 +14,8 @@ SONGS=[dict(slug='amazing-grace',title='Amazing Grace',composer='Traditional · 
  "g'2-5 e'8-3 c'8-1", "e'2-3 d'4-2", "c'2-3 a4-2", 'g2-1 g4-1',
  "c'2-2 e'8-4 c'8-2", "e'2-4 d'4-3", "c'2.-2~", "c'2-2"],
  bass=['c','c','f,','c','c','c','g,','g,','c','c','f,','c','c','g,','c','c'],
- summary='A complete 16-bar tune in C, with a one-beat pickup and a simple left-hand bass part.',
- material='Beginner arrangement of NEW BRITAIN. One complete verse of the tune, in 3/4.'),
+ summary='The complete tune in C, with all six original verses in full-song playback and a single-verse practice option.',
+ material='Beginner arrangement of NEW BRITAIN in 3/4. Full song repeats the tune for all six original verses; the Words panel follows each verse.'),
  dict(slug='lord-of-the-dance',title='Lord of the Dance · Simple Gifts',composer='Joseph Brackett · traditional tune',meter='4/4',
  pickup='g8-1 g8-1',bars=[
  "c'4-1 c'8-1 d'8-2 e'8-3 c'8-1 e'8-3 f'8-4",
@@ -159,6 +159,9 @@ def build(song, variant):
   for sequence in sequences.values(): assert next(sequence, None) is None
   data['fingeringNote'] = variant['fingering']
   data['passages'] = [{'id':'opening','label':'Opening · pickup + bars 1–4','from':0,'to':4}, {'id':'full','label':'Complete tune · 16 bars','from':0,'to':16}]
+  if base == 'amazing-grace':
+   data['passages'][1].update(label='Full song · six original verses', repetitions=6)
+   data['passages'].insert(2, dict(id='tune',label='Single verse · complete 16-bar tune', **{'from':0,'to':16}))
   if base == 'lord-of-the-dance':
    data['passages'] += [{'id':'a','label':'Section A · opening through bar 8, beat 1','from':0,'to':8,'toBeat':1}, {'id':'b','label':'Section B · bar 8, beat 2 through ending','from':8,'fromBeat':1,'to':16}]
   data['passages'] += [{'id':str(a),'label':f'Bars {a}–{b}','from':a,'to':b} for a,b in [(1,4),(4,8),(8,12),(12,16),(9,16)]]

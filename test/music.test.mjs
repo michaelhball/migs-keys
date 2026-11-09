@@ -123,7 +123,7 @@ test('hymns have complete tunes, valid fingerings and a score location for every
     }
     assert.equal(barTotals.get(0),1); assert.equal(barTotals.get(16),beats-1);
     for(let bar=1;bar<16;bar++) assert.equal(barTotals.get(bar),beats);
-    assert.equal(selectPassage(piece,'full').events.at(-1).bar,16);
+    assert.equal(selectPassage(piece,'full').events.at(-1).bar,slug==='amazing-grace'?96:16);
   }
 });
 
@@ -144,6 +144,29 @@ test('hymn lyric phrases follow absolute score positions when stepping or changi
   assert.equal(lyricIndexAt(lyrics,{bar:12,beat:2},3),3);
   assert.match(lyricsPanel(lyrics,5),/earth shall soon/);
   assert.equal(lyricsPanel(null),'');
+});
+
+test('Amazing Grace full playback joins six verses and resets words and score positions', async () => {
+  const {selectPassage,lyricIndexAt,performancePlayer}=await import('../public/performance.js');
+  const read=async name=>JSON.parse(await readFile(new URL('../content/songs/amazing-grace-'+name+'.json',import.meta.url),'utf8'));
+  const piece=await read('performance'),lyrics=await read('lyrics');
+  const full=selectPassage(piece,'full'),single=selectPassage(piece,'tune');
+  assert.equal(full.events.reduce((n,e)=>n+e.beats,0),288);
+  assert.equal(single.events.reduce((n,e)=>n+e.beats,0),48);
+  assert.equal(single.automaticVerses,undefined);
+  const ids=new Set();
+  for(let verse=0;verse<6;verse++) {
+    const events=full.events.filter(e=>e.verse===verse);
+    assert.equal(events.length,single.events.length);
+    assert.equal(events[0].bar,16*verse); assert.equal(events[0].beat,2);
+    assert.equal(lyricIndexAt(lyrics,events[0],3),0);
+    for(let i=0;i<events.length;i++) for(const hand of ['right','left']) {
+      assert.deepEqual(events[i][hand].map(n=>[n.midi,n.length,n.scoreKey,n.attack]),single.events[i][hand].map(n=>[n.midi,n.length,n.scoreKey,n.attack]));
+      for(const n of events[i][hand].filter(n=>n.attack)) {assert.ok(!ids.has(n.id)); ids.add(n.id);}
+    }
+  }
+  assert.match(performancePlayer({exercise:piece,lyrics},full,60,'notes','full'),/follows playback/);
+  assert.match(performancePlayer({exercise:piece,lyrics},single,60,'notes','tune','piano',2),/Through many dangers/);
 });
 
 test('song fingering is opt-in and removing it preserves score geometry and lyrics', async () => {

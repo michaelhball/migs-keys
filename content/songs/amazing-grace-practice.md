@@ -1,6 +1,6 @@
 ## Start here
 
-Select **Right hand**, **Opening**, and about **50–60 quarter notes per minute**. Choose **Organ** in the Sound menu beside the playback controls. This arrangement contains one complete 16-bar verse of the tune; repeat it for further verses. The Words panel includes all six original stanzas by John Newton. Choose a stanza; its current line is highlighted during playback and manual stepping.
+Select **Right hand**, **Opening**, and about **50–60 quarter notes per minute**. Choose **Organ** in the Sound menu beside the playback controls. The 16-bar tune is the same for every verse. Use **Full song** for all six original stanzas, or **Single verse** to choose and practise one stanza. The current lyric line is highlighted during playback and manual stepping.
 
 The right hand starts on **G3**, below middle C, with the thumb (1). Move toward middle C as the melody rises: C4 with 2, E4 with 4. Piano view shows finger numbers throughout. In Sheet music, use **Show fingering** when you need them; they are hidden by default. They suggest movements, not a position to stretch and hold. Later, move the hand right for G4 with finger 5.
 
@@ -16,7 +16,7 @@ In bar 1, hold C for beats 1–2; play E and C on **3 &**. Two eighth notes shar
 2. Learn bars 2–4. Practise the join from the end of bar 1 into bar 2, then play the opening through bar 4.
 3. Learn bars 5–8. Keep counting while G is held across the bar line.
 4. Work through bars 9–12, then 13–16. Use the overlapping passages to connect them.
-5. Select **Complete tune** and play the right hand through. Stop to work on the first uncertain join before repeating the whole tune.
+5. Select **Single verse** and play the right hand through. Stop to work on the first uncertain join before repeating the whole tune.
 
 ## Add the bass
 
@@ -29,3 +29,9 @@ Practise the bass alone, then combine one bar. The right hand changes notes whil
 The melody is the traditional **NEW BRITAIN** tune. This is our beginner arrangement in C, with an original single-note bass part. Public melody references: [Colin Hume’s ABC transcription](https://abcnotation.com/tunePage?a=colinhume.com%2FABC.txt%2F0030) and [Hymnary’s tune catalogue](https://hymnary.org/tune/new_britain). Traditional versions vary slightly in rhythm and ornamentation.
 
 [Musictheory.net: dots and ties](https://www.musictheory.net/lessons/14) explains the duration markings used here.
+
+## Full song or one verse
+
+**Full song** plays all six original stanzas by John Newton, with the Words panel changing automatically. Every stanza uses the same tune; there is no separate chorus. The score shows the tune once with the first stanza printed under it, and the moving dots return to the beginning for each verse. The downloadable PDF and MIDI contain that single complete tune.
+
+For practice, select **Single verse** and choose the stanza you want in the Words panel. The shorter passages are also available. You can use the position slider to move through the full performance without listening from the beginning.

@@ -63,6 +63,10 @@ The app does not send notes to an assistant automatically. **Copy check-in** pre
 
 To add a requested song, add its metadata to `content/songs.json` and put the referenced files in `content/songs/`. IDs and SVG filenames use lowercase letters, digits, and hyphens. Keep pitches and durations identical across both views. Finger guidance belongs in Piano view. Label simplified rhythm, excerpts, and original preparation exercises explicitly. Record the score source in the practice file. Full copyrighted arrangements should come from learner-provided material; do not commit private supplied scores to the public repository. Playback is shared by the lessons and song viewer.
 
+Local arrangements live in ignored `data/songs/`. Its `index.json` has the same `{ "songs": [...] }` catalogue shape, and each entry's assets live in `data/songs/SONG-ID/`. A local entry replaces the corresponding public entry in full, including its words and exercise. This prevents old lyrics being attached to a different version. The API, score downloads and JSON backup all use the selected local arrangement. Back up the whole `data/` directory as well to retain the source inputs and MIDI/PDF files.
+
+`uv run --locked python scripts/build-local-song.py INPUT.json` engraves a reviewed note list, writes both score variants, MIDI, playback events and moving-dot positions, then installs the catalogue entry. Its input schema is documented in the script. Note times are quarter-note units; supplied fingerings and section labels are editorial decisions. The builder verifies every rendered MIDI pitch, onset and duration against the input before publishing. Keep private inputs and outputs in `data/`; the reusable builder is committed. For isolated Chrome verification with local arrangements, run `MIGS_QA_SONGS="$PWD/data/songs" node scripts/check-song-ui.mjs`; it copies only song content into throwaway test data, never your progress or recordings.
+
 ## Validation
 
 ```sh

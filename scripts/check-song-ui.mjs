@@ -1,7 +1,7 @@
 // Headless Chrome verification against an isolated server and throwaway progress.
 // Node 22+ and Chrome are required. Screenshots go to a temporary directory.
 import {spawn} from 'node:child_process';
-import {mkdtemp,readFile,writeFile,rm} from 'node:fs/promises';
+import {mkdtemp,readFile,writeFile,rm,cp,mkdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -13,6 +13,10 @@ const chromePath=process.env.MIGS_CHROME || '/Applications/Google Chrome.app/Con
 let server,chrome,ws;
 async function poll(fn,label) { for(let i=0;i<100;i++){try{const value=await fn();if(value)return value;}catch{}await delay(100);}throw Error('Timed out: '+label); }
 try {
+  if (process.env.MIGS_QA_SONGS) {
+    await mkdir(path.join(temp,'data'),{recursive:true});
+    await cp(process.env.MIGS_QA_SONGS,path.join(temp,'data/songs'),{recursive:true});
+  }
   let serverOutput='';
   server=spawn(process.execPath,['server.mjs'],{cwd:root,env:{...process.env,PORT:'0',MIGS_DATA_DIR:path.join(temp,'data')},stdio:['ignore','pipe','pipe']});
   server.stdout.on('data',chunk=>serverOutput+=chunk);
@@ -28,7 +32,8 @@ try {
   const evaluate=async expression=>{const result=await send('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true,userGesture:true});if(result.exceptionDetails)throw Error(JSON.stringify(result.exceptionDetails));return result.result.value;};
   await send('Page.enable'); await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1800,deviceScaleFactor:1,mobile:false});
   for (const slug of ['amazing-grace','lord-of-the-dance','fur-elise','dont-stop-believin']) {
-    const expectedTitle=(await (await fetch(base+'/api/songs/'+slug)).json()).title;
+    const song=(await (await fetch(base+'/api/songs/'+slug)).json());
+    const expectedTitle=song.title;
     await send('Page.navigate',{url:base+'/#song/'+slug});
     await poll(()=>evaluate('document.querySelector("h1")?.textContent==='+JSON.stringify(expectedTitle)),'song title');
     await poll(()=>evaluate('!!document.querySelector("#song-score .melody-controls")'),'song load');
@@ -62,10 +67,30 @@ try {
         await writeFile(path.join(temp,slug+'-page-'+(i+1)+'.png'),Buffer.from(pageShot.data,'base64'));
       }
       await evaluate('document.querySelector("[data-action=melody]").click()');
+      if (slug==='amazing-grace') {
+        await evaluate('document.querySelector("[data-action=song-view][data-view=notes]").click()');
+        await poll(()=>evaluate('!!document.querySelector("#piano-position")'),'piano navigation');
+        assert.equal(await evaluate('document.querySelector("#lyric-verse").disabled'),true);
+        const firstVerseEvents=song.exercise.events.length;
+        await evaluate('{const s=document.querySelector("#piano-position");s.value='+firstVerseEvents+';s.dispatchEvent(new Event("input",{bubbles:true}));}');
+        assert.equal(await evaluate('document.querySelector("#lyric-verse").value'),'1');
+        assert.equal(await evaluate('document.querySelector(".current-lyric").textContent.startsWith("’Twas grace")'),true);
+        assert.ok(await evaluate('document.querySelector("#piano-step-label").textContent.includes("Verse 2")'));
+        await evaluate('document.querySelector("[data-action=melody]").click()');
+        await delay(150);
+        assert.equal(await evaluate('document.querySelector("#lyric-verse").value'),'1','playback resumes from the selected verse');
+        await evaluate('document.querySelector("[data-action=melody]").click()');
+        await evaluate('{const s=document.querySelector("#piano-position");s.value=0;s.dispatchEvent(new Event("input",{bubbles:true}));}');
+        assert.equal(await evaluate('document.querySelector("#lyric-verse").value'),'0');
+        await evaluate('const p=document.querySelector("#song-passage");p.value="tune";p.dispatchEvent(new Event("change",{bubbles:true}));');
+        assert.equal(await evaluate('document.querySelector("#lyric-verse").disabled'),false);
+        await evaluate('const v=document.querySelector("#lyric-verse");v.value="2";v.dispatchEvent(new Event("change",{bubbles:true}));');
+        await poll(()=>evaluate('document.querySelector(".lyric-lines").textContent.includes("Through many dangers")'),'single verse selection');
+      }
       if(slug==='lord-of-the-dance') {
-        await evaluate('const p=document.querySelector("#song-passage");p.value="b";p.dispatchEvent(new Event("change",{bubbles:true}));document.querySelector("[data-action=song-view][data-view=notes]").click()');
+        await evaluate('const p=document.querySelector("#song-passage");p.value='+JSON.stringify(song.localContent?'chorus':'b')+';p.dispatchEvent(new Event("change",{bubbles:true}));document.querySelector("[data-action=song-view][data-view=notes]").click()');
         await poll(()=>evaluate('!!document.querySelector(".player-keyboards")'),'piano view');
-        assert.equal(await evaluate('document.querySelector(".current-lyric").textContent.startsWith("When true")'),true);
+        if (song.lyrics) assert.equal(await evaluate('document.querySelector(".current-lyric").textContent.startsWith("When true")'),true);
         await evaluate('const hand=document.querySelector("#song-hands");hand.value="right";hand.dispatchEvent(new Event("change",{bubbles:true}));document.querySelectorAll("[data-action=piano-step]")[1].click()');
         assert.equal(await evaluate('document.querySelectorAll("[data-hand=left] .sounding").length'),0);
         assert.ok(await evaluate('document.querySelectorAll("[data-hand=right] .sounding").length')>0);
