@@ -1,4 +1,0 @@
-genanki==0.13.1
-Pillow==13.0.0
-# Anki itself is used only for the optional import/regression check.
-anki==25.9.2

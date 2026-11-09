@@ -18,13 +18,13 @@ Optional song packs are independent of the core lesson release. A full library a
 - `images.json`, `source/`, `media/`: notation specifications, LilyPond sources, and PNGs.
 - `decks/`, `manifest.json`: generated import packages and download metadata.
 
-Install the pinned dependencies from `scripts/anki-requirements.txt` in a virtual environment. With LilyPond installed, run:
+The dependencies are declared in the root `pyproject.toml` and pinned in `uv.lock`. From the repository root, with uv and LilyPond installed, run:
 
 ```sh
-python scripts/anki-content.py
-python scripts/build-anki.py --images
-python scripts/check-theory.py
-python scripts/check-anki.py
+uv run --group flashcards python scripts/anki-content.py
+uv run --group flashcards python scripts/build-anki.py --images
+uv run --group flashcards python scripts/check-theory.py
+uv run --group flashcards python scripts/check-anki.py
 ```
 
 The build only needs `--images` when image specifications change. `check-anki.py` imports packages into temporary collections, renders both card directions, verifies media, checks duplicate-free updates and confirms that scheduled reviews survive. It never opens the learner's collection. `check-theory.py` checks notation source pitches and release boundaries independently of package import.

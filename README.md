@@ -74,14 +74,29 @@ npm test
 
 Integration tests use an isolated temporary data directory, exercise real HTTP endpoints, restart the server, and verify saved data survives. They do not alter the learner's progress.
 
+## Python tools
+
+Python tooling uses **uv**, `pyproject.toml`, `.python-version` and the committed `uv.lock`. Run commands from this repository. `uv` creates the local `.venv/`; the environment is ignored by Git and can be recreated from the lockfile. Python 3.13 matches the validated Anki tooling.
+
+```sh
+brew install uv ffmpeg lilypond poppler
+uv sync --locked --all-groups
+uv run python scripts/check-theory.py
+uv run --group flashcards python scripts/check-anki.py
+```
+
+The base environment provides NumPy for local audio/video analysis and Pillow for image processing. The `flashcards` dependency group adds genanki and Anki's collection/import library. FFmpeg/ffprobe inspect and convert media, LilyPond engraves scores and produces MIDI, and Poppler renders PDFs for visual review. These system programs are not Python packages. The Node server does not need the Python environment to serve already-built content.
+
+Use `uv run python scripts/NAME.py ...` for media and score tools, and `uv run --group flashcards python scripts/NAME.py ...` for Anki tools. The Anki in-app import helper is the exception: it runs inside Anki's own console. Keep reusable scripts and documentation committed; put local media inputs, extracted frames and private transcriptions under ignored `data/` or outside the repository. Never embed a downloaded video's path in committed code.
+
 ## Rebuilding music and inspecting source video
 
-Run `python3 scripts/build-fur-elise.py` from the repository root with LilyPond 2.26 installed. It rebuilds the score, unfolded MIDI, player events, suggested fingerings, and the map from playback notes to engraved noteheads. The green dots are drawn above the staff; the printed SVG remains unchanged beneath them. Generated assets are committed, so LilyPond and Python are not needed to run the app.
+Run `uv run python scripts/build-fur-elise.py` from the repository root with LilyPond 2.26 installed. It rebuilds the score, unfolded MIDI, player events, suggested fingerings, and the map from playback notes to engraved noteheads. The green dots are drawn above the staff; the printed SVG remains unchanged beneath them. Generated assets are committed, so LilyPond and Python are not needed to run the app.
 
 `scripts/extract-video-frames.py` extracts sparse, timestamped frames using FFmpeg's input seeking. Start with `--every 60`, then use `--times 30,90,330` for chosen details. Store source videos and extracted frames under ignored `data/video-review/`. The extraction script and inspection decisions belong in Git; personal video files do not. No video-analysis API is called.
 
-Run `python3 scripts/build-journey.py` to rebuild the Journey accompaniment from the committed arrangement code. Source review timestamps and adaptation decisions are in `content/songs/journey-source-review.md`; no downloaded-video paths are stored in the repository. Both score builders share the meter-aware MIDI importer and score-linking code.
+Run `uv run python scripts/build-journey.py` to rebuild the Journey accompaniment from the committed arrangement code. Source review timestamps and adaptation decisions are in `content/songs/journey-source-review.md`; no downloaded-video paths are stored in the repository. Both score builders share the meter-aware MIDI importer and score-linking code.
 
 `scripts/convert-video.py INPUT --output OUTPUT.mp4` creates H.264/AAC MP4 using FFmpeg and reports the output codecs/duration. It refuses to overwrite an existing file or the original. Frame extraction supports `--crop width:height:x:y` after scaling and merges its inspection manifest when adding timestamps.
 
-Run `python3 scripts/build-hymns.py` to regenerate the two beginner hymn tunes. `scripts/score_output.py` removes only tagged fingering groups from the default SVGs, preserving score coordinates, and builds plain PDF scores. Higher-level Simple Gifts arrangement helpers are retained in the builder but not published or built by default. Run `python3 scripts/build-lessons.py` to rebuild the original lesson 7–12 exercises (plus Beethoven’s public-domain Ode to Joy opening). `python3 scripts/build-music-symbols.py` regenerates the lesson renderer’s vector glyphs. After any content or code change, run the relevant checks and commit and push the completed change to `main`; see `content/learner-guide.md`.
+Run `uv run python scripts/build-hymns.py` to regenerate the two beginner hymn tunes. `scripts/score_output.py` removes only tagged fingering groups from the default SVGs, preserving score coordinates, and builds plain PDF scores. Higher-level Simple Gifts arrangement helpers are retained in the builder but not published or built by default. Run `uv run python scripts/build-lessons.py` to rebuild the original lesson 7–12 exercises (plus Beethoven’s public-domain Ode to Joy opening). `uv run python scripts/build-music-symbols.py` regenerates the lesson renderer’s vector glyphs. After any content or code change, run the relevant checks and commit and push the completed change to `main`; see `content/learner-guide.md`.

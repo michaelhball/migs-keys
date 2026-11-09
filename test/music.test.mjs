@@ -147,7 +147,7 @@ test('hymn lyric phrases follow absolute score positions when stepping or changi
 });
 
 test('song fingering is opt-in and removing it preserves score geometry and lyrics', async () => {
-  execFileSync('python3',[fileURLToPath(new URL('./score-assets.py',import.meta.url))]);
+  execFileSync('uv',['run','--locked','python',fileURLToPath(new URL('./score-assets.py',import.meta.url))]);
   const {performancePlayer}=await import('../public/performance.js');
   const library=JSON.parse(await readFile(new URL('../content/songs.json',import.meta.url),'utf8'));
   for (const song of library.songs.filter(s=>s.fingeredNotationFiles)) {
