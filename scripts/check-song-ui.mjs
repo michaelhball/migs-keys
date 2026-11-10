@@ -115,11 +115,46 @@ try {
   await send('Page.navigate',{url:base+'/#lesson/1'});
   await poll(()=>evaluate('!!document.querySelector("#lesson-player")&&document.querySelector("#melody-tempo")?.value==="37"'),'lesson tempo preserved');
   await send('Page.navigate',{url:base+'/#song/roses'});
-  await poll(()=>evaluate('document.querySelector("h1")?.textContent==="Roses · piano intro"'),'Roses source page');
-  assert.equal(await evaluate('document.querySelector("#melody-tempo")'),null,'source-only song has no misleading playback control');
-  assert.ok(await evaluate('!!document.querySelector("a[href$=\\"outkast_roses_piano_solo.pdf\\"]")'));
+  const roses=await (await fetch(base+'/api/songs/roses')).json();
+  await poll(()=>evaluate('document.querySelector("h1")?.textContent==="Roses · piano intro"'),'Roses page');
+  if (roses.exercise) {
+    await poll(()=>evaluate('!!document.querySelector("#melody-tempo")'),'local Roses player');
+    assert.equal(await evaluate('document.querySelector("#melody-tempo").value'),'109');
+    assert.equal(await evaluate('document.querySelector("#song-passage").value'),'full');
+    await evaluate('document.querySelector("[data-action=song-view][data-view=notation]").click()');
+    await poll(()=>evaluate('document.querySelector(".full-score-page")?.naturalWidth>0'),'local score image');
+    assert.equal(await evaluate('document.querySelector(".player-keyboards")'),null);
+    assert.equal(await evaluate('document.querySelector("[data-action=song-fingering]").getAttribute("aria-pressed")'),'false');
+    await evaluate('window.__audioAttacks=0;window.__oldAudioStart=AudioBufferSourceNode.prototype.start;AudioBufferSourceNode.prototype.start=function(...args){window.__audioAttacks++;return window.__oldAudioStart.apply(this,args)};document.querySelector("#follow-score").checked=false;document.querySelector("[data-action=melody]").click()');
+    await poll(()=>evaluate('window.__audioAttacks>3&&!!document.querySelector(".score-marker")'),'audio notes and score markers');
+    await evaluate('document.querySelector(".score-scroll").scrollIntoView({behavior:"instant",block:"start"})');
+    await writeFile(path.join(temp,'roses-score.png'),Buffer.from((await send('Page.captureScreenshot',{format:'png'})).data,'base64'));
+    await evaluate('document.querySelector("[data-action=melody]").click();AudioBufferSourceNode.prototype.start=window.__oldAudioStart;document.querySelector("[data-action=song-view][data-view=notes]").click()');
+    await poll(()=>evaluate('!!document.querySelector("#piano-position")'),'local piano navigation');
+    // Every supplied note, including ornaments and held notes, has a visible
+    // keyboard key and the correct finger at its static navigation step.
+    const steps=roses.exercise.events.map(e=>({right:e.right.map(n=>[n.midi,n.finger]),left:e.left.map(n=>[n.midi,n.finger])}));
+    assert.equal(await evaluate(`(()=>{const steps=${JSON.stringify(steps)};const slider=document.querySelector('#piano-position');for(let i=0;i<steps.length;i++){slider.value=i;slider.dispatchEvent(new Event('input',{bubbles:true}));for(const hand of ['right','left']){const keys=[...document.querySelectorAll('[data-hand="'+hand+'"] .sounding')];if(keys.length!==steps[i][hand].length)return 'key count at '+i;for(const [midi,finger] of steps[i][hand]){const key=keys.find(k=>Number(k.dataset.note)===midi);if(key?.querySelector('.key-finger').textContent!==String(finger))return 'finger at '+i+':'+midi;}}}return 'ok'})()`),'ok');
+    for (const passage of roses.exercise.passages) {
+      await evaluate(`{const p=document.querySelector('#song-passage');p.value=${JSON.stringify(passage.id)};p.dispatchEvent(new Event('change',{bubbles:true}));}`);
+      assert.ok(await evaluate('Number(document.querySelector("#piano-position").max)')>0,'nonempty passage');
+    }
+    await evaluate('const p=document.querySelector("#song-passage");p.value="full";p.dispatchEvent(new Event("change",{bubbles:true}));const hand=document.querySelector("#song-hands");hand.value="right";hand.dispatchEvent(new Event("change",{bubbles:true}));document.querySelectorAll("[data-action=piano-step]")[1].click()');
+    assert.equal(await evaluate('document.querySelectorAll("[data-hand=left] .sounding").length'),0);
+    assert.ok(await evaluate('document.querySelectorAll("[data-hand=right] .sounding").length')>0);
+    await evaluate('document.querySelector("#song-hands").value="both";document.querySelector("#song-hands").dispatchEvent(new Event("change",{bubbles:true}));document.querySelector(".piano-navigation").scrollIntoView({behavior:"instant",block:"center"})');
+    await writeFile(path.join(temp,'roses-piano.png'),Buffer.from((await send('Page.captureScreenshot',{format:'png'})).data,'base64'));
+    await evaluate('{const t=document.querySelector("#melody-tempo");t.value=48;t.dispatchEvent(new Event("change",{bubbles:true}));}');
+    await poll(async()=>(await(await fetch(base+'/api/state')).json()).settings.songTempos?.roses===48,'local tempo persistence');
+    await evaluate('document.querySelector("[data-action=song-tempo-reset]").click()');
+    await poll(()=>evaluate('document.querySelector("#melody-tempo").value==="109"'),'local reference tempo reset');
+    console.log('Roses: notation, audio, markers, every keyboard step, fingerings, passages and tempo passed');
+  } else {
+    assert.equal(await evaluate('document.querySelector("#melody-tempo")'),null,'source-only song has no misleading playback control');
+    assert.ok(await evaluate('!!document.querySelector("a[href$=\\"outkast_roses_piano_solo.pdf\\"]")'));
+  }
   await writeFile(path.join(temp,'roses.png'),Buffer.from((await send('Page.captureScreenshot',{format:'png'})).data,'base64'));
-  console.log('Per-song tempo persistence, reset, lesson isolation and Roses source page passed');
+  console.log('Per-song tempo persistence, reset, lesson isolation and Roses page passed');
   console.log('Screenshots: '+temp);
 } finally {
   ws?.close(); chrome?.kill('SIGTERM'); server?.kill('SIGTERM');

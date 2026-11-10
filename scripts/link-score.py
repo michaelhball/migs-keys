@@ -5,11 +5,12 @@ The source event log comes from an unfolded layout with score-events.ily.
 from pathlib import Path
 from fractions import Fraction
 import argparse,json,re,xml.etree.ElementTree as ET
+from score_timing import link_timed_notes
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('event_log',type=Path);parser.add_argument('svg_prefix')
 parser.add_argument('--performance',type=Path,default=Path('content/songs/fur-elise-performance.json'))
 parser.add_argument('--output',type=Path,default=Path('content/songs/fur-elise-score-map.json'))
-parser.add_argument('--timed',action='store_true',help='Match by score time; supports tied continuations (no grace notes)')
+parser.add_argument('--timed',action='store_true',help='Match score time, tied continuations and grace-note MIDI attacks')
 args=parser.parse_args();p=args.performance;d=json.loads(p.read_text())
 source={'right':[],'left':[]}
 for line in args.event_log.read_text().splitlines():
@@ -23,21 +24,11 @@ for event in d['events']:
  time+=event['beats']
 ids={};all_keys=set()
 if args.timed:
- # A tied note has one MIDI attack but several printed heads. Move the marker
- # to each continuation without retriggering the sound.
- at={hand:{} for hand in source}
- for hand,origins in source.items():
-  for moment,grace,pitch,key in origins:
-   assert not grace, 'Timed matching does not support grace notes.'
-   at[hand].setdefault(round(float(moment)*d['meter'][1],6),{})[pitch]=key
- current={hand:{} for hand in source};time=0
+ d['events']=link_timed_notes(source,d['events'],d['meter'][1])
  for event in d['events']:
   for hand in source:
-   current[hand].update(at[hand].get(round(time,6),{}))
    for note in event[hand]:
-    note['scoreKey']=current[hand][note['midi']]
     all_keys.add(note['scoreKey']);ids[note['id']]=note['scoreKey']
-  time+=event['beats']
 else:
  for hand in source:
   src=sorted(source[hand],key=lambda x:(x[0],x[1],x[2]));notes=sorted(played[hand])
@@ -77,7 +68,7 @@ for page,file in enumerate(files,1):
    if path is None or not transform:continue
    shape=path.get('d','')
    # Emmentaler noteheads at the 18/20-point staff sizes used by our scores.
-   if not shape.startswith(('M0 -46','M0 -45','M0 -42','M0 -34','M0 -40','M74 -105','M343 -25')):continue
+   if not shape.startswith(('M0 -46','M0 -45','M0 -42','M0 -34','M0 -38','M0 -40','M74 -105','M72 -106','M343 -25','M347 -26')):continue
    x,y=map(float,transform.groups())
    staff=min(tops,key=lambda top:abs(y-(top+2)))
    # Marker is always above the staff and above high ledger notes.
