@@ -21,6 +21,7 @@ try {
   server=spawn(process.execPath,['server.mjs'],{cwd:root,env:{...process.env,PORT:'0',MIGS_DATA_DIR:path.join(temp,'data')},stdio:['ignore','pipe','pipe']});
   server.stdout.on('data',chunk=>serverOutput+=chunk);
   const base=await poll(()=>serverOutput.match(/http:\/\/127\.0\.0\.1:\d+/)?.[0],'local server');
+  await fetch(base+'/api/settings',{method:'PUT',headers:{'Content-Type':'application/json','X-Migs-Local':'1'},body:JSON.stringify({melodyTempo:37})});
   chrome=spawn(chromePath,['--headless','--disable-gpu','--no-first-run','--disable-background-networking','--mute-audio','--autoplay-policy=no-user-gesture-required','--remote-debugging-port=0',`--user-data-dir=${path.join(temp,'chrome')}`,'about:blank'],{stdio:'ignore'});
   const port=await poll(async()=>Number((await readFile(path.join(temp,'chrome/DevToolsActivePort'),'utf8')).split('\n')[0]),'Chrome');
   const targets=await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
@@ -37,6 +38,7 @@ try {
     await send('Page.navigate',{url:base+'/#song/'+slug});
     await poll(()=>evaluate('document.querySelector("h1")?.textContent==='+JSON.stringify(expectedTitle)),'song title');
     await poll(()=>evaluate('!!document.querySelector("#song-score .melody-controls")'),'song load');
+    assert.equal(await evaluate('Number(document.querySelector("#melody-tempo").value)'),Math.round(song.tempo.bpm*song.exercise.meter[1]/song.tempo.unit),'song starts at reference tempo, not lesson tempo');
     if(await evaluate('document.querySelector("[data-action=song-view][data-view=notation]").getAttribute("aria-pressed")!=="true"')) {
       await evaluate('document.querySelector("[data-action=song-view][data-view=notation]").click()');
     }
@@ -98,6 +100,26 @@ try {
     }
     console.log(slug+': browser checks passed');
   }
+  await evaluate('{const t=document.querySelector("#melody-tempo");t.value=90;t.dispatchEvent(new Event("change",{bubbles:true}));}');
+  await poll(async()=>(await(await fetch(base+'/api/state')).json()).settings.songTempos?.['dont-stop-believin']===90,'save song tempo');
+  await send('Page.navigate',{url:base+'/#song/fur-elise'});
+  await poll(()=>evaluate('document.querySelector("h1")?.textContent==="Für Elise"&&document.querySelector("#melody-tempo")?.value==="144"'),'independent second song tempo');
+  await send('Page.navigate',{url:base+'/#song/dont-stop-believin'});
+  await poll(()=>evaluate('document.querySelector("h1")?.textContent.includes("Believin")&&document.querySelector("#melody-tempo")?.value==="90"'),'saved song tempo after navigation');
+  await evaluate('window.__migsTempoOldDocument=true');
+  await send('Page.reload');
+  await poll(()=>evaluate('!window.__migsTempoOldDocument&&document.querySelector("#melody-tempo")?.value==="90"'),'saved song tempo after reload');
+  await evaluate('document.querySelector("[data-action=song-tempo-reset]").click()');
+  await poll(()=>evaluate('document.querySelector("#melody-tempo")?.value==="119"'),'reset reference tempo');
+  await poll(async()=>(await(await fetch(base+'/api/state')).json()).settings.songTempos?.['dont-stop-believin']===undefined,'persist tempo reset');
+  await send('Page.navigate',{url:base+'/#lesson/1'});
+  await poll(()=>evaluate('!!document.querySelector("#lesson-player")&&document.querySelector("#melody-tempo")?.value==="37"'),'lesson tempo preserved');
+  await send('Page.navigate',{url:base+'/#song/roses'});
+  await poll(()=>evaluate('document.querySelector("h1")?.textContent==="Roses · piano intro"'),'Roses source page');
+  assert.equal(await evaluate('document.querySelector("#melody-tempo")'),null,'source-only song has no misleading playback control');
+  assert.ok(await evaluate('!!document.querySelector("a[href$=\\"outkast_roses_piano_solo.pdf\\"]")'));
+  await writeFile(path.join(temp,'roses.png'),Buffer.from((await send('Page.captureScreenshot',{format:'png'})).data,'base64'));
+  console.log('Per-song tempo persistence, reset, lesson isolation and Roses source page passed');
   console.log('Screenshots: '+temp);
 } finally {
   ws?.close(); chrome?.kill('SIGTERM'); server?.kill('SIGTERM');

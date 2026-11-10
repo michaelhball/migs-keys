@@ -31,7 +31,7 @@ Open **http://127.0.0.1:4317**. Keep the server running while using the app. Sto
 
 Notes, progress, settings, and timer state are saved to disk. Journal drafts save after a short pause in typing and when closing the note dialog. Audio playback itself stops on navigation or page close. The timer can be resumed across a page reload because its start time is persisted. Pause it when leaving your practice session.
 
-The melody player has its own tempo setting, from 30 to 180 BPM, starting at 60 BPM. Changing tempo during playback adjusts the remaining notes without restarting the melody. This setting is saved separately from the metronome tempo.
+Lesson melodies keep their own tempo setting, from 30 to 180 BPM, initially 60. Each song starts at its reference tempo; changes are saved per song in `settings.songTempos`, independently of lessons and the metronome. **Reset tempo** removes that song's override. Changing tempo during playback adjusts the remaining notes without restarting. Song metadata records the reference's BPM, counted note value, basis and source; playback converts it to the meter's denominator unit. Thus Für Elise's score marking quarter = 72 becomes 144 eighth notes per minute. Hymns without a fixed recording use explicitly labelled arrangement tempos.
 
 **Songs** appears below **Practice journal**. **Piano view** has one keyboard per hand, finger numbers, Previous/Next controls, a position slider, and a bar selector. It can be studied without playing audio. **Sheet music** shows notation separately. Für Elise includes the full public-domain edition, both hands, repeats, original 3/8 timing, selectable passages, looping, and a PDF/MIDI download. Journey includes a 116-bar tutorial-based piano accompaniment with both hands, walking bass, named sections, overlapping practice passages, synced notation and PDF/MIDI downloads. Repeated voicings are standardized for practice; the vocal/guitar melody is not included.
 
@@ -74,7 +74,7 @@ npm run check
 npm test
 ```
 
-`node scripts/check-song-ui.mjs` checks all four song pages in headless Chrome, including saved fingering, score playback dots and hand-filtered stepping. It uses a temporary server and profile and leaves screenshots in the printed temporary directory. It requires Node 22+ and Chrome; set `MIGS_CHROME` if Chrome is installed elsewhere.
+`node scripts/check-song-ui.mjs` checks the four playable songs and the Roses source page in headless Chrome, including saved fingering, score playback dots, hand-filtered stepping, per-song tempo persistence/reset and isolation from lessons. It uses a temporary server and profile and leaves screenshots in the printed temporary directory. It requires Node 22+ and Chrome; set `MIGS_CHROME` if Chrome is installed elsewhere.
 
 Integration tests use an isolated temporary data directory, exercise real HTTP endpoints, restart the server, and verify saved data survives. They do not alter the learner's progress.
 

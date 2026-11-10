@@ -5,6 +5,25 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { musicPlayer, measures, notation } from '../public/music.js';
 
+test('song defaults use their own reference tempo and convert the counted note value',async()=>{
+  const {referenceTempo,songTempo,performancePlayer}=await import('../public/performance.js');
+  const song={id:'example',tempo:{bpm:72,unit:4,label:'Score tempo'},exercise:{timeline:true,meter:[3,8],events:[{bar:1,beat:0,beats:3,right:[],left:[]}]}};
+  assert.equal(referenceTempo(song),144,'quarter=72 equals eighth=144');
+  assert.equal(songTempo(song,{melodyTempo:30}),144,'legacy shared tempo is not a song default');
+  assert.equal(songTempo(song,{songTempos:{example:90,other:100}}),90);
+  assert.equal(songTempo({...song,id:'other-song'},{songTempos:{example:90}}),144);
+  const html=performancePlayer(song,song.exercise,144,'notes');
+  assert.match(html,/Reset tempo/);assert.match(html,/144 eighth notes/);
+  const library=JSON.parse(await readFile(new URL('../content/songs.json',import.meta.url),'utf8'));
+  for (const song of library.songs) {
+    assert.ok(song.tempo?.bpm>0);assert.ok([4,8].includes(song.tempo.unit));
+    if (song.exerciseFile) {
+      song.exercise=JSON.parse(await readFile(new URL('../content/songs/'+song.exerciseFile,import.meta.url),'utf8'));
+      assert.ok(referenceTempo(song)>=30&&referenceTempo(song)<=180);
+    }
+  }
+});
+
 test('available lesson exercises have complete bars, matching hand keyboards, and notation', async () => {
   const course = JSON.parse(await readFile(new URL('../content/course.json', import.meta.url), 'utf8'));
   for (const lesson of course.lessons.filter(x => x.file)) {

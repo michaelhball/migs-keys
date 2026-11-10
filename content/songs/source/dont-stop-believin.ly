@@ -5,7 +5,7 @@
 \score {
 \new PianoStaff <<
 \new Staff = "up" {
-\clef treble \key e \major \numericTimeSignature \time 4/4 \tempo 4 = 60
+\clef treble \key e \major \numericTimeSignature \time 4/4 \tempo 4 = 119
 \mark \markup \small "Intro"
 <e' b'>8 b8 <e' b'>8 b8 <e' b'>8 b8 <e' b'>8 b8 | % bar 1
 <fis' b'>8 b8 <fis' b'>8 b8 <fis' b'>8 b8 <fis' b'>8 b8 | % bar 2
@@ -138,7 +138,7 @@
 \bar "|."
 }
 \new Staff = "down" {
-\clef bass \key e \major \numericTimeSignature \time 4/4 \tempo 4 = 60
+\clef bass \key e \major \numericTimeSignature \time 4/4 \tempo 4 = 119
 e,2~ e,8 fis,8 gis,8 b,8~ | % bar 1
 b,2~ b,8 cis8 dis8 cis8~ | % bar 2
 cis2~ cis8 dis8 e8 a,8~ | % bar 3

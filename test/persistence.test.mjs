@@ -87,7 +87,18 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.equal((await request('/api/settings','PUT',{songFingering:{songId:'amazing-grace',show:'yes'}})).status,400);
   await request('/api/settings','PUT',{songFingering:{songId:'amazing-grace',show:true}});
   const library = await request('/api/songs');
-  assert.deepEqual(library.data.songs.map(song => song.id), ['dont-stop-believin', 'fur-elise', 'amazing-grace', 'lord-of-the-dance']);
+  assert.deepEqual(library.data.songs.map(song => song.id), ['dont-stop-believin', 'fur-elise', 'amazing-grace', 'lord-of-the-dance', 'roses']);
+  const roses=await request('/api/songs/roses');
+  assert.equal(roses.data.exercise,undefined);
+  assert.match(roses.data.practice,/outkast_roses_piano_solo\.pdf/);
+  assert.equal((await request('/api/settings','PUT',{songTempo:{songId:'roses',tempo:90}})).status,400);
+  for (const tempo of [0,29,181,90.5,'90',undefined]) assert.equal((await request('/api/settings','PUT',{songTempo:{songId:'fur-elise',tempo}})).status,400);
+  assert.equal((await request('/api/settings','PUT',{songTempo:{songId:'missing',tempo:90}})).status,400);
+  await request('/api/settings','PUT',{songTempo:{songId:'fur-elise',tempo:90}});
+  await request('/api/settings','PUT',{songTempo:{songId:'dont-stop-believin',tempo:100}});
+  await request('/api/settings','PUT',{songTempo:{songId:'dont-stop-believin',tempo:null}});
+  assert.deepEqual((await request('/api/state')).data.settings.songTempos,{'fur-elise':90});
+  assert.equal((await request('/api/state')).data.settings.melodyTempo,60,'song tempos do not change lesson tempo');
   for (const song of library.data.songs) {
     const detail = await request(`/api/songs/${song.id}`);
     assert.equal(detail.status, 200);
@@ -130,7 +141,8 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   await request('/api/drafts/1', 'PUT', { ...draft, worked: 'A new draft to resume.' });
   const exported = await request('/api/export');
   assert.equal(exported.data.lessons.length, 12);
-  assert.equal(exported.data.songs.length, 4);
+  assert.equal(exported.data.songs.length, 5);
+  assert.deepEqual(exported.data.progress.settings.songTempos,{'fur-elise':90});
   assert.match(exported.data.songs[1].scores[0].svg, /<svg/);
   assert.match(exported.data.songs[1].noteNames, /D♯5/);
   assert.equal(exported.data.progress.sessions[0].sticky, draft.sticky);
@@ -160,6 +172,7 @@ test('course, journal, drafts, checkpoints and settings survive a server restart
   assert.deepEqual(saved.checkpoints['1'], [0, 1]);
   assert.equal(saved.settings.tempo, 72);
   assert.equal(saved.settings.melodyTempo, 105);
+  assert.deepEqual(saved.settings.songTempos,{'fur-elise':90});
   assert.equal(saved.settings.timer.elapsed, 42);
   assert.equal(saved.settings.songView, 'notation');
   assert.equal(saved.settings.lessonFingerings['7'], true);

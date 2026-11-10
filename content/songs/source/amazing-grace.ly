@@ -7,7 +7,7 @@
 \new PianoStaff <<
 \new Staff = "up" {
 \new Voice = "melody" {
-\clef treble \key c \major \numericTimeSignature \time 3/4 \tempo 4 = 60 \partial 4
+\clef treble \key c \major \numericTimeSignature \time 3/4 \tempo 4 = 80 \partial 4
 g4-1 | % 0
 c'2-2 e'8-4 c'8-2 | % 1
 e'2-4 d'4-3 | % 2
@@ -48,7 +48,7 @@ see.
 
 }
 \new Staff = "down" {
-\clef bass \key c \major \numericTimeSignature \time 3/4 \tempo 4 = 60 \partial 4
+\clef bass \key c \major \numericTimeSignature \time 3/4 \tempo 4 = 80 \partial 4
 r4 | % 0
 c2.-5 | % 1
 c2.-5 | % 2

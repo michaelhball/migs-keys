@@ -69,7 +69,7 @@ sections={1:'Intro',9:'Verse 1',17:'Verse 2',25:'Instrumental',33:'Verse 3',41:'
 source=folder/'source'/f'{slug}.ly'
 lines=['\\version "2.26.0"','\\header { title = "Don’t Stop Believin’" subtitle = "Piano accompaniment · tutorial-based practice arrangement" composer = "Journey" tagline = ##f }', '#(set-global-staff-size 18)', '\\paper { top-margin = 10\\mm bottom-margin = 10\\mm ragged-last-bottom = ##t }', '\\score {', '\\new PianoStaff <<']
 for hand,bars in [('up',right),('down',left)]:
-    lines+=['\\new Staff = "'+hand+'" {','\\clef '+('treble' if hand=='up' else 'bass')+' \\key e \\major \\numericTimeSignature \\time 4/4 \\tempo 4 = 60']
+    lines+=['\\new Staff = "'+hand+'" {','\\clef '+('treble' if hand=='up' else 'bass')+' \\key e \\major \\numericTimeSignature \\time 4/4 \\tempo 4 = 119']
     for number,bar in enumerate(bars,1):
         if hand=='up' and number in sections:lines.append('\\mark \\markup \\small "'+sections[number]+'"')
         lines.append(bar+' |'+(' \\break' if number%4==0 else '')+' % bar '+str(number))

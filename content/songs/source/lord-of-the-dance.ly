@@ -7,7 +7,7 @@
 \new PianoStaff <<
 \new Staff = "up" {
 \new Voice = "melody" {
-\clef treble \key c \major \numericTimeSignature \time 4/4 \tempo 4 = 60 \partial 4
+\clef treble \key c \major \numericTimeSignature \time 4/4 \tempo 4 = 100 \partial 4
 g8-1 g8-1 | % 0
 \mark \markup "A" c'4-1 c'8-1 d'8-2 e'8-3 c'8-1 e'8-3 f'8-4 | % 1
 g'4-5 g'8-5 f'8-4 e'4-3 d'8-2 c'8-1 | \break % 2
@@ -48,7 +48,7 @@ turn -- ing, turn -- ing we
 come round right.
 }
 \new Staff = "down" {
-\clef bass \key c \major \numericTimeSignature \time 4/4 \tempo 4 = 60 \partial 4
+\clef bass \key c \major \numericTimeSignature \time 4/4 \tempo 4 = 100 \partial 4
 r4 | % 0
 c1-5 | % 1
 c1-5 | \break % 2

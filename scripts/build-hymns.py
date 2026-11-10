@@ -7,7 +7,7 @@ import json, re, shutil, subprocess, sys, tempfile
 from score_output import FINGERING_LAYOUT, write_score_pages, plain_pdf
 ROOT = Path(__file__).resolve().parent.parent
 FOLDER = ROOT / 'content/songs'
-SONGS=[dict(slug='amazing-grace',title='Amazing Grace',composer='Traditional · NEW BRITAIN',meter='3/4',
+SONGS=[dict(slug='amazing-grace',title='Amazing Grace',composer='Traditional · NEW BRITAIN',meter='3/4',tempo=80,
  pickup="g4-1",bars=[
  "c'2-2 e'8-4 c'8-2", "e'2-4 d'4-3", "c'2-3 a4-2", 'g2-1 g4-1',
  "c'2-2 e'8-4 c'8-2", "e'2-4 d'4-3", "g'2.-5~", "g'2-5 e'4-3",
@@ -16,7 +16,7 @@ SONGS=[dict(slug='amazing-grace',title='Amazing Grace',composer='Traditional · 
  bass=['c','c','f,','c','c','c','g,','g,','c','c','f,','c','c','g,','c','c'],
  summary='The complete tune in C, with all six original verses in full-song playback and a single-verse practice option.',
  material='Beginner arrangement of NEW BRITAIN in 3/4. Full song repeats the tune for all six original verses; the Words panel follows each verse.'),
- dict(slug='lord-of-the-dance',title='Lord of the Dance · Simple Gifts',composer='Joseph Brackett · traditional tune',meter='4/4',
+ dict(slug='lord-of-the-dance',title='Lord of the Dance · Simple Gifts',composer='Joseph Brackett · traditional tune',meter='4/4',tempo=100,
  pickup='g8-1 g8-1',bars=[
  "c'4-1 c'8-1 d'8-2 e'8-3 c'8-1 e'8-3 f'8-4",
  "g'4-5 g'8-5 f'8-4 e'4-3 d'8-2 c'8-1",
@@ -122,7 +122,7 @@ def build(song, variant):
  for hand, bars in [('up', right), ('down', left)]:
   lines += ['\\new Staff = "' + hand + '" {']
   if hand == 'up': lines += ['\\new Voice = "melody" {']
-  lines += ['\\clef ' + ('treble' if hand == 'up' else 'bass') + f' \\key c \\major \\numericTimeSignature \\time {song["meter"]} \\tempo 4 = 60 \\partial 4']
+  lines += ['\\clef ' + ('treble' if hand == 'up' else 'bass') + f' \\key c \\major \\numericTimeSignature \\time {song["meter"]} \\tempo 4 = {song["tempo"]} \\partial 4']
   for i, bar in enumerate(bars):
    marker = ''
    if base == 'lord-of-the-dance' and hand == 'up' and i == 1: marker = '\\mark \\markup "A" '

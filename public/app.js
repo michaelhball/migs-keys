@@ -5,7 +5,7 @@ import { SoundEngine } from './sound.js';
 import { markdown, escapeHtml as esc } from './markdown.js';
 import { MelodyPlayer } from './playback.js';
 import { musicPlayer, handNotes, notation } from './music.js';
-import { performancePlayer, selectPassage, lyricIndexAt } from './performance.js';
+import { performancePlayer, selectPassage, lyricIndexAt, referenceTempo, songTempo, tempoReference } from './performance.js';
 
 const $ = selector => document.querySelector(selector);
 let course, state, currentLesson, currentSong, currentExercise, recorder, routeVersion = 0;
@@ -105,6 +105,7 @@ async function showLesson(id, today) {
   const item = await api(`lessons/${id}`);
   if (version !== routeVersion) return;
   currentLesson = item;
+  melodyTempo = state.settings.melodyTempo || 60;
   if (!item.markdown) {
     main.innerHTML = `${intro(`LESSON ${item.id} · PLANNED`, item.title, item.description)}<div class="planned-card card"><h2>Lesson not written yet</h2><p>This topic is planned. The exercises will be added based on your progress.</p><p>To work on this topic sooner, mention it at your next check-in.</p><a href="#today" class="button primary">Back to your current lesson →</a></div>`;
     return;
@@ -157,7 +158,13 @@ async function showSongs(id) {
   }
   const song = await api(`songs/${encodeURIComponent(id)}`);
   if (version !== routeVersion) return;
-  currentSong = song; songPassage = song.defaultPassage || 'opening'; currentExercise = song.exercise.timeline ? selectPassage(song.exercise, songPassage) : song.exercise;
+  currentSong = song;
+  if (!song.exercise) {
+    main.innerHTML = `<a class="text-link" href="#songs">← All songs</a>${intro(song.artist,song.title,song.summary)}<section class="card lesson-body song-material"><h2>${esc(song.materialTitle)}</h2><p>${esc(song.materialDescription)}</p>${tempoReference(song)}${markdown(song.practice)}</section>`;
+    return;
+  }
+  melodyTempo = songTempo(song,state.settings);
+  songPassage = song.defaultPassage || 'opening'; currentExercise = song.exercise.timeline ? selectPassage(song.exercise, songPassage) : song.exercise;
   main.innerHTML = `<a class="text-link" href="#songs">← All songs</a>${intro(song.artist, song.title, song.summary)}<section class="card song-material"><div class="section-top"><div><h2>${esc(song.materialTitle)}</h2><p class="muted">${esc(song.materialDescription)}</p></div></div><div class="song-view-controls" role="group" aria-label="Music display"><button class="button small outline" data-action="song-view" data-view="notes" aria-controls="song-score">Piano view</button><button class="button small outline" data-action="song-view" data-view="notation" aria-controls="song-score">Sheet music</button></div><div id="song-score"></div></section><article class="card lesson-body song-practice">${markdown(song.practice)}</article>`;
   renderSongView();
 }
@@ -267,13 +274,22 @@ async function playMelody() {
   melodyPlayer.start(currentExercise.events, melodyTempo, currentStep);
   const button = $('[data-action="melody"]'); button.textContent = '■ Stop';
 }
-function changeMelodyTempo(input) {
-  const tempo = Math.min(180, Math.max(30, Math.round(Number(input.value) || 60)));
+function changeMelodyTempo(input, reset=false) {
+  const songId = currentSong?.id;
+  const tempo = reset ? referenceTempo(currentSong) : Math.min(180, Math.max(30, Math.round(Number(input.value) || 60)));
   input.value = tempo;
   melodyTempo = tempo;
   melodyPlayer.setTempo(tempo);
-  state.settings.melodyTempo = tempo;
-  tempoWrites = tempoWrites.catch(() => {}).then(() => api('settings', 'PUT', { melodyTempo: tempo }));
+  let setting;
+  if (songId) {
+    state.settings.songTempos ??= {};
+    if (reset) delete state.settings.songTempos[songId]; else state.settings.songTempos[songId]=tempo;
+    setting={songTempo:{songId,tempo:reset?null:tempo}};
+  } else {
+    state.settings.melodyTempo = tempo;
+    setting={melodyTempo:tempo};
+  }
+  tempoWrites = tempoWrites.catch(() => {}).then(() => api('settings', 'PUT', setting));
   return tempoWrites;
 }
 async function toggleMetronome() {
@@ -389,6 +405,7 @@ document.addEventListener('click', async event => {
       }
     }
     else if (action === 'melody') { button.disabled = true; await playMelody(); button.disabled = false; }
+    else if (action === 'song-tempo-reset') { button.disabled=true; await changeMelodyTempo($('#melody-tempo'),true); button.disabled=false; }
     else if (action === 'metronome') await toggleMetronome();
     else if (action === 'timer') { button.disabled = true; await toggleTimer(); button.disabled = false; }
     else if (action === 'complete') {

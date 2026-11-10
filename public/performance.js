@@ -2,6 +2,22 @@ import { soundControl } from './sound.js';
 import { keyboardView } from './music.js';
 import { escapeHtml as esc } from './markdown.js';
 
+// Playback counts the meter denominator, which is not always the note value
+// used by the source's metronome marking (e.g. quarter = 72 in a 3/8 score).
+export function referenceTempo(song) {
+  const source=song.tempo || {bpm:60,unit:4};
+  return Math.round(source.bpm * (song.exercise?.meter?.[1] || source.unit) / source.unit);
+}
+export function songTempo(song, settings) {
+  return settings.songTempos?.[song.id] ?? referenceTempo(song);
+}
+export function tempoReference(song) {
+  if (!song.tempo) return '';
+  const unit=(song.exercise?.meter?.[1] || song.tempo.unit)===8?'eighth':'quarter';
+  const source=song.tempo.source;
+  return `<p class="fine tempo-reference">${esc(song.tempo.label)} · ${referenceTempo(song)} ${unit} notes / minute. ${esc(song.tempo.note || '')}${source?` <a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label)}</a>`:''}</p>`;
+}
+
 export function passages(exercise) {
   if (exercise.passages?.length) return exercise.passages;
   const last = exercise.events.at(-1).bar;
@@ -38,7 +54,8 @@ export function performancePlayer(song, exercise, tempo, view, selected='opening
   const files = showFingering && song.fingeredNotationFiles ? song.fingeredNotationFiles : song.notationFiles || [];
   const scorePages=files.map((file,i)=>`<div class="score-scroll"><div class="engraved-page" data-score-page="${i+1}"><img class="full-score-page" src="/scores/${esc(file)}" alt="${esc(song.title||title)}, page ${i+1} of ${files.length}"><svg class="score-overlay" viewBox="${esc(song.scoreViewBoxes?.[i]||'0 0 119.5016 169.0094')}" aria-hidden="true"></svg></div></div>`).join('');
   return `<div class="performance-controls"><label>Passage<select id="song-passage">${passages(song.exercise).map(p=>`<option value="${esc(p.id)}" ${p.id===selected?'selected':''}>${esc(p.label)}</option>`).join('')}</select></label><label>Play<select id="song-hands"><option value="both">Both hands</option><option value="right">Right hand</option><option value="left">Left hand</option></select></label><label class="loop-control"><input type="checkbox" id="song-loop"> Repeat passage</label></div>
-  <div class="section-top"><h2>${esc(title)}</h2><div class="melody-controls">${soundControl(preset)}<label for="melody-tempo">${unit}</label><input id="melody-tempo" type="number" min="30" max="180" value="${tempo}"><button class="button outline small" data-action="melody">▷ Listen</button></div></div>
+  <div class="section-top"><h2>${esc(title)}</h2><div class="melody-controls">${soundControl(preset)}<label for="melody-tempo">${unit}</label><input id="melody-tempo" type="number" min="30" max="180" value="${tempo}"><button class="button outline small" data-action="song-tempo-reset">Reset tempo</button><button class="button outline small" data-action="melody">▷ Listen</button></div></div>
+  ${tempoReference(song)}
   <p class="fine">${esc(exercise.description||'Playback uses a steady tempo.')}</p><p id="playback-position" class="playback-position" aria-live="off">Ready</p>
   ${view==='notation' && song.lyrics ? `<details class="score-words"><summary>Words · ${esc(song.lyrics.title)}${song.lyrics.verses.length>1?' · all stanzas':''}</summary>${words}</details><p class="fine">${esc(song.scoreLyricsNote||'Lyrics are printed beneath the melody staff.')}</p>` : words}
   ${view==='notes'?`<div class="player-keyboards">${['right','left'].map(hand=>keyboardView(exercise,hand)).join('')}</div><p class="fine">Fingers: 1 thumb · 2 index · 3 middle · 4 ring · 5 little finger. ${esc(exercise.fingeringNote||'Finger numbers are suggestions.')}</p>`:''}

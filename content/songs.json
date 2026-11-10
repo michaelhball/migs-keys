@@ -30,7 +30,17 @@
         "dont-stop-believin.pdf",
         "dont-stop-believin.midi"
       ],
-      "category": "Pop / rock"
+      "category": "Pop / rock",
+      "tempo": {
+        "bpm": 119,
+        "unit": 4,
+        "label": "Recording reference",
+        "note": "A fixed reference close to the original recording; its tempo varies slightly.",
+        "source": {
+          "label": "Tempo reference",
+          "url": "https://www.soundbrenner.com/blogs/articles/finding-your-tempo-without-a-metronome"
+        }
+      }
     },
     {
       "id": "fur-elise",
@@ -54,7 +64,17 @@
         "fur-elise.midi"
       ],
       "scoreMapFile": "fur-elise-score-map.json",
-      "category": "Classical"
+      "category": "Classical",
+      "tempo": {
+        "bpm": 72,
+        "unit": 4,
+        "label": "Score tempo",
+        "note": "The edition uses quarter note = 72, equivalent to 144 eighth notes per minute here. Performances vary.",
+        "source": {
+          "label": "Score edition",
+          "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=931"
+        }
+      }
     },
     {
       "id": "amazing-grace",
@@ -85,7 +105,13 @@
       "scoreLyricsNote": "The printed score shows John Newton’s first stanza. The Words panel contains all six original stanzas.",
       "fingeredNotationFiles": [
         "amazing-grace-fingering-page-1.svg"
-      ]
+      ],
+      "tempo": {
+        "bpm": 80,
+        "unit": 4,
+        "label": "Arrangement tempo",
+        "note": "A chosen tempo for this arrangement; the hymn has no single original recording tempo."
+      }
     },
     {
       "id": "lord-of-the-dance",
@@ -119,7 +145,36 @@
       "fingeredNotationFiles": [
         "lord-of-the-dance-fingering-page-1.svg",
         "lord-of-the-dance-fingering-page-2.svg"
-      ]
+      ],
+      "tempo": {
+        "bpm": 100,
+        "unit": 4,
+        "label": "Arrangement tempo",
+        "note": "A chosen tempo for the traditional Simple Gifts study."
+      }
+    },
+    {
+      "id": "roses",
+      "title": "Roses · piano intro",
+      "artist": "OutKast",
+      "category": "Hip-hop / R&B",
+      "status": "Intro score links",
+      "summary": "Ten-bar piano intro: a free transcription and video lesson. Interactive playback is not available yet.",
+      "materialTitle": "Intro score and tutorial",
+      "materialDescription": "Open the sources below. A supplied score or tutorial file is needed to build the synchronized score and keyboard player.",
+      "notesFile": "roses-notes.md",
+      "practiceFile": "roses-practice.md",
+      "notationFiles": [],
+      "tempo": {
+        "bpm": 109,
+        "unit": 4,
+        "label": "Recording reference",
+        "note": "The published piano edition uses 108; HDpiano lists the recording at 109.",
+        "source": {
+          "label": "HDpiano",
+          "url": "https://hdpiano.com/lesson/roses-by-outkast"
+        }
+      }
     }
   ]
 }
